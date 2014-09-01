@@ -18,11 +18,10 @@
 
 详情参阅： [BUILD.md](Build.md)
  
-此项目基于 Larrycayu 的 sdcamp 项目框架修改而来，感谢他的努力，希望更多人关注[他
-的项目](ttps://github.com/larrycai/sdcamp/)
+此项目基于 Larrycayu 的 sdcamp 项目框架修改而来，感谢他的努力，希望更多人关注
+[他的项目](ttps://github.com/larrycai/sdcamp/)
 
 # 发布许可 #
 
-![](http://i.creativecommons.org/l/by-sa/4.0/88x31.png)
-[CC BY SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)
+![](http://i.creativecommons.org/l/by-sa/4.0/88x31.png)  [CC BY SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)
 
