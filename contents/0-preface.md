@@ -60,7 +60,7 @@
 
 本章以两个主要的大型应用程序案例（Web 浏览器以及微博客户端）讲述如何进行互联网应用程序开发，同时将前面学习到的知识加以综合利用。
 
-<code>
+````JavaScript
 using GLib;
 using Gtk;
 using WebKit;
@@ -81,5 +81,4 @@ public class Main : WebView
         return 0;
     }
 }
-</code>
-
+````
