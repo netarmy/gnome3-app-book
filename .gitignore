@@ -1,0 +1,16 @@
+gnome3-app-book.*.pdf
+gnome3-app-book.*.mobi
+gnome3-app-book.*.epub
+gnome3-app-book.*.html
+gnome3-app-book.*.markdown
+*.zip
+gnome3-app-book-*.epub
+*.pdf
+!contents/img/cover.pdf
+*.swp
+latex/*
+!latex/README
+epub/temp
+*~
+.#*
+*.epub
