@@ -16,10 +16,9 @@
 
 需要 Git 和 Markdown 基础。
 
-详情参阅： [BUILD.md](Build.md)
+详情参阅： [BUILD.md](BUILD.md)
  
-此项目基于 Larrycayu 的 sdcamp 项目框架修改而来，感谢他的努力，希望更多人关注
-[他的项目](ttps://github.com/larrycai/sdcamp/)
+此项目基于Larrycayu的sdcamp项目框架修改而来，感谢他的努力，使得书写技术书籍变得如此简单 [他的项目](https://github.com/larrycai/sdcamp/)
 
 # 发布许可 #
 
