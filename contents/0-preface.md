@@ -68,7 +68,7 @@ public class Main : WebView
 {
     public Main ()
     {
-        load_html_string("<h1>Hello</h1>","/");
+        load_html_string("\<h1\>Hello\</h1\>","/");
     }
     static int main (string[] args)
     {
