@@ -60,3 +60,26 @@
 
 本章以两个主要的大型应用程序案例（Web 浏览器以及微博客户端）讲述如何进行互联网应用程序开发，同时将前面学习到的知识加以综合利用。
 
+<code>
+using GLib;
+using Gtk;
+using WebKit;
+public class Main : WebView
+{
+    public Main ()
+    {
+        load_html_string("<h1>Hello</h1>","/");
+    }
+    static int main (string[] args)
+    {
+        Gtk.init (ref args);
+        varwebView = new Main ();
+        var window = new Gtk.Window();
+        window.add(webView);
+        window.show_all ();
+        Gtk.main ();
+        return 0;
+    }
+}
+</code>
+
