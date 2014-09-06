@@ -116,6 +116,10 @@ GNOME 3 提供了两种不同的**用户体验**（UX，User Experience）以应
 
 ----
 
+### 实践环节 —— 在 Debian Testing 上安装 GNOME 及其 SDK
+
+
+
 ### 实践环节 —— 在 Fedora 20 中安装 GNOME 及其 SDK
 
 Fedora 20默认搭载 GNOME，因此我们主要集中在安装 SDK。要想在 Fedora 上安装软件包，只需要打开 **添加/移除软件** 工具。
