@@ -46,6 +46,23 @@ You need to install related fonts for Chinese, fortunately they exist in fedora 
     // # yum install cjkuni-uming-fonts cjkuni-ukai-fonts
     # yum install wqy-microhei-fonts wqy-zenhei-fonts # from WenQuanYi
     
+### OpenSUSE Platform ###
+
+OpenSUSE 13.1 is recommanded, which uses texlive 2013.
+
+    # zypper in texlive-xetex
+    # zypper in texlive-latex
+    # zypper in texlive
+    # zypper in texlive-xetex-def texlive-xltxtra texlive-tocbibind
+    # zypper in in texlive-euenc texlive-frame texlive-footnpag texlive-titlesec
+    # zypper in texlive-appendix
+    
+You need to install related fonts for Chinese, fortunately they exist in official openSUSE source also.
+    
+    # zypper in texlive-arphic # from arphic
+    # zypper in arphic-gbsn00lp-fonts arphic-ukai-fonts arphic-uming-fonts
+    # zypper in wqy-microhei-fonts wqy-zenhei-fonts # from WenQuanYi
+    
 
 ### Generate PDF ###
 
