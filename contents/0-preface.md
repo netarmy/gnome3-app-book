@@ -14,7 +14,9 @@
 [image0]: ./img/gnome.png "GNOME基金会" width=180px
 
 
-## 分章节介绍 ##
+## 为什么写此书？  ##
+
+## 各章节介绍 ##
 
 - **第一章：安装 GNOME 3 及其 SDK**
 
