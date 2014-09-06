@@ -38,14 +38,23 @@
  * 第十二章 品质控制
  * 第十三章 激动人心的应用案例
 
-# 发布许可 #
-
-![](http://i.creativecommons.org/l/by-sa/4.0/88x31.png)  [CC BY SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)
 
 # 参与编写须知 #
 
 [TODO]
 
+# 贡献者列表
+
+- 佟辉：完成本书源文件架构的初始化，并编译了第一章“安装 GNOME 3 及其 SDK”。
+
+- （期待更多人参与）
+
 # 著作权及版权声明 #
 
 [TODO]
+
+
+# 发布许可 #
+
+![](http://i.creativecommons.org/l/by-sa/4.0/88x31.png)  [CC BY SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)
+

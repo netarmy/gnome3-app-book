@@ -1,4 +1,4 @@
-# 安装GNOME 3 及其SDK #
+# 安装 GNOME 3 及其 SDK #
 
 > GNOME 3 是自GNOME项目1999年发布以来，最新也是最强大的版本。GNOME 3 在之前版本的基础上为桌面环境的用户体验带来了突破性变化，搭载了更加流畅的用户界面和动画特效，它完美诠释了现代的计算机通过使用 GNOME Shell 将会为新的用户体验（UX）带来如何飞跃性的变化。当然，对那些传统用户体验来说，依旧保持了 Classic Mode (传统模式)以兼容硬件配置不支持的情况。
 
@@ -118,33 +118,162 @@ GNOME 3 提供了两种不同的**用户体验**（UX，User Experience）以应
 
 ### 实践环节 —— 在 Debian Testing 上安装 GNOME 及其 SDK
 
-
-
-### 实践环节 —— 在 Fedora 20 中安装 GNOME 及其 SDK
-
-Fedora 20默认搭载 GNOME，因此我们主要集中在安装 SDK。要想在 Fedora 上安装软件包，只需要打开 **添加/移除软件** 工具。
+目前的 Debian Testing 版本是 Jessie（8.0），默认使用 GNOME 3 桌面环境，因此我们只需要安装 SDK 即可。Debian Testing 下我们可以打开 **软件包** 工具来安装。
 
 1. 点击屏幕左上角的**活动**按钮。
-2. 点击**显示应用程序**按钮。
-3. 点击**软件**按钮（或者在搜索栏里输入“软件”）。
-4. 将会显示如下的画面：
+2. 点击**显示应用程序**图标
+3. 点击**软件包**图标（或者在搜索栏里输入“软件包”）。
+4. 之后就可以看到这样的画面：
 
-![][1-3]
+![Debian Testing 下的软件包工具][1-3]
 
-[1-3]: ./img/1-3-fedora20.png width=350px
+[1-3]: ./img/1-3-debian-testing.png width=350px
 
 #### 刚刚发生了什么？
 
-**软件** 这个工具把 Fedora 20 里的软件包数据库列了出来，这样我们就可以浏览和选择要安装的软件包了。SDK 一般是放在所谓的开发包中的。在 Fedora 里面，开发包的包名是以 `-devel` 结尾的，而实际上的库则是在包名没有 `-devel` 的软件包里面的，当安装 `devel` 软件包的时候，也会把同名的库一并安装。比如 GLib 在 `glib2` 包内，其开发包则是 `glib2-devel`，无论 `glib2-devel` 何时安装，`glib2` 都会自动安装。
+**软件**工具是一个先标记后安装的软件包管理器，也就是说在我们真正安装前，我们有机会去改变选择安装的包。在我们点击**应用（Apply）**以后才会开始安装。也正是因为有这样的特性，我们可以让一边安装一边浏览和搜索，不用等待冗长的安装过程结束，再去安装下一个包。
 
-----
+如图1.3所示，这个工具有两栏，左侧是搜索和选择包的类别，右侧则会显示搜索结果（或类别里的内容），下边的方框内会列出选定软件包的描述。
 
-> 开发包里一般包含一些头文件以及其他一些文件，这些文件只在做相应的开发工作时才会用到，平时使用软件的时候并不需要的。
+#### 标记 SDK 软件包
 
-----
+SDK 软件包一般是被包含在各种开发包中。所谓开发包则包含了相应开发所需的头文件，用来编译和链接。如果平时仅仅只是运行与库编译链接好的程序，则不需要这些包。
 
-在软件包安装之前，我们需要搜索一下，先在搜索栏输入包名，比如 `glib2-devel` 然后
+这些开发包往往会冠以 `lib` 或以 `-dev` 结尾，他们通过内部的依赖关系与相应的库绑定在一起，因此无论何时安装这些开发包，包含相应库的软件包也会一并自动安装。
 
+表1.1列出了 GNOME 组件在 Debian Testing 上的包名称，我们只需要搜索并标记上即可。
+
+
+| 子系统           | 包名称                                           |
+| ---------------- | ------------------------------------------------ |
+| 核心库           | `libglib2.0-dev (GIO 和 GObject 已经包括在此包里)` |
+|                  | `libglib2.0-doc`                                   |
+| 用户界面         | `libgtk-3-dev`                                     |
+|                  | `libgtk-3-doc`                                     |
+|                  | `libcairo2-dev`                                    |
+|                  | `libcairo2-doc`                                    |
+|                  | `libpango1.0-dev `                                 |
+|                  | `libpango1.0-doc`                                  |
+|                  | `libatk1.0-dev`                                    |
+|                  | `libatk1.0-doc`                                    |
+|                  | `libclutter-1.0-dev`                               |
+|                  | `libclutter-1.0-doc`                               |
+|                  | `libwebkitgtk-3.0-dev`                             |
+|                  | `libwebkitgtk-3.0-doc`                             |
+| 多媒体库         | `libgstreamer0.10-dev `                            |
+| 数据存储         | `libecal1.2-dev`                                   |
+| 工具和基础开发包 | `valac-0.16`                                       |
+|                  | `anjuta`                                           |
+|                  | `glade`                                            |
+|                  | `gtranslator`                                      |
+|                  | `devhelp`                                          |
+[Debian Testing 下 GNOME 3 SDK 主要软件包列表]
+
+#### 应用并安装
+
+在标记完之后，我们就可以点**应用**按钮来安装了。稍事休息一下，等待安装完成，之后我们就可以进行下一章的内容了。
+
+另外，熟悉 Debian 的朋友亦可以使用命令行下的 `aptitude` 工具或者 `apt-get` 等工具来安装。此处不赘述。
+
+### 实践环节 —— 在 Ubuntu 14.04 上安装 GNOME 及其 SDK
+
+Ubuntu 默认使用了自己的桌面环境，也就是 **Unity**。我们安装 GNOME 3 桌面环境及其 SDK 利用**Ubuntu 软件中心**：
+
+1. 在屏幕左侧的边栏中点击**Ubuntu 软件中心**。
+2. 点中搜索框，键入 `gnome-shell`
+3. 在搜索的第一个结果旁点击**安装**按钮
+4. 稍等片刻，GNOME Shell 就装上了。
+
+#### 刚刚发生了什么？
+
+刚刚我们只是安装了 GNOME Shell 桌面，因为 GNOME Panel / Classic Mode 与 GNOME Shell 存在依赖关系，因此现在把两种 UX 都安装好了。
+
+**Ubuntu 软件中心**并不是先标记后安装的，因此我们需要每次搜索一个包安装一个包，而安装进程则是在后台进行的，用户不能直观看到，更糟糕的是后我们无法一边安装一边搜索，不过呢若搜索出来的结果恰好在一页里，我们可以点击安装按钮让其排队自动完成。
+
+若想在 Ubuntu 下开发 GNOME 应用程序，这里推荐使用 [Ubuntu GNOME 发行版](http://ubuntugnome.org/)。此发行版已经默认集合了 GNOME 桌面，同时更具备 Ubuntu 的一些优势。因此只需要直接安装 GNOME 3 的 SDK 就行了。
+
+![Ubuntu GNOME 14.04 LTS][1-4]
+
+[1-4]: ./img/1-4-ubuntugnome.jpg width=300px
+
+#### 继续安装 SDK
+
+Ubuntu 是基于 Debian 的，因此我们可以使用如表1.1相同的包名称来安装，现在只需要一个包一个包的来安装就行了。安装完成之后，我们就可以进入到下一章的学习中啦！
+
+与 Debian 一样，在 Ubuntu 下也可以使用命令行下的 `aptitude` 工具或者 `apt-get` 等工具来安装。此处不赘述。
+
+### 实践环节 —— 在 openSUSE 13 下安装 GNOME 及其 SDK
+
+openSUSE 13 已经默认安装 GNOME（若安装的是 KDE 桌面或其他桌面，也可以通过下面的 **YaST** 工具来安装），因此我们只需要关心如何安装 SDK 即可。为了管理各种软件，openSUSE 提供了 **YaST（Yet another Setup Tool）** 工具，按下面的步骤就可以在 openSUSE 13 下安装 GNOME 及其 SDK。
+
+1. 点击屏幕左上角的**活动**按钮
+2. 点击**显示应用程序**图标
+3. 再打开 **YaST** 工具即可（或者在搜索栏键入`yast`），之后会要求你输入正确的 root 密码以验证身份
+4. 这样 YaST 就打开了，点击**软件管理**图标。
+5. 等待其更新软件包和数据库之后，就可以看到如图1.5的界面了：
+
+![openSUSE 13 提供的软件管理工具][1-5]
+
+[1-5]: ./img/1-5-opensuse.png width=300px
+
+#### 刚刚发生了什么？
+
+**YaST** 是 openSUSE 提供的一系列系统管理工具的集合，**软件管理**是其中之一。这个工具有两栏，左侧是软件包的类别，右侧是选择的类别下的软件包列表或者搜索的结果，以及软件包的描述。
+
+与 Debian 下的**软件包**工具类似，**YaST**也是先标记后安装的，这就意味着我们需要先勾选需要安装的包，然后再安装。确保所有我们要安装的包都勾选上以后，最后就可以点击安装了。
+
+#### 勾选 SDK 软件包
+
+SDK 软件包一般是被包含在各种开发包中。openSUSE 使用 `RPM` 包管理系统，开发包的后缀名称是 `-devel`，同时相应的库的软件包会随开发包包的同时一起安装。
+
+表1.2列出了 openSUSE 13 下的 GNOME 组件的包名称。我们可以一一搜索这些包，并将之勾选上。
+
+| 子系统           | 包名称                                        |
+| ---------------- | --------------------------------------------- |
+| 核心库           | `glib2-devel (GIO 和 GObject 已经包括在此包里)` |
+| 用户界面         | `gtk3-devel`                                    |
+|                  | `gtk3-devel-docs`                               |
+|                  |` libseed-gtk3-devel`                            |
+|                  | `cairo-devel `                                  |
+|                  |` pango-devel`                                   |
+|                  | `atk-devel  `                                   |
+|                  | `clutter-devel`                                 |
+|                  | `clutter-doc`                                   |
+|                  | `libwebkitgtk3-devel `                          |
+| 多媒体库         | `gstreamer-0_10-devel `                         |
+|                  |` gstreamer-0_10-docs`                           |
+|                  | `gstreamer-0_10-fluendo-mp3`                    |
+| 数据存储         | `evolution-data-server-devel`                   |
+|                  | `evolution-data-server-doc`                     |
+| 工具和基础开发包 | `vala`                                          |
+|                  | `anjuta`                                        |
+|                  | `glade （不要与 glade3 弄混）`                  |
+|                  | `gtranslator`                                   |
+|                  | `devhelp`                                       |
+[OpenSUSE 13.1 下 GNOME 3 SDK 主要软件包列表]
+
+#### 开始安装
+
+全部都勾选完毕以后，就可以点**应用**按钮来启动安装了。等待一段时间安装完成，我们就可以进入到下一章的学习了。
+
+### 实践环节 —— 在 Fedora 20 中安装 GNOME 及其 SDK
+
+Fedora 20默认搭载 GNOME，因此我们主要集中在安装 SDK。要想在 Fedora 上安装软件包，可以运行**软件**工具。但其不能帮我们安装 SDK，因此只能通过命令行的工具来完成了。
+
+1. 点击屏幕左上角的**活动**按钮
+2. 点击**显示应用程序**图标
+3. 点击**终端**图标（或者在搜索栏键入`terminal`）
+4. 打开终端输入命令。
+
+* `yum search <包名称>` 此命令可以用来搜索软件包，以确定是否安装
+
+* `sudo yum install <包名称>` 此命令用来安装软件包，需要 root 权限。
+
+#### 刚刚发生了什么？
+
+SDK 一般是放在所谓的开发包中的。Fedora 与 openSUSE 一样都是 `RPM` 包管理系统。开发包的包名是以 `-devel` 结尾的，而实际上的库则是在包名没有 `-devel` 的软件包里面的，当安装 `devel` 软件包的时候，也会把同名的库一并安装。比如 GLib 在 `glib2` 包内，其开发包则是 `glib2-devel`，无论什么时候安装 `glib2-devel` ，`glib2` 都会自动安装。
+
+表1.3列出了 Fedora 下的 GNOME SDK 软件包名称。
 
 | 子系统           | 包名称                                        |
 | ---------------- | --------------------------------------------- |
@@ -172,53 +301,22 @@ Fedora 20默认搭载 GNOME，因此我们主要集中在安装 SDK。要想在 
 |                  | `devhelp`                                       |
 [Fedora 20下 GNOME 3 SDK 主要软件包列表]
 
+#### 完成安装
 
-| 子系统           | 包名称                                        |
-| ---------------- | --------------------------------------------- |
-| 核心库           | `glib2-devel (GIO 和 GObject 已经包括在此包里)` |
-| 用户界面         | `gtk3-devel`                                    |
-|                  | `gtk3-devel-docs`                               |
-|                  |` libseed-gtk3-devel`                            |
-|                  | `cairo-devel `                                  |
-|                  |` pango-devel`                                   |
-|                  | `atk-devel  `                                   |
-|                  | `clutter-devel`                                 |
-|                  | `clutter-doc`                                   |
-|                  | `libwebkitgtk3-devel `                          |
-| 多媒体库         | `gstreamer-0_10-devel `                         |
-|                  |` gstreamer-0_10-docs`                           |
-|                  | `gstreamer-0_10-fluendo-mp3`                    |
-| 数据存储         | `evolution-data-server-devel`                   |
-|                  | `evolution-data-server-doc`                     |
-| 工具和基础开发包 | `vala`                                          |
-|                  | `anjuta`                                        |
-|                  | `glade （不要与 glade3 弄混）`                  |
-|                  | `gtranslator`                                   |
-|                  | `devhelp`                                       |
-[OpenSUSE 13.1 下 GNOME 3 SDK 主要软件包列表]
+如上所说，我们可以利用 `yum search <包名称>` 命令先搜索出来这些包是否安装。然后再用 `sudo yum install <包名称>` 来安装。其实也可以在一条命令里同时安装多个包，比如：
+
+````
+sudo yum install glib2-devel gtk3-devel gtk3-devel-docs cairo-devel 
+````
+
+所有相关包都安装完毕以后，就可以跳到下一章了。
+
+## 小结
+
+本章我们学习了一些有关 GNOME 的基础理论知识，了解了其系统需求，基础架构和 GNOME 及其 SDK 的安装。特别的，我们知道了 GNOME 3 提供了两种不同的 UX，我们也懂得了其系统需求是不同的，以及开发所需的系统需求。还有一些小窍门，比如我们可以在虚拟机环境中运行。还讨论了 GNOME 的基础架构以及本书中将会涉及到的每一个组件的功能和作用。
+
+我们现在也知道了 GNOME 的组件在架构图框中的位置。当然同时现在也知道如何在主流的几大 Linux 发行版上安装 GNOME 的软件包和开发包，这让我们领略了不同发行版之间的差异。
+
+千里之行始于足下，这章的学习为后面学习 GNOME 应用程序开发做好了铺垫。下一步就要准备我们的开发工具了，我们将要学习如何使用它们，以及接触一点点 Vala，也就是本书将会涉及到的一种编程语言。
 
 
-| 子系统           | 包名称                                           |
-| ---------------- | ------------------------------------------------ |
-| 核心库           | `libglib2.0-dev (GIO 和 GObject 已经包括在此包里)` |
-|                  | `libglib2.0-doc`                                   |
-| 用户界面         | `libgtk-3-dev`                                     |
-|                  | `libgtk-3-doc`                                     |
-|                  | `libcairo2-dev`                                    |
-|                  | `libcairo2-doc`                                    |
-|                  | `libpango1.0-dev `                                 |
-|                  | `libpango1.0-doc`                                  |
-|                  | `libatk1.0-dev`                                    |
-|                  | `libatk1.0-doc`                                    |
-|                  | `libclutter-1.0-dev`                               |
-|                  | `libclutter-1.0-doc`                               |
-|                  | `libwebkitgtk-3.0-dev`                             |
-|                  | `libwebkitgtk-3.0-doc`                             |
-| 多媒体库         | `libgstreamer0.10-dev `                            |
-| 数据存储         | `libecal1.2-dev`                                   |
-| 工具和基础开发包 | `valac-0.16`                                       |
-|                  | `anjuta`                                           |
-|                  | `glade`                                            |
-|                  | `gtranslator`                                      |
-|                  | `devhelp`                                          |
-[Debian Testing 下 GNOME 3 SDK 主要软件包列表]
