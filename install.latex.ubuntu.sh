@@ -6,3 +6,5 @@ sudo apt-get install ttf-arphic-gbsn00lp ttf-arphic-ukai # from arphic
 sudo apt-get install ttf-wqy-microhei ttf-wqy-zenhei # from WenQuanYi
 sudo apt-get install texlive-fonts-recommended
 sudo apt-get install latex-cjk-all
+
+sudo cp FZSongS.ttf /usr/share/fonts/truetype/
