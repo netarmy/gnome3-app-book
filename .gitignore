@@ -7,6 +7,7 @@ gnome3-app-book.*.markdown
 gnome3-app-book-*.epub
 *.pdf
 !contents/img/cover.pdf
+!book-sample.pdf
 *.swp
 latex/*
 !latex/README
