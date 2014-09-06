@@ -8,3 +8,5 @@ sudo apt-get install texlive-fonts-recommended
 sudo apt-get install latex-cjk-all
 
 sudo cp FZSongS.ttf /usr/share/fonts/truetype/
+
+sudo fc-cache
