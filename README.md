@@ -1,3 +1,5 @@
+[![Build Status](https://drone.io/github.com/tonghuix/gnome3-app-book/status.png)](https://drone.io/github.com/tonghuix/gnome3-app-book/latest)
+
 # GNOME 3 应用程序开发入门指南 #
 
 这是一本由北京GNOME用户组共同完成的旨在介绍 GNOME 3 应用开发相关的入门指引，为
