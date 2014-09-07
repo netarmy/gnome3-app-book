@@ -180,7 +180,7 @@ public class Main : WebView
 
 ## 致谢
 
-本书基于 Mohammad Anwari （默罕默德 · 安瓦里）[^original-writer]于2012年编写的《GNOME 3 Application Development Beginner's Guide》，并在原书基础上大量增加新的代码实例和大量的本地化内容，丰富和加强了原书的架构，更适合中国程序员阅读，同时降低了入门难度。
+本书基于 Mohammad Anwari （默罕默德 · 安瓦里）于2012年编写的《GNOME 3 Application Development Beginner's Guide》，并在原书基础上大量增加新的代码实例和大量的本地化内容，丰富和加强了原书的架构，更适合中国程序员阅读，同时降低了入门难度。
 
 同时还要特别鸣谢 Larrycaiyu，本书的[源代码](https://github.com/tonghuix/gnome3-app-book/)就是基于其 [sdcamp](https://github.com/larrycai/sdcamp) 项目。通过MultiMarkdown和Latex（xelatex）将书写中文技术书籍变得非常简单，同时 Larrycaiyu 将其与Git结合，并结合GitHub的社交编程功能，使得多人协作编写技术书籍更加易如反掌！
 
