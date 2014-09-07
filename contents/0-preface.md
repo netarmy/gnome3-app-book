@@ -199,3 +199,5 @@ public class Main : WebView
 **北京 GNOME 用户组 微博：** <http://weibo.com/bjgug>
 
 [^original-writer]: Mohammad Anwari （默罕默德 · 安瓦里），他是 GNOME 基金会成员，印度尼西亚著名的软件开发者,有 13 年的软件开发经验，在印尼生活期间创办了印尼最大的软件公司,积极参与 Linux 内核和 GNOME 相关应用软件的社区开发，有非常丰富的开发经验。后移居芬兰加入 Nokia 公司软件开发部，参与 QT 应用程序的开发。近几年回到印尼,专注于开发印尼的 Linux 发行版 BlackOn ,并积极研发基于 GNOME Shell 桌面环境的菜单环境，在 2013 年 GNOME.Asia 亚洲峰会上展示，并获得与会人员的一致认可。
+
+
