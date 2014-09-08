@@ -1,16 +1,16 @@
 #!/bin/bash
 
-TEMPLATE_DIR=template
-CONTENTSi_DIR=contents
-IMAGE_DIR=contents/img
+TEMPLATE_DIR=./template
+CONTENTS_DIR=./contents
+IMAGE_DIR=./contents/img
 
 all: 
-	cp -fr ./contents/img .
-	multimarkdown -t latex ./template/meta.txt ./contents/0-preface*.md -o preface.tex
-	multimarkdown -t latex ./template/meta.txt ./contents/1-chapter*.md -o chapters.tex
-	multimarkdown -t latex ./template/meta.txt ./contents/2-appendix*.md -o appendix.tex
+	cp -fr ${IMAGE_DIR} .
+	multimarkdown -t latex ${TEMPLATE_DIR}/meta.txt ${CONTENTS_DIR}/0-preface*.md -o preface.tex
+	multimarkdown -t latex ${TEMPLATE_DIR}/meta.txt ${CONTENTS_DIR}/1-chapter*.md -o chapters.tex
+	multimarkdown -t latex ${TEMPLATE_DIR}/meta.txt ${CONTENTS_DIR}/2-appendix*.md -o appendix.tex
 	
-	cp ./template/template.tex gnome3-app-book.tex
+	cp ${TEMPLATE_DIR}/template.tex gnome3-app-book.tex
 
 	xelatex gnome3-app-book.tex
 	xelatex gnome3-app-book.tex
