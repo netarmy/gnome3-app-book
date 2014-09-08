@@ -41,7 +41,7 @@
 
 # 参与编写须知 #
 
-[TODO]
+[传送门](https://github.com/tonghuix/gnome3-app-book/wiki/CONTRIBUTION)
 
 # 贡献者列表
 
