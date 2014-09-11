@@ -1,4 +1,5 @@
 \documentclass[a4paper]{book}
+\usepackage[CJKspace]{xeCJK}
 \usepackage{tocbibind} % for toc show inside pdf
 \usepackage[
 	%urlbordercolor = {1 1 1},
@@ -172,8 +173,17 @@ framexleftmargin=20pt
 %               Hiragino Sans - 字体很完美，但item的·不能显示！
 %               WenQuanYi Micro Hei 文泉驿微米黑 - 没有对应的粗体字体
 %               Source Sans Han S(Noto Sans CJK)  思源黑体 - 不能用有错误
-\setromanfont[BoldFont=WenQuanYi Micro Hei]{FZSongS-Extended}
-\setmonofont{WenQuanYi Zen Hei Mono}
+
+% 设置英文字体
+%\usepackage{ebgaramond}
+%\setromanfont[BoldFont=WenQuanYi Micro Hei]{FZSongS-Extended}
+%\setromanfont[BoldFont=DejaVu Sans]{DejaVu Serif}
+%\setmonofont{WenQuanYi Zen Hei Mono}
+
+% 设置中文字体
+\setCJKmainfont[BoldFont=WenQuanYi Micro Hei]{AR PL SungtiL GB}
+\setCJKsansfont{WenQuanYi Zen Hei}
+\setCJKmonofont{WenQuanYi Micro Hei Mono}
 
 
 
@@ -197,7 +207,7 @@ framexleftmargin=20pt
 
 \title{\huge{\savedtitle}}
 
-\author{\textbf{\savedauthor}\thanks{本书基于 CC-BY-SA 4.0 (Commons Creative Attribution-Share Alike 4.0) 许可发布。本书使用 Markdowan 书写，源文件：\url{https://github.com/beijinggug/gnome3-app-book/}，欢迎大家提出宝贵的意见和建议，以帮助此书更加完善，方便更多中国爱好 GNOME 的朋友。}}
+\author{\textbf{\savedauthor}\thanks{本书基于 CC-BY-SA 4.0 (Commons Creative Attribution-Share Alike 4.0) 许可发布。本书使用 Markdown 书写，源文件：\url{https://github.com/beijinggug/gnome3-app-book/}，欢迎大家提出宝贵的意见和建议，以帮助此书更加完善，方便更多中国爱好 GNOME 的朋友。}}
 \def\w3cdtfymd{\the\year-\ifnum\month<10 0\fi\the\month-\ifnum\day<10 0\fi\the\day}
 \date{\w3cdtfymd}
 %\renewcommand{\thefootnote}{\fnsymbol{footnote}}
