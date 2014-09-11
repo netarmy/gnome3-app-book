@@ -1,11 +1,12 @@
 \documentclass[a4paper]{book}
+\usepackage[lining]{ebgaramond}
 \usepackage[CJKspace]{xeCJK}
 \usepackage{tocbibind} % for toc show inside pdf
 \usepackage[
 	%urlbordercolor = {1 1 1},
 	%linkbordercolor = {1 1 1},
 	%citebordercolor = {1 1 1},
-    bookmarksnumbered, % add bookmark number in pdf output
+	bookmarksnumbered, % add bookmark number in pdf output
 	urlcolor = blue,
 	colorlinks = true,
 	citecolor = black,
@@ -172,19 +173,49 @@ framexleftmargin=20pt
 %               Adobe Song Std L Adobe宋体 - item的·号无法显示 
 %               Hiragino Sans - 字体很完美，但item的·不能显示！
 %               WenQuanYi Micro Hei 文泉驿微米黑 - 没有对应的粗体字体
-%               Source Sans Han S(Noto Sans CJK)  思源黑体 - 不能用有错误
+%               Source Sans Han S (Noto Sans CJK)  思源黑体 - 不能用有错误
+%                jjgod 给 xdvipdfmx 写了补丁，会被包含在 TeX Live 2015。
+%                 讨论：http://tug.org/pipermail/xetex/2014-July/025385.html 起
+%                 补丁：https://gist.github.com/jjgod/c1194a9b371848aaa746
+%                       https://gist.github.com/jjgod/cf39032b839bb3542107
 
 % 设置英文字体
-%\usepackage{ebgaramond}
-%\setromanfont[BoldFont=WenQuanYi Micro Hei]{FZSongS-Extended}
-%\setromanfont[BoldFont=DejaVu Sans]{DejaVu Serif}
+\setmainfont
+    [ Numbers        = {Proportional,Lining},
+      UprightFont    = *-Regular,
+      ItalicFont     = *-Italic,
+      BoldFont       = Cantarell Bold,
+      BoldItalicFont = *-Italic,
+    ]
+    {EBGaramond12}
+% TODO: Pick a new mono font for non-CJK text?  Or use TeX default?
 %\setmonofont{WenQuanYi Zen Hei Mono}
 
 % 设置中文字体
-\setCJKmainfont[BoldFont=WenQuanYi Micro Hei]{AR PL SungtiL GB}
+\setCJKmainfont
+    [
+      BoldFont   = WenQuanYi Micro Hei,
+      ItalicFont = AR PL KaitiM GB,
+    ]
+    {FZSongS-Extended}
 \setCJKsansfont{WenQuanYi Zen Hei}
 \setCJKmonofont{WenQuanYi Micro Hei Mono}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 使用 DejaVu Sans 显示 ⚠ ☢ ☠ ✔ 这四个 dingbats 字符
+% http://tex.stackexchange.com/questions/23049/font-substitution-with-xelatex
+\newfontfamily{\DingbatSubstFont}{DejaVu Sans}
+\XeTeXinterchartokenstate=1
+\newXeTeXintercharclass\DingbatSubst
+\XeTeXcharclass"26A0=\DingbatSubst	% ⚠
+\XeTeXcharclass"2622=\DingbatSubst	% ☢
+\XeTeXcharclass"2620=\DingbatSubst	% ☠
+\XeTeXcharclass"2714=\DingbatSubst	% ✔
+\XeTeXinterchartoks 0 \DingbatSubst = {\begingroup\DingbatSubstFont}
+\XeTeXinterchartoks 255 \DingbatSubst = {\begingroup\DingbatSubstFont}
+\XeTeXinterchartoks \DingbatSubst 0 = {\endgroup}
+\XeTeXinterchartoks \DingbatSubst 255 = {\endgroup}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 \XeTeXlinebreaklocale{zh}
