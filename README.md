@@ -46,7 +46,7 @@
 # 贡献者列表
 
 - **[佟辉](https://github.com/tonghuix)**：完成本书源文件架构的初始化，并编译了第一章“安装 GNOME 3 及其 SDK”。
-- **[杜伟华](https://github.com/wnereiz)**：增加了openSUSE环境配置脚本
+- **[WnereiZ](https://github.com/wnereiz)**：增加了openSUSE环境配置脚本
 
 - （期待更多人参与）
 
