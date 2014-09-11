@@ -1,12 +1,12 @@
 # 写在前面 #
 
-本书是第一本全方位介绍 GNOME3 应用开发的书籍，自从 GNOME 基金会在 2011 年发布 GNOME3 以来，还没有如此基础和详尽介绍 GNOME3 应用程序开发的教程。
+本书是第一本全方位介绍 GNOME 3 应用开发的书籍，自从 GNOME 基金会在 2011 年发布 GNOME 3 以来，还没有如此基础和详尽介绍 GNOME 3 应用程序开发的教程。
 
 这本小册子浓缩了 GNOME 3 应用开发的主要内容，从 GNOME 的基础架构、GNOME Shell 桌面环境以及 GNOME 3 SDK 在时下流行的 Linux 发行版下的安装和搭建讲起，浅显易懂，逐阶深入，适合初学者，同时又兼顾现时流行趋向，有丰富的网络、多媒体和基于 HTML5 的应用开发例程，深入浅出，层层递进讲解，使得初学者不会像其他书那样被大量代码吓倒。
 
 本书的一大特色是以开源软件和开源社区精神为内涵，以社区开发规范和开源软件开发规范为准绳，同时又兼顾工程化和质量体系要求；本书的形式特色是每章和每个例子后面都附有思考问题，让学习者可在引人入胜的问题中进一步深入自学，是开源爱好者和Linux 应用开发不可多得的基础教程。
 
-本书使用 Vala 和 JavaScritp 来开发 GNOME 3 的应用程序，非常适合初级开发者。本书将会引导开发者一步步在 GNOME 3 上构建 GTK+、Clutter 和 HTML5 的应用程序。同时还覆盖了很多 GNOME 3 的独有之处，比如数据访问、多媒体支持、网络以及文件系统等，同时也很好的满足了软件工程的要求，比如本地化和测试。
+本书使用 Vala 和 JavaScript 来开发 GNOME 3 的应用程序，非常适合初级开发者。本书将会引导开发者一步步在 GNOME 3 上构建 GTK+、Clutter 和 HTML5 的应用程序。同时还覆盖了很多 GNOME 3 的独有之处，比如数据访问、多媒体支持、网络以及文件系统等，同时也很好的满足了软件工程的要求，比如本地化和测试。
 
 >**关于 GNOME **
 > 即 GNU 网络对象模型环境 (The GNU Network Object Model Environment)，GNU 计划的一部分，开放源码运动的一个重要组成部分。其目标是基于自由软件，为 Unix 及类 Unix 系统构造一个功能完善、操作简单以及界面友好的桌面环境。它是 GNU 计划的正式桌面。GNOME 以及 GNOME 基金会的官方网站是：<http://www.gnome.org>   ——摘自维基百科。
@@ -26,7 +26,7 @@
 
 而 GNOME 基金会在2011年发布 GNOME 3 以后，由于其用户界面、编程接口和 API 变动较大，造成大量用户和开发者流失，而本地开发者流失导致更难有人来接手相关的开发文档的编写和翻译工作。
 
-就在此时，印尼的自由软件专家 Mohammad Anwari （默罕默德 · 安瓦里）[^original-writer] 编写的《GNOME 3 Application Development Beginner's Guide》在2012年底出版，于是我们决定着手翻译此书。
+就在此时，印尼的自由软件专家 Mohammad Anwari（默罕默德·安瓦里）[^original-writer] 编写的《GNOME 3 Application Development Beginner's Guide》在2012年底出版，于是我们决定着手翻译此书。
 
 从2013年开始近一年的时间遍寻出版社出版此书的翻译版，一直未果，出版社大多以此书经济价值不高，难以收回成本等理由拒绝。对出版社来说也是无可厚非的，毕竟他们也要生存，特别是在目前竞争如此激烈的出版行业，对于这样的外版书还需要给外国出版社支付高额版权费。
 
@@ -37,7 +37,7 @@
 
 - **第一章：安装 GNOME 3 及其 SDK**
 
-  简单介绍了 GNOME3 的桌面环境和 SDK 的情况，并在 Fedora/OpenSUSE/Ubuntu/Debian 这些主流 Linux 发行版下进行安装和测试。
+  简单介绍了 GNOME 3 的桌面环境和 SDK 的情况，并在 Fedora/OpenSUSE/Ubuntu/Debian 这些主流 Linux 发行版下进行安装和测试。
 
 - **第二章 基本开发环境介绍**
 
@@ -53,7 +53,7 @@
 
 - **第五章 构建用户界面（GUI）**
 
-  通过 GTK+和 Clutter 组件构建基本的用户界面，脱离命令行开发，做出更有创造力的应用程序。
+  通过 GTK+ 和 Clutter 组件构建基本的用户界面，脱离命令行开发，做出更有创造力的应用程序。
 
 - **第六章 GNOME 的界面小组件（Widgets）**
 
@@ -90,7 +90,7 @@
 
 ## 需要的前期准备 ##
 
-阅读本书需要一些基本的面向对象编程的基础。若能有 Vala 或者 Javascript 的经验将会更加有帮助。同时，为了更好地阅读和实践书里的内容，你需要安装最新版的 Linux 发行版，比如 Fedora、OpenSUSE、Ubuntu 或其他 Debian 发行版均可。
+阅读本书需要一些基本的面向对象编程的基础。若能有 Vala 或者 JavaScript 的经验将会更加有帮助。同时，为了更好地阅读和实践书里的内容，你需要安装最新版的 Linux 发行版，比如 Fedora、OpenSUSE、Ubuntu 或其他 Debian 发行版均可。
 
 当然，若没有面向对象编程基础也是可以阅读的，本书浅显易懂，对具有其他编程基础的人也将不会有太多难度。
 
@@ -175,9 +175,9 @@ public class Main : WebView
 
 ## 致谢
 
-首先感谢 Mohammad Anwari （默罕默德 · 安瓦里）于2012年编写了《GNOME 3 Application Development Beginner's Guide》一书，将 GNOME 3 应用程序开发的要义写明出来。我们在原书基础上大量增加新的代码实例和大量的本地化内容，丰富和加强了原书的架构，更适合中国程序员阅读，同时降低了入门难度。
+首先感谢 Mohammad Anwari（默罕默德·安瓦里）于2012年编写了《GNOME 3 Application Development Beginner's Guide》一书，将 GNOME 3 应用程序开发的要义写明出来。我们在原书基础上大量增加新的代码实例和大量的本地化内容，丰富和加强了原书的架构，更适合中国程序员阅读，同时降低了入门难度。
 
-同时还要特别鸣谢 Larrycaiyu，本书的[源代码](https://github.com/beijinggug/gnome3-app-book/)就是基于其 [sdcamp](https://github.com/larrycai/sdcamp) 项目发展而来。Larrycaiyu 利用 MultiMarkdown 和 Latex（xelatex）将书写中文技术书籍变得非常简单，同时将其与Git结合，并结合GitHub的社交编程功能，使得多人协作编写技术书籍更加易如反掌！
+同时还要特别鸣谢 Larrycaiyu，本书的[源代码](https://github.com/beijinggug/gnome3-app-book/)就是基于其 [sdcamp](https://github.com/larrycai/sdcamp) 项目发展而来。Larrycaiyu 利用 MultiMarkdown 和 <!-- \LaTeX\ (\XeLaTeX) --> 将书写中文技术书籍变得非常简单，同时将其与 Git 结合，并结合 [GitHub](https://github.com/) 的社交编程功能，使得多人协作编写技术书籍更加易如反掌！
 
 本书的编写得到了北京GNOME用户组大量志愿者的热心参与，其中：
 
@@ -193,6 +193,6 @@ public class Main : WebView
 
 **北京 GNOME 用户组 微博：** <http://weibo.com/bjgug>
 
-[^original-writer]: Mohammad Anwari （默罕默德 · 安瓦里），他是 GNOME 基金会成员，印度尼西亚著名的软件开发者,有 13 年的软件开发经验，在印尼生活期间创办了印尼最大的软件公司，积极参与 Linux 内核和 GNOME 相关应用软件的社区开发，有非常丰富的开发经验。后移居芬兰加入 Nokia 公司软件开发部，参与 QT 应用程序的开发。近几年回到印尼,专注于开发印尼的 Linux 发行版 BlackOn，并积极研发基于 GNOME Shell 桌面环境的菜单环境，最终在 2013 年 GNOME.Asia 亚洲峰会上展示，获得与会人员的一致认可。
+[^original-writer]: Mohammad Anwari（默罕默德·安瓦里），他是 GNOME 基金会成员，印度尼西亚著名的软件开发者,有 13 年的软件开发经验，在印尼生活期间创办了印尼最大的软件公司，积极参与 Linux 内核和 GNOME 相关应用软件的社区开发，有非常丰富的开发经验。后移居芬兰加入 Nokia 公司软件开发部，参与 Qt 应用程序的开发。近几年回到印尼,专注于开发印尼的 Linux 发行版 BlackOn，并积极研发基于 GNOME Shell 桌面环境的菜单环境，最终在 2013 年 GNOME.Asia 亚洲峰会上展示，获得与会人员的一致认可。
 
 
