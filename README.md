@@ -1,4 +1,4 @@
-[![Build Status](https://drone.io/github.com/tonghuix/gnome3-app-book/status.png)](https://drone.io/github.com/tonghuix/gnome3-app-book/latest)
+[![Build Status](https://drone.io/github.com/beijinggug/gnome3-app-book/status.png)](https://drone.io/github.com/beijinggug/gnome3-app-book/latest)
 
 # GNOME 3 应用程序开发入门指南 #
 
@@ -41,7 +41,7 @@
 
 # 参与编写须知 #
 
-[传送门](https://github.com/tonghuix/gnome3-app-book/wiki/CONTRIBUTION)
+[传送门](https://github.com/beijinggug/gnome3-app-book/wiki/CONTRIBUTION)
 
 # 贡献者列表
 
