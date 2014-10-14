@@ -140,7 +140,7 @@ JavaScript 是松散类型的语言，这意味着我们不用定义变量的类
 现在让我们看下 JavaScript 的基本数据类型及如何使用。
 这之后，我们才能够根据我们的需求来选择使用的类型。
 
-1. 创建一个新文件 hello-world-data-types.js 并填入如下代码：
+1. 创建一个新文件 _hello-world-data-types.js_ 并填入如下代码：
 ````
 #!/usr/bin/env gjs
 print("Hello world")
@@ -158,7 +158,7 @@ number = undefined
 print(number);
 ````
 2. 运行
-3. 输出的结果如下：
+3. 输出的结果如下：（如果使用 seed 运行，输出的结果略有不同）
 ````
 Hello world
 1
@@ -171,209 +171,167 @@ undefined
 ````
 ### 刚刚发生了什么？
 
-We can now see two interesting things. First, that JavaScript can juggle between data
-types. We can change the type of one variable into another by just assigning a new value.
-The second, which we have talked about is that we do not need to declare the type of the
-variable. In this code, we have the number variable that we initially set with the value of 1 .
 我们会发现两件有趣的事情。一是 JavaScript 能够自动转换数据类型。
 我们能够通过赋值的方式来改变一个变量的类型。
 第二，我们并不需要定义变量的类型，之前已经提到过。
-在程序中我们使用 number 变量，并赋值为 1 。
+在程序中我们使用 _number_ 变量，并赋值为 _1_ 。
+````
 var number = 1;
 print(number);
-Now the number variable is just a plain integer.
-现在 number 变量是一个整数
-
+````
+现在 _number_ 变量是一个整数。
+````
 number = number + 0.5;
 print(number);
-
-Then we add 0.5 into it, making it a floating point data type. JavaScript accepts this without
-any problem and we have 1.5 as the value now.
-在我们给 number 加 0.5 后，它转换为浮点类型。JavaScript 支持这个没有任何问题，当前 number 的值是 1.5 。
-
+````
+在我们给 _number_ 加 _0.5_ 后，它转换为浮点类型。JavaScript 支持这个没有任何问题，当前 _number_ 的值是 _1.5_ 。
+````
 print(number.length);
-Then we try to access the .length property of the number. Because the type of the number
-variable at this moment is a number, and because it does not have any length, the value of
-number.length is [undefined] .
-然后我们尝试访问 number 的 .length 属性。因为当前的类型是数字，并没有长度，所以返回值是 [undefined]。
+````
+然后我们尝试访问 _number_ 的 _.length_ 属性。因为当前的类型是数字，并没有长度，所以返回值是 _undefined_。
 
-We see now that JavaScript has the unknown value concept, which is described as
-[undefined] . If a variable is undefined, we can't access anything inside it and it
-will cause JavaScript to think that this is an error.
-我们可以看到 JavaScript 有未知值，就是 [undefined], 如果一个变量是未知值，我们不能访问它的属性并会让
-JavaScript 认为这是一个错误。
-
+我们可以看到 JavaScript 有未知值的概念，也就是 _undefined_, 如果一个变量是未知值，我们不能访问它的属性，
+这会让 JavaScript 认为这是一个错误。
+````
 number = number + " is a number? no, it is now a string";
 print(number);
-Now we concatenated number with a string, effectively making it a string as a whole. Now
-number.length is defined by the interpreter and has a value of 39 , showing that it has
-39 characters in it.
-现在给 number 连接一个字符串，使它变成了一个字符串。现在 number.length 就被解释器定义了，值为39，意思是
-包含了 39 个字符。
-
+````
+现在给 _number_ 连接一个字符串，使它变成了一个字符串。现在 _number.length_ 就在解释器中有定义了，值为39，意思是
+_number_ 包含了 39 个字符。
+````
 number = (number.length == 0)
 print(number);
-
-Here we assign number with a Boolean value coming from the (number.length == 0)
-expression. Because number.length is not 0 , the expression returns false , and it is
-printed as 0 . If it was true , it would be printed as 1 .
-这我们又把 number 赋了一个布尔值。因为 number.length 不是 0 ，表达工 (number.length == 0)
-返回 false，也就是 0。 如果返回的 true，值就是 1 。
+````
+这行代码又把 _number_ 赋了一个布尔值。因为 _number.length_ 不是 _0_ ，表达式 _(number.length == 0)_
+返回 _false_ ，也就是 _0_ 。 如果返回的 _true_ ，值就是 _1_ 。
+````
 number = undefined
 print(number);
-Now we set number to undefined ; it is a reserved word, so we can just set it as
-shown previously.
-现在给 number 赋值为 undefined，这是一个保留字，因此我们可以用它赋值。
+````
+现在给 _number_ 赋值为 _undefined_ ，这是一个保留字，因此我们可以用它赋值。
 
-It is fun, isn't it?
 很有趣，是吧？
 
-Pop quiz – what is the value now?
-小练习 下面的值是什么？
-Q1. After the assignment of all data types that was performed earlier, at the very end of our
-code, what is the value of number.length now? Choose from the following (remember
-that just after we assigned it as a string, it had a value of 39 ):
-在完成了之前所有的任务之后，在代码运行的最后，number.length 的值是多少？
-1.	 0 , because we set number to undefined .
-0, 因为我们给 number 赋值为 undefined 。
-2.	 undefined , because we set number to undefined .
-undefined， 因为我们给 number 赋值为 undefined。
-3.	 JavaScript will think this is an error because we try to access .length from an
-undefined value.
-JavaScript 将认为这是一个错误，因为我们尝试访问一个 undefined 的变量的长度。
+### 小测试 - 现在的值是什么？
+Q1. 在完成了之前所有的任务之后，在代码运行的最后，_number.length_ 的值是多少？
+（记得我们在给 _number_ 赋值为字符串后它的长度是 39 ）
 
-Controlling iteration
-控制迭代
-In programming, we almost always need to repeat certain parts of the code to be run. We do
-this by having an iteration control (also known as loop or repetition control) inside our code.
-In JavaScript it is quite easy.
-在编程，我们总会需要重复的运行一段代码。我们参运迭代来完成这个工作（也叫循环）
-在 JavaScript 这十分容易。
+1. _0_ ，因为我们给 _number_ 赋值为 _undefined_ 。
+2. _undefined_ ， 因为我们给 _number_ 赋值为 _undefined_ 。
+3. JavaScript 将认为这是一个错误，因为我们尝试访问一个 _undefined_ 的变量的长度 _.length_ 。
 
-Time for action – controlling Iteration
-### 实践环节 - 代码时间
-We can follow these steps to control iteration:
+### 使用迭代
+在编程，我们总会需要重复的运行一段代码。我们通过迭代来完成这个工作（也叫循环）
+这在 JavaScript 十分容易。
+
+### 实践环节 - 使用迭代
 按下面的步骤来：
-1.	Create a new file called hello-world-iteration.js and put this code in it:
-i创建一个新文件 hello-world-iteration.js 然后填入下面的代码：
 
-#!/usr/bin/env seed
+1. 创建一个新文件 _hello-world-iteration.js_ ，然后填入下面的代码：
+````
+#!/usr/bin/env gjs
+
 print("Hello, world")
-for (i = 0; i < 10; i ++) {
-print("Iteration number #" + i);
+for (var i = 0; i < 10; i ++) {
+	print("Iteration number #" + i);
 }
-2.	Run it.
-运行
+````
+2. 运行
 
-ee that the text is printed 10 times.
-我们可以看到输出了10次结果。
-
+3. 我们可以看到输出了10次结果。
+````
+Hello, world
+Iteration number #0
+Iteration number #1
+Iteration number #2
+Iteration number #3
+Iteration number #4
+Iteration number #5
+Iteration number #6
+Iteration number #7
+Iteration number #8
+Iteration number #9
+````
 ### 刚刚发生了什么？
+在这段代码里，我们让 JavaScript 使用 _for_ 循环做 _10_ 次迭代操作，从 _0_ 开始，不是 _1_ ，每次迭代我们
+给 _i_ 加 _1_ （在 _for_ 循环中的 _i++_ 表达式意味着每次给 _i_ 加 _1_ ），循环在 _i_ 到 _10_ 之后将会退出。
+循环最后 _i_ 的值是 _10_ , 因为不小于 _10_，所以结束循环。因此输出的结果
+中显示的是从 _0_ 到 _9_, 而不是 _10_.
 
-In the code, we tell JavaScript to do 10 iterations using the for loop. We can see that
-JavaScript starts the index from 0 , and not from 1, as we initially set the value of i ( i = 0
-in the code). In each iteration we add 1 to i (see the i++ expression in the for loop, which
-means "increase the value of i by 1"). The loop stops immediately when the i value breaks
-the constraint, which is 10. At the end of the loop, the value of i is 10. But because 10 is not
-lesser than 10 (in the code we put i < 10 ), it breaks the loop. Hence the text displays 0 to 9
-instead of up to 10.
-在这段代码里，我们让 JavaScript 使用循环做 10 次迭代操作，从 0 开始，不是 1 ，每次迭代我们给 i 加 1
-循环在 i 到 10 之后将会退出。循环最后 i 的值是 10, 但因为不小于 10，所以结束循环。因此输出的结果
-中显示的是从 0 到 9, 而不是 10.
+### 大胆实践 - 倒数
+我们已经完成了累加，那么如何倒数呢？
 
-Have a go hero – counting down
-We have done the counting up. Now how about counting down?
-倒数
+### 实践环节 - 使用数组
+让我们把数组想像成一堆盒子，每个里面装了一个同类型的数据。下面就把这堆盒子填满。
 
-我们已经完成了累加，那么如何反过来？
-
-Time for action – manipulating an array
-### 实践环节 - 操作数组
-
-We can imagine an array as a collection of boxes that can hold a number of items with the
-same type. Let's try to fill those boxes.
-数组就是一个盒子，里面装了同一类型的数据。
-1.	
-Create a new script called hello-world-array.js and fill it to look like this:
-创建 hello-world-array.js，并填入下面的代码
-
-#!/usr/bin/env seed
+1. 创建 _hello-world-array.js_ ，并输入下面的代码
+````
+#!/usr/bin/env gjs
 print("Hello world")
 var boxes = []
-for (i = 0; i < 10; i ++) {
-boxes[i] = i * 2;
+for (var i = 0; i < 10; i ++) {
+	boxes[i] = i * 2;
 }
 for (i = 0; i < boxes.length; i ++) {
-print("Box content #" + i + " is " + boxes[i])
+	print("Box content #" + i + " is " + boxes[i])
 }
-2.	Run it.
-运行
-3.	
-We will see the text specifying the box number and its content.
-我们将看到下面的结果.
-[IMG]
-
+````
+2. 运行。
+3. 我们将看到下面的从 _0_ 到 _9_ 号箱子中放了些什么。
+````
+Hello world
+Box content #0 is 0
+Box content #1 is 2
+Box content #2 is 4
+Box content #3 is 6
+Box content #4 is 8
+Box content #5 is 10
+Box content #6 is 12
+Box content #7 is 14
+Box content #8 is 16
+Box content #9 is 18
+````
 ### 刚刚发生了什么？
 
-The first thing we do is to declare boxes as an array:
-首先我们定义 boxes 为数据类型
+首先我们定义 _boxes_ 为数组类型：
+````
 var boxes = []
-Note that we did not set the size of the array; we just say that it is an array and let JavaScript
-do the magic. This is because the array can shrink or grow at any time whenever we modify
-its content. Then we fill in the boxes:
-注意我们没有设置数据的大小，我们只知道这个是数据就足够了，让 JavaScript 来处理吧。
-这是因为任何时候我们编辑它的内容时数组可以自动缩小或增大。
-接下来我们：
-for (i = 0; i < 10; i ++) {
-boxes[i] = i * 2;
+````
+你也许注意我们没有设置数据的大小，其实我们只用知道这个是数组就足够了，让 JavaScript 来处理吧。
+这是因为任何时候我们编辑它的内容时，数组自身可以自动缩小或增大。
+接下来我们往盒子数组里填充数据：
+````
+for (var i = 0; i < 10; i ++) {
+	boxes[i] = i * 2;
 }
-Then, on each box, we set the value to be the index of the array times two. We just set
-the content on the index i directly, without allocating anything, like in the C programming
-language. It's super easy. Then we print out the content of the array:
-
-在每一个 boxes 中我们赋一个为索引的2倍的值。
-我们只直接按索引来赋值，而不像 C 语言需要提前分配。
-
+````
+我们给每一个盒子赋了一个索引值的2倍的值。
+我们只直接按索引来给盒子赋值，而不像 C 语言那样需要提前分配。
+真心简单啊！然后我们打印出数组的内容：
+````
 for (i = 0; i < boxes.length; i ++) {
-print("Box content #" + i + " is " + boxes[i])
+	print("Box content #" + i + " is " + boxes[i])
 }
-
-The length of the array can be obtained from the length variable within an object. In this
-case, we can get the length from boxes.length . So whenever we fill an array, the length
-is adjusted automatically.
-数组的长度可以从对象的 length 变量来获取，本例中使用 boxes.length 就可以获取长度。
+````
+数组的长度可以从对象的 _length_ 变量来获取，本例中使用 _boxes.length_ 就可以获取长度。
 无论数组怎么变化，它的长度都会自动调整。
 
-Have a go hero – fill with anything you want
-随便往数组里些东东
+### 大胆实践 - 随便往数组里放些东东
+在前面的部分我们往盒子里填入了数字，那么填入其它的类型会怎么样呢？
+你可以试试在盒子中填入字符串, 甚至字符串和数字的混和也是可以的。感到惊喜没？
 
-We have filled the boxes with numbers in the previous section; how about other data types?
-在前面的部分我们往 boxes 里填入了数字，那么如何填入其它的类型呢？
-
-Try to fill boxes with string or even mixed string and integer. Are you surprised?
-你可以试试在 boxes 中填入字符串, 甚至字符串和数字的混和也是可以的。
-
-Object-oriented programming (OOP) with JavaScript
-JavaScript 面象对象的编程
-
-If you are already familiar with object-oriented programming, be prepared that OOP in
-JavaScript is somewhat limited and does not follow the usual OOP practice. This is because
-the language itself is not a full OOP language. What we are trying to do here is to adapt the
-OOP concept within the limitations that JavaScript has.
+### JavaScript 面象对象的编程 (OOP)
 如果你已经熟悉面向对象的编程，那么你要准备好 JavaScript 中的 OOP 有些限制并不像通常的 OOP。
 这是因为 JavaScript 本身并不是一个全面象对象的语言。
 我们所需要做的就是在已有的限制内使用 OOP。
 
-Time for action – using the JavaScript object
-### 实践环节 - 使用  JavaScript 对象
+### 实践环节 - 使用 JavaScript 对象
+到该尝尝肉的时候了，这就试试 JavaScript 对象。
+我们将在本书中使用大量的对象，先从一个简单的例子开始。
 
-Now it is time to eat the meat, the JavaScript object. We will use objects extensively in this
-book. Let's do that by first introducing to ourselves a simple one.
-到吃肉的时候了，让我们试试 JavaScript 对象。
-从书做为一个开始的例子。
-1.	Create a new script called hello-world-object.js and fill with this code:
-创建 hello-world-object.js ，并填入下面的代码：
-#!/usr/bin/env seed
+1. 创建 hello-world-object.js ，并输入下面的代码：
+````
+#!/usr/bin/env gjs
 print("Hello world")
 var book = {};
 print(book);
@@ -383,141 +341,120 @@ book.title = "A somewhat interesting book"
 print(book);
 print(book.isbn);
 print(book.title);
-
-2.	Run it.
-运行
-3.	See the values printed:
-看看结果
+````
+2. 运行。
+3. 看看结果：
+````
 Hello world
 [object Object]
-[undefined]
+undefined
 [object Object]
 xxxx-1234-1234
 A somewhat interesting book
-
+````
 ### 刚刚发生了什么？
-
-Like any other data type, we can assign a variable with an object easily.
-与其它数据类型一样，我们可以给一个变量赋一个对象值。
-
+与其它数据类型一样，我们可以很容易地给一个变量赋一个对象值。
+````
 var book = {};
-In this line, we define book as an empty object. Here, the object is initialized with curly
-brackets. This is the simplest form of an object.
-这行我们定义 book 为一个空的对象。用大括号来初始化对象，这是对象最简单的形式。
+````
+这行我们定义 _book_ 为一个空的对象。用大括号来初始化对象，这是对象最简单的形式。
+````
 print(book);
-This prints [object Object] saying that this is an object of type Object .
-这行打印出 [object Object] ， 意思是这是一个 Object 类型的对象。
+````
+这行打印出 _[object Object]_ ， 意思是这是一个 _Object_ 类型的对象。
+````
 print(book.isbn);
-We try to access the .isbn property of the object here, but as it is empty, it is initially
-访问对象的 .isbn 属性，但是没有值，初始化为 [undefined] 。
-
+````
+我们试图访问对象的 _.isbn_ 属性，但是没有值，初始化为 _undefined_ 。
+````
 book.isbn = "xxxx-1234-1234";
 book.title = "A somewhat interesting book"
-Here, we try to assign the property of the object with some values. At this point, we are free
-to put anything inside the object, and we don't have to initialize or declare it before using it.
-这给对象的属性赋些值。我们可以随意在对象内放任何东东，我们以不必初始或在使用前定义它。
+````
+这两行代码给对象的属性赋些值。我们可以随意在对象内放任何东东，我们不用初始化或在使用前声明它。
+````
 print(book);
-Here, we print the book variable again; it still says that it is an object of type Object .
-再次打印变量 book ，它将返回 Object 类型的对象。
+````
+再次打印变量 _book_ ，它仍将返回 _Object_ 类型的对象。
+````
 print(book.isbn);
 print(book.title);
-But here the situation changes as the values are assigned and can be printed.
-目前情况已经改变，因为已经赋值了，能够被打印出来了。
+````
+目前情况已经改变，因为已经赋值了，_isbn_ 和 _title_ 能够被打印出来了。
 
-With great power comes great responsibility
-能力大责任也大
-As you may have noticed, in JavaScript, we are practically free to do anything with the data
-types. However, with this power, we have to thoroughly check our code for correctness.
-Sloppy programming with JavaScript will end up in disaster, because as the code grows, it
-becomes harder to track where the error is.
+### 能力越大责任也越大
 你也许已经注意到在 JavaScript 中我们可以对数据类型做任何事情，由此我们必须检查代码的正确性。
 随着代码的增长，最后你会发现很难找到错误的位置，JavaScript 的松散编程将最终导致灾难。
 
-Because JavaScript is case sensitive, it will become even harder to track errors. Imagine if we
-have set this line somewhere in our code:
 因为 JavaScript 区分大小写，这将对跟踪错误增加了难度。
-假设在我们的代码中有下面一行
+假设在我们的代码中有下面一行：
+````
 book.authorFirstName = "Random Joe"
-然后，在其它部分，我们编辑了这个变量
-Then, in other parts of the code, we try to modify the variable with this line:
+````
+然后，在其它部分，我们编辑了这个变量：
+````
 book.authorFirstname = "Another Joe"
-
-JavaScript will not complain about this because we are free to set anything inside our object.
-We must take responsibility for this error by double, no, triple checking our code so that we
-do not make typos like the previous one. Wait a second; have you spotted the bug that we
-are talking about?
+````
 JavaScript 将不会有任何提示因为我们可以随意的设置对象内的东东。
 我们有责任检查这种错误，两遍甚至三遍，以致于我们不会有前面的错误。
 到现在，你对我们提到的 bug 明白了么？
 
-Have a go hero – another way to fill the object
-给对象赋值的另一个方法
-Try to modify a part of the previous code to look like this and see what happens:
+### 大胆实践 - 给对象赋值的另一个方法
 按下面的方法编辑前面的代码，看看结果怎么样。
+````
 var book = {
-isbn:"xxxx-1234-1234",
-title:"A somewhat interesting book"
+	isbn:"xxxx-1234-1234",
+	title:"A somewhat interesting book"
 }
-We are now defining the ISBN and the title inside the object in a different way. Here we use
-a colon instead of the equals sign, and we put a comma in between the definitions. This
-notation is called JSON (JavaScript Object Notation).
+````
 我们以一个新的方式来定义 book 对象内 ISBN 和标题。我们使用冒号而不是等号，在不同的变量间使用逗号。
-这个就是所谓的 JSON (JavaScript 对象注释)。
-Constructing objects
-构建对象
-After using the simplest form of a JavaScript object, let's now have a more sophisticated
-object. This marks our adventure with object-oriented programming with JavaScript.
+这个就是所谓的 **JSON (JavaScript 对象标记法)** 。
+### 构建对象
 在使用了最简单的 JavaScript 对象后，我们将再试一下复杂点的对象。
 
-Time for action – playing with constructors
-### 实践环节 - 玩下构建
-When we talk about constructing an object, it means that we call a special function called a
-constructor. Let's see how to do it.
-当我们提到构建一个对象，就是指调用一个特殊的函数 constructor 。下面让我们来看一下。
-1.	Create a new file called hello-world-constructor.js and fill it with this code:
-创建一个 hello-world-constructor.js 文件，填入下面的代码：
+### 实践环节 - 构造函数
+当我们提到构建一个对象，就是指调用一个特殊的函数 **constructor** 。下面让我们来试一下。
 
-#!/usr/bin/env seed
+1. 创建一个 hello-world-constructor.js 文件，输入下面的代码：
+````
+#!/usr/bin/env gjs
 print("Hello world")
+
 var Book = function(isbn, title) {
 	this.isbn = isbn;
 	this.title = title;
 }
-book = new Book("1234", "A good title");
+
+var book = new Book("1234", "A good title");
 print(book.isbn);
 print(book.title);
-2.	Run it.
-运行
-3.	See the values printed:
-看看结果：
+````
+2. 运行。
+3. 看看结果：
+````
 Hello world
 1234
 A good title
-
+````
 ### 刚刚发生了什么？
-
-This is actually similar to our previous code, with the difference that now we define it as a
-class, and then later instantiate it as an object.
 这与我们前面介绍的代码相类似，不同的是现在我们定义了一个类，然后实例化为一个对象。
+````
 var Book = function(isbn, title) {
-this.isbn = isbn;
-this.title = title;
+	this.isbn = isbn;
+	this.title = title;
 }
-This is our constructor of the Book class. Within it, we assign the .isbn property with the
-isbn variable passed as an argument in the constructor function. The same thing happens
-with the .title property.
-这是 Book 类的构造函数，我们把构造函数的参数 isbn 赋值为 .isbn 属性，对 .title 属性也是一样。
-book = new Book("1234", "A good title");
-Here we create a new variable called book (note the lowercase!) by instantiating a Book
-class with the supplied arguments.
-我们创建了一个叫 book 的变量（注意我们用的小写！)，通过参数把 Book 类实例化。
+````
+这是 _Book_ 类的构造函数，我们把构造函数的参数 _isbn_ 赋值给 _.isbn_ 属性，对 _.title_ 属性也是一样。
+````
+var book = new Book("1234", "A good title");
+````
+我们创建了一个叫 _book_ 的变量（注意我们用的小写！)，通过参数把 _Book_ 类实例化。
+````
 print(book.isbn);
 print(book.title);
-Now we can see the value of .isbn and .title as printed.
-现在我们可以看见 .isbn 和 .title 已经被打印出来了。
+````
+现在我们可以看见 _.isbn_ 和 _.title_ 已经被打印出来了。
 
-Class and object
-类和对象
+### 类和对象
 The class is only a definition such as var Book = function(..) {...} in the previous
 code; it is not an object until we really instantiate it later with the new operator. When it
 becomes an object, we also call it an instance of a class. Previously, we did the instantiation
