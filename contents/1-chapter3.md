@@ -132,7 +132,7 @@ chmod +x hello-world.js
 ./hello-world.js
 ````
 
-### 松散类型的语言
+## 松散类型的语言
 JavaScript 是松散类型的语言，这意味着我们不用定义变量的类型为数字，字符串或数组就可以使用它。
 只要简单的使用 _var_ 指令去定义变量。我们将很快发现这是怎么工作的。
 
@@ -220,7 +220,7 @@ Q1. 在完成了之前所有的任务之后，在代码运行的最后，_number
 2. _undefined_ ， 因为我们给 _number_ 赋值为 _undefined_ 。
 3. JavaScript 将认为这是一个错误，因为我们尝试访问一个 _undefined_ 的变量的长度 _.length_ 。
 
-### 使用迭代
+## 使用迭代
 在编程，我们总会需要重复的运行一段代码。我们通过迭代来完成这个工作（也叫循环）
 这在 JavaScript 十分容易。
 
@@ -320,7 +320,7 @@ for (i = 0; i < boxes.length; i ++) {
 在前面的部分我们往盒子里填入了数字，那么填入其它的类型会怎么样呢？
 你可以试试在盒子中填入字符串, 甚至字符串和数字的混和也是可以的。感到惊喜没？
 
-### JavaScript 面象对象的编程 (OOP)
+## JavaScript 面象对象的编程 (OOP)
 如果你已经熟悉面向对象的编程，那么你要准备好 JavaScript 中的 OOP 有些限制并不像通常的 OOP。
 这是因为 JavaScript 本身并不是一个全面象对象的语言。
 我们所需要做的就是在已有的限制内使用 OOP。
@@ -408,7 +408,7 @@ var book = {
 ````
 我们以一个新的方式来定义 book 对象内 ISBN 和标题。我们使用冒号而不是等号，在不同的变量间使用逗号。
 这个就是所谓的 **JSON (JavaScript 对象标记法)** 。
-### 构建对象
+## 构建对象
 在使用了最简单的 JavaScript 对象后，我们将再试一下复杂点的对象。
 
 ### 实践环节 - 构造函数
@@ -454,159 +454,51 @@ print(book.title);
 ````
 现在我们可以看见 _.isbn_ 和 _.title_ 已经被打印出来了。
 
-### 类和对象
-The class is only a definition such as var Book = function(..) {...} in the previous
-code; it is not an object until we really instantiate it later with the new operator. When it
-becomes an object, we also call it an instance of a class. Previously, we did the instantiation
-differently by just using the curly brackets without any class definition.
-在上面的化码里类只是一个定义, var Book = function(..) {...} 
-它仍不是一个对象直到我们在后面用 new 操作符实例化。
-当它变成一个对象，我们叫类的实例。而之前我们直接使用大括号来实例化，而不是用类。
+## 类和对象
+在上面的代码里类只是一个定义, 比如 _var Book = function(..) {...}_ ，
+它仍不是一个对象直到我们在后面用 _new_ 操作符实例化。
+当它变成一个对象，我们叫类的实例。而在这之前我们直接使用大括号来实例化，而没有使用任何类的定义。
 
-By convention, we usually name our classes with CamelCase, which has a mix of uppercase
-and lowercase characters, where the first character in the first word is started with
-uppercase (for example, Book ). In contrast, for object instances or variables, we used
-lowercase for the first character in the first word (for example, book ).
-按惯例，我们使用驼峰字来定义类名，即第一个司的首字母大写，如 Book 。
-对比之下，对象实例或变量，我们全部使用小写，如 book 。
+按惯例，我们使用驼峰字来定义类名，即第一个词的首字母大写，如 _Book_ 。
+对比之下，对象的实例或变量，首字母的第一个词使用小写，如 _book_ 。
 
-Pop quiz – can you see the difference now?
-找不同
-Let's take a look at this code:
-看下下面的代码：
+### 小测试 - 你能分辨出类和对象的区别吗？
+看一下下面的代码：
+````
 var Circle = function(radiusInPixel) {
-this.radius = radiusInPixel
+	this.radius = radiusInPixel
 }
-var circle = new Circle(100);
-Q1. What is circle and what is Circle ? Which one of the following statements is correct?
-Q1. circle 和 Circle 都代表什么？下面哪句话正确？
-1.	 Circle is a class because it has the definition, and circle is an object, instantiated
-from the Circle class.
-1. Circle 是一个类，因为它有定义，circle 是一个对象，从一个 Circle 类实例。
-2.	 circle is an object because it has the definition, and Circle is an instance of the
-circle object.
-2. circle 是一个对象，因为它有定义，Circle 是 circle 对象的一个实例。
 
-Using prototypes
-使用 prototypes
+var circle = new Circle(100);
+````
+Q1. circle 和 Circle 都代表什么？下面哪句话正确？
+
+1. _Circle_ 是一个类，因为它有定义，_circle_ 是一个对象，从一个 _Circle_ 类实例。
+2. _circle_ 是一个对象，因为它有定义，_Circle_ 是 _circle_ 对象的一个实例。
+
+## 使用原型 (prototypes)
 In OOP, we can have methods or functions attached to an object. This means that the
 function is specific to a particular object in memory. If we call a function in one object, it
 does not interfere with another object of the same type that also has the same function.
 In JavaScript we use prototypes to achieve this feature.
-在面向对象编程中，一个对象可以有方法或是函数。这意味着函数在内存中是一个特殊的对象。
+
+在面向对象编程中，我们可以给一个对象添加更多的方法或函数。这意味着函数在内存中是一个特殊的对象。
 如果我们调用一个对象中的函数，它并不会妨碍另一个对象中相同名字的函数。
-在 JavaScript 中我们使用 prototypes 来实现这个特性。
+在 JavaScript 中我们使用原型来添加函数。
 
-Time for action – adding prototypes
-### 实践环节 - 添加 prototypes
-Let's now add some methods to our class. Here we will use the prototype object to
-define them.
-在 Book 类中添加一些方法。我们使用 prototype 对象来定义它们。
-1.	Create a new script called hello-world-prototype.js and fill it with this:
-创建一个新的文件 hello-world-prototype.js 并填入下面的代码：
-#!/usr/bin/env seed
+### 实践环节 - 添加原型
+让我们在之前的 _Book_ 类中添加一些方法。我们使用 _prototype_ 对象来定义它们。
+
+1. 创建一个新的文件 _hello-world-prototype.js_ ，输入下面的代码：
+````
+#!/usr/bin/env gjs
 print("Hello world")
-var Book = function(isbn, title) {
-this.isbn = isbn;
-this.title = title;
-}
-Book.prototype = {
-printTitle: function(){
-print("Title is " + this.title);
-},
-printISBN: function() {
-print("ISBN is " + this.isbn);
-}
-}
-var book = new Book("1234", "A good title");
 
-book.printTitle();
-book.printISBN();
-2.	Run it.  
-运行
-3.	See the values printed:
-结果：
-Hello world
-Title is A good title
-ISBN is 1234
-
-### 刚刚发生了什么？
-
-In a JavaScript object, prototype is a special object that holds all the properties and
-methods inside a class or an object. So what we do here is to fill in the prototype with
-our own methods.
-在 JavaScript  对象，prototypes 是一个特殊的对象，它拥有一个类或对象的所有属性。
-因此我们用我们自己的方法来填充 prototypes 。
-var Book = function(isbn, title) {
-this.isbn = isbn;
-this.title = title;
-}
-In this code, we have our constructor like before:
-构造函数与前面的一样。
-Book.prototype = {
-
-Then, we start the declaration of the prototype, ready to fill it in with our own
-method definitions:
-然后，定义 prototypes ，用我们自己的方法赋给它。
-printTitle: function(){
-print("Title is " + this.title);
-},
-Here, we put our first method as described with a function body:
-第一个方法
-
-printISBN: function() {
-print("ISBN is " + this.isbn);
-}
-We use a colon instead of an equals sign to define the method, and
-we put a comma at the end of our method, meaning that there
-will come another method or member declaration after this line.
-Remember our experience from the previous code when defining
-the book object in a different way?
-我们使用冒号而不是等号来定义一个方法，使用逗号在方法的结束，意味着还将定义另一个方法或成员。
-还记得我们之前定义 book 对象时使用什么方式了么？
-Then, our next method comes along. Here we end the definition without putting a comma.
-第二个方法，注意结束后没有逗号。
-
-var book = new Book("1234", "A good title");
-After that, we declare a book variable by constructing the Book object with
-specified arguments.
-在这之后，定义了 book 变量，以特定的参数构建一个 Book 对象给它。
-book.printTitle();
-book.printISBN();
-Finally, we use our method by just calling it (note the brackets after the name of
-the method).
-最后，我们调用这些方法（注意方法名字后面要接小括号）。
-
-Have a go hero – adding more methods
-添加更多的方法
-Why don't we add more methods? Let's say we need these methods:
-为什么不加些方法呢？我们需要下面的方法：
-  getISBN() , which returns the isbn
-  getISBN() , 将返回 isbn 的值
-
-  getTitle() , which returns the title of the book
-  getTitle() , 将返回书名
-Don't forget about the colon and the comma!
-不要忘记冒号和逗号！
-
-Time for action – modifying the prototype of an object
-### 实践环节 - 编辑一个对象的 prototype
-
-As mentioned previously, we can also put something inside the prototype of an object
-directly and not in the class. This is not something that we will do on an everyday basis, but
-we will learn it here just for our knowledge; it may come in handy later. Imagine that we
-want to replace a function defined in our prototype with another function at runtime!
-前面提到的，我们可以直接在一个对象的 prototype 中添加一些东东，而不是在类中添加。
-我们不会每天都做这些基本的事情，在此我们了解一下，这些迟早都会派上用场的。
-想象一下我们想要在运行的时候用另一个函数代替在 prototype 中已经定义的函数！
-1.	Create a new script called hello-world-proto.js and fill with this:
-创建 hello-world-proto.js，打入下面的代码：
-#!/usr/bin/env seed
-print("Hello world")
 var Book = function(isbn, title) {
 	this.isbn = isbn;
 	this.title = title;
 }
+
 Book.prototype = {
 	printTitle: function(){
 		print("Title is " + this.title);
@@ -616,87 +508,178 @@ Book.prototype = {
 	}
 }
 var book = new Book("1234", "A good title");
+
 book.printTitle();
 book.printISBN();
+````
+2. 运行。
+3. 结果如下：
+````
+Hello world
+Title is A good title
+ISBN is 1234
+````
+### 刚刚发生了什么？
+在 JavaScript  对象，_prototype_ 是一个特殊的对象，它拥有一个类或对象内部的所有属性和函数。
+因此我们所做的就是往 _prototype_ 中添加我们自己的函数。
+````
+var Book = function(isbn, title) {
+	this.isbn = isbn;
+	this.title = title;
+}
+````
+从上面可以看到，构造函数与前面的一样。
+````
+Book.prototype = {
+````
+然后，定义 _prototype_ ，加入我们自己的方法。
+````
+printTitle: function(){
+	print("Title is " + this.title);
+},
+````
+这是我们添加的第一个方法。
+````
+printISBN: function() {
+	print("ISBN is " + this.isbn);
+}
+````
+> ✔ 我们使用冒号而不是等号来定义一个函数，在函数结束时使用逗号，意味着还将定义另一个函数或成员。
+还记得我们之前定义 _book_ 对象时使用什么方式了么？
+
+接着，添加第二个方法，注意结束后大括号后边没有逗号。
+````
+var book = new Book("1234", "A good title");
+````
+在这之后，定义了 _book_ 变量，并以特定的参数构建一个 _Book_ 对象赋值给它。
+````
+book.printTitle();
+book.printISBN();
+````
+最后，我们调用这些方法（注意方法名字后面要接小括号）。
+
+### 大胆实践 - 添加更多的方法
+为什么不再添加些方法呢？我们还需要下面的方法：
+
+- _getISBN()_ , 将返回 _isbn_ 的值
+- _getTitle()_ , 将返回书名
+
+> ✔ 注意不要忘记冒号和逗号！
+
+### 实践环节 - 编辑一个对象的 prototype
+就像前面提到的，我们可以直接在一个对象的 _prototype_ 中添加一些东东，而不是在类中添加。
+我们不会每天都做这些基本的事情，在此我们还是了解一下，这些迟早都会派上用场的。
+想象一下我们如何在运行的时候用另一个函数代替在 prototype 中已经定义的函数！
+
+1. 创建 _hello-world-proto.js_ ，输入下面的代码：
+````JavaScript
+#!/usr/bin/env seed
+
+print("Hello world")
+
+var Book = function(isbn, title) {
+	this.isbn = isbn;
+	this.title = title;
+}
+
+Book.prototype = {
+	printTitle: function(){
+		print("Title is " + this.title);
+	},
+
+	printISBN: function() {
+		print("ISBN is " + this.isbn);
+	}
+}
+
+var book = new Book("1234", "A good title");
+
+book.printTitle();
+book.printISBN();
+
 book.__proto__ = {
 	author: "Joe Random",
 	printAuthor: function() {
 		print("Author is " + this.author);
 	}
 }
+
 book.printAuthor();
+
 var anotherBook = new Book("4567", "A more better title");
+
 anotherBook.printTitle();
 anotherBook.printISBN();
 anotherBook.printAuthor(); // this is invalid
-2.	Run it.
-运行
-3.	Note that it prints the author of the first book, but it fails to do so for the second one.
-注意这段代码将会打印第一本书的作者，但打印第二本书的作者时会失败。
+````
+2. 运行。
+3. 看看结果你会发现这段代码能够打印第一本书的作者，但打印第二本书的作者时会失败。
+````
 Hello world
 Title is A good title
 ISBN is 1234
 Author is Joe Random
 Title is A more better title
 ISBN is 4567
-** (seed:4911): CRITICAL **: Line 39 in hello-world.js:
-TypeError 'undefined' is not a function (evaluating 'anotherBook.
-printAuthor()')
 
+(gjs:3476): Gjs-WARNING **: JS ERROR: TypeError: anotherBook.printAuthor is not a function
+@./hello-world-proto.js:37
+
+JS_EvaluateScript() failed
+````
+用 Seed 运行后的结果略有不同，只需要把第一行的 _gjs_ 更改为 _seed_ 。
+````
+Hello world
+Title is A good title
+ISBN is 1234
+Author is Joe Random
+Title is A more better title
+ISBN is 4567
+
+** (seed:3507): CRITICAL **: Line 36 in ./hello-world-proto.js: TypeError undefined is not a function (evaluating 'anotherBook.printAuthor()')
+
+Stack:
+global code@./hello-world-proto.js:36:24
+````
 ### 刚刚发生了什么？
-
-To modify the prototype at runtime, we need to know a little secret. It's no longer accessible
-with the prototype property but rather with __proto__ . In this line, we instantiate the
-book object:
-为了在运行时编辑 prototype ，我们需要知道些小技巧。 这时 prototype 属性不再能被访问了，我们需要使用 __proto__ 。
-在这行，我们实例化 book 对象
+为了在运行时编辑 _prototype_ ，我们需要知道些小技巧。
+这时 _prototype_ 属性不再能被访问了，我们需要使用 __proto__ 。
+在下面这行，我们先实例化一个 _book_ 对象。
+````
 var book = new Book("1234", "A good title");
-
-And here, we add two properties inside the prototype which we access with __proto__ :
-在这里，我们在 prototype 中加入了两个属性，我们用 __proto__ 来使用它。
+````
+接着，我们通过 __proto__ 在 _prototype_ 中加入了两个属性。
+````
 book.__proto__ = {
 	author: "Joe Random",
 	printAuthor: function() {
 		print("Author is " + this.author);
 	}
 }
-Then, we try to use it immediately:
-然后，我们立即使用它。
+````
+然后，我们立即调用它。
+````
 book.printAuthor();
-
-However, we were not able to do this in another instance. Do you know why? Yes, because
-we only modify the book object, and this does not affect the anotherBook object.
-然而，我们不能够在另一个实例这么做。你知道为什么吧？因为我们只编辑了 book 对象，这不会影响另一个 Book 对象。
+````
+然而，我们另一个实例并不具有这个属性。你知道为什么吧？
+因为我们只编辑了 _book_ 对象，这不会影响另一个 _anotherBook_ 对象。
+````
 var anotherBook = new Book("4567", "A more better title");
 anotherBook.printAuthor(); // this is invalid
+````
+### 小测试 - 如何让 _printAuthor()_ 都可以用？
+Q1. 为了给所有从 _Book_ 类创建的对象添加中 _printAuthor_ 方法，下面哪个方式更好些？
 
-Pop quiz – how to make it global then?
-如何使它全局可用？
-Q1. What is the best way to add the printAuthor method in all objects created from the
-Book class?
-在所有从 Book 类创建的对象添加中 printAuthor 方法，下面哪个方式更好些？
-1.	 Add printAuthor to __proto__ in every object created, and then we will have
-the function available in all objects.
-1. 在每一个创建的对象的 __proto__ 中添加 printAuthor ，之后大所有的对象中都可以使用这个函数。
+1. 在每一个创建的对象的 __proto__ 中添加 _printAuthor_ ，之后所有的对象中都可以使用这个函数。
+2. 在 _Book_ 类的 _prototype_ 中添加 _printAuthor_ ，然后从 _Book_ 创建的所有对象中都可以使用这个函数。
 
-2.	 Just add printAuthor in the Book class prototype, and then all objects created
-from Book will have the function.
-2. 在 Book 类的 prototype 中添加 printAuthor ，然后从 Book 创建的所有对象中都有这个函数。
+### 大胆实践 - 改变实现的细节
+假设我们准备使用 _anotherBook_ 对象定义一本特殊的书。我们想在 _printTitle_ 中打印出的 "<book-title> is really good title" 。
+其中 <book-title> 是书的标题。
 
-Have a go hero – changing the implementation details
-改变实现的细节
+> ✔ 重新定义在 anotherBook 对象的 __proto__ 中的函数即可。
 
-Imagine that we want the anotherBook object to be used only for declaring special
-books. Because it is so special, we want to print <book-title> is a really good title in the
-printTitle function, with <book-title> being the actual title of the book.
-假设我们准备使用 anotherBook 对象定义特殊的书。因为安特别，我们想在 printTitle 中打印出的 <book-title> 是一个好的标题。
-<book-title> 是书的标题。
-
-Just redefine the function within __proto__ in the anotherBook object.
-重新定义在 anotherBook 对象的 __proto__ 中的函数。
-
-Modularization
-模块化
+## 模块化
 
 Imagine that we implemented a big project and we put it inside a single script. That would
 be a nightmare as it would be very difficult to debug. Hence, we should discuss this now,
@@ -709,14 +692,17 @@ Now we are going to modularize our software.
 现在我们将把程序模块化
 1.	Let's create a new file called hello-world-module.js and fill it with this:
 创建 hello-world-module.js ，写入下面的代码：
+````
 #!/usr/bin/env seed
 print("Hello world")
 var BookModule = imports.book
 var book = new BookModule.Book("1234", "A good title");
 book.printTitle();
 book.printISBN();
+````
 2.	Create another new script called book.js and fill it with this:
 创建 book.js 脚本，定入下面的代码：
+````
 var Book = function(isbn, title) {
 	this.isbn = isbn;
 	this.title = title;
@@ -729,6 +715,7 @@ Book.prototype = {
 		print("ISBN is " + this.isbn);
 	}
 }
+````
 3.	Then run hello-world-module.js (not book.js ).
 3. 然后运行 hello-world-module.js ，不是 book.js 。
 4.	See the printouts.
@@ -764,7 +751,7 @@ programming language. Now let's move on to Vala.
 至此我们将结束对 GNOME 应用程序开发语言 JavaScript 的介绍，接下来让我们看看 Vala 。
 
 Getting to know Vala
-了解 Vala
+## 了解 Vala
 When compared to JavaScript, Vala is fairly new and is the only language being used
 in GNOME development since its conception. It has quite an interesting concept: the
 programmers are exposed to C# and Java-like syntax, but underneath, the code will be
@@ -805,6 +792,7 @@ what makes an application from the ground up.
 我们将用我们自己的代码来代替所有自动生成的代码，这样我们就可以了解一个程序是如何从头开始产生的。
 1.	Edit the generated hello_vala.vala file and fill it with this:
 1. 编辑 hello_vala.vala 文件，并写入下面的代码：
+````
 using GLib;
 public class Main : Object
 {
@@ -817,36 +805,47 @@ public class Main : Object
 		return 0;
 	}
 }
+````
 2.	Click on the Run menu and choose Execute.
 2. 点击 'Run' 菜单中的 'Execute'。
 3.	See the text that is printed:
 3. 看下输出的结果：
+````
 Hello, world
-
+````
 ### 刚刚发生了什么？
 
 Here we start by looking at the Book class.
 下面让我们看一下 Book 类。 (TBD)
+````
 using GLib;
+````
 This line says that we are using the GLib namespace.
 这行说明我们使用 GLib 的命名空间。
+````
 public class Main : Object
+
+````
 This is the definition of the Main class. It is stated here that it is derived from the
 GLib.Object class. We don't put the full name GLib.Object but only Object
 because we already stated in the first line that we are using the GLib namespace.
 这行是 Main 类的定义。它是从 GLib.Object 类派生出来的。我们没有使用全名 GLib.Object 面只
 使用了 Object 是因为我们已经在第一行中使用 GLib 命名空间了。
+````
 public Main ()
 {
 }
+````
 The preceding structure is the constructor of the class. Here we have an empty one.
 我们定义了类的构建函数，它为空。
+````
 static int main (string[] args)
 {
 	stdout.printf ("Hello, world\n");
 	return 0;
 }
 }
+````
 This is our entry point to the program. If declared as static, the main function will be
 considered as the first function that will be run in the application. Without this function,
 we can't run the application.
@@ -857,7 +856,7 @@ program will not compile.
 还有一件事需要注意，这必需只有一个静态 main 函数，否则你的程序将会编译失败。
 
 Have a go hero – look at the generated C code
-看看产生的 C 代码
+### 大胆实践 - 看看产生的 C 代码
 Now we should have the generated C code available in the src/ directory. Navigate the
 filesystem using the Files dock and find hello_vala.c . Let's open it and see how Vala
 transforms the Vala code into C code.
@@ -880,6 +879,7 @@ Let's take a look at how to specify the access to our class member.
 让我们看一下如何指定访问类中的成员。
 1.	Create a new file and save it as book.vala inside the src/ directory. Fill it with this:
 1. 创建新的文件保存到 src/ 目录下的 book.vala ，写入下面的代码：
+````
 using GLib;
 public class Book : Object {
 	private string title;
@@ -895,7 +895,7 @@ public class Book : Object {
 		stdout.printf("%s\n", title);
 	}
 }
-
+````
 2.	 We need to add this to the project. Click on the Project menu and choose
 Add Source File....
 2. 我们添加这个到项目中，点出 'Project' 菜单，选择 'Add Source File...'。
@@ -905,6 +905,7 @@ and then, in the file selection box below it, choose book.vala .
 
 4.	 Modify the main function of hello_vala.vala to look like this:
 4. 按下面来修改 hello_vala.vala 的 main 函数：
+````
 using GLib;
 public class Main : Object
 {
@@ -920,6 +921,7 @@ public class Main : Object
 		return 0;
 	}
 }
+````
 5.	Run it.
 5. 运行
 6.	Note that the program cannot be built.
@@ -937,16 +939,17 @@ book.printISBN ();
 This is what we have in the Main class constructor. There we instantiate Book into the book
 variable, and call printISBN there.
 这是我们在 Main 类构建函数中的代码，我们把 Book 实例化并赋给 book 变量，然后调用 printISBN 。
-
+````
 void printISBN() {
-stdout.printf(isbn);
+    stdout.printf(isbn);
 }
+````
 However, this is what we have in the Book class. It looks innocent, but it turns out that we
 missed something crucial that makes this function inaccessible from outside the class.
 然而在 Book 类的代码，看起来没什么问题，但从结果证明它缺少一些关键的东西来让它可以从类外面访问。
 
 The access specifiers
-访问指示符
+### 访问指示符
 Here is a list of access specifiers that are recognized by Vala:
 在 Vala 中可以使用的访问指示符列表：
   private : The access is limited within the class or struct.
@@ -964,7 +967,7 @@ program cannot be built.
 当我们不指定任何类型时，访问权限被缺省的设置为 private 。这也是为什么程序编译失败的原因。
 
 Pop quiz – how to fix this?
-如何解决呢？
+### 小测试 - 如何解决呢？
 As mentioned previously, we don't put any specifiers in front of the printISBN function,
 so it is considered private. We can fix this by putting the correct access specifier in the
 printISBN function.
@@ -991,6 +994,7 @@ We will now create an imaginary BookStore program to explore the data types in V
 我们现在通过创建一个想象中的书店 (BookStore) 程序来了解 Vala 的数据类型。
 1.	Create a new file called bookstore.vala and put it in src/ . Fill it with these lines:
 1. 创建一个 bookstore.vala 的文件，保存到 src/ 目录下，写入下面的代码：
+````
 using GLib;
 public class BookStore {
 	private Book book;
@@ -1020,10 +1024,12 @@ public class BookStore {
 		return (stock > 0);
 	}
 }
+````
 2.	Add this file to our project.
 2. 把这个文件添加到工程里。
 3.	Modify our Main class to look like this:
 3. 按下面来编辑我们的 Main 类：
+````
 using GLib;
 public class Main : Object
 {
@@ -1051,10 +1057,12 @@ public class Main : Object
 		return 0;
 	}
 }
+````
 4.	Run it.
 4. 运行
 5.	See how the data is manipulated and printed:
 5. 看看数据是怎么处理和输出的：
+````
 Hello, world
 1234
 Initial stock is 10
@@ -1062,29 +1070,30 @@ Initial price is $ 4.200000
 Stock is 6
 and price is now $ 5.000000
 And the book is still available
-
+````
 ### 刚刚发生了什么？
 
 Let's start analyzing from the calling code, the Main constructor.
 让我们从 Main 构造函数开始分析。
-
+````
 var store = new BookStore(book, 4.2, 10);
-
+````
 Here, we instantiate a new store object from the BookStore class. We initialize it with
 a book object, a floating point number, and an integer.
 我们从 BookStore 类实例化一个新的 store 对象，并用一个 book 对象，一个浮点数字和一个整数来做为参数。
-
+````
 public BookStore (Book book, double price, int stock) {
-
+````
 In the BookStore constructor, we have to specify the data types in the argument list as
 previously done. Then we say that we want to accept a Book object, a number in double
 precision, and an integer.
 在 BookStore 的构造函数里，我们必须在参数列表中指定数据的类型，也就是说我们想要接受一个 Book 对象，
 一个浮点型的数字和一个整数。
+````
 this.book = book;
 this.price = price;
 this.stock = stock;
-
+````
 And then, we assign our private members of book , price , and stock with the arguments.
 Here we use this. to denote that we want to assign the book member from the private
 member with the book member from the argument. If we name our argument variable
@@ -1102,7 +1111,7 @@ This is how we print an integer with printf . We use %d as a placeholder for an 
 stdout.printf ("Initial price is $ %f\n", store.getPrice());
 And this is how we print a real number with printf. We use %f as a placeholder for it.
 这行用 printf 来打印一个实数，使用 %f 作为它的点位符。
-
+````
 store.removeStock(4);
 Then, we remove 4 books from the stock. Internally, this is defined in BookStore.
 然后，我们从仓库中删除 4 本书，这在 BookStore 中有定义。
@@ -1112,19 +1121,23 @@ stock = stock - amount;
 
 There we just subtract using a mathematical expression because it is simply an integer.
 这是一个减法表达式。
+````
 var status = "still available";
 if (store.isAvailable() == false) {
-status = "not available";
+    status = "not available";
 }
+````
 Next, we have a Boolean expression evaluation. If the value is false , we change the value
 of status . The type for status is string , and we can just assign the value.
 接下来，我们使用一个布尔表达式。如果值为 false ，我们更改 status 的值。status 的类型为字符串，可以直接赋值。
+````
 stdout.printf ("And the book is %s\n", status);
+````
 Finally, we use %s as a placeholder in printf to put our string value there.
 最后我们使用 %s 做为输出字符串的点位符。
 
 Gee, what is it?
-Gee 是什么？
+### Gee 是什么？
 
 Gee is a collection library written in Vala. The basic types of the collection are list, set,
 and maps. These are similar to array but with more powerful features.
@@ -1182,6 +1195,7 @@ After installing Gee in our project, let's quickly check what capabilities Gee h
 start from the simple ones, the array list.
 1.	Modify our book.vala file to look like this:
 编辑 book.vala 文件：
+````
 using GLib;
 using Gee;
 public class Book : Object {
@@ -1208,6 +1222,7 @@ public class Book : Object {
 		}
 	}
 }
+````
 2.	Modify the Main class constructor to include these lines:
 2. 编辑 Main 类的构造函数并加入下面这些行：
 var book = new Book("1234", "A new book");
@@ -1219,6 +1234,7 @@ book.printAuthors();
 3. 运行
 4.	See that it prints all of the authors of the book.
 看看结果，它会打印书的所有作者。
+````
 Hello, world
 1234
 Author name: Joe Random
@@ -1228,7 +1244,7 @@ Initial price is $ 4.200000
 Stock is 6
 and price is now $ 5.000000
 And the book is still available
-
+````
 ### 刚刚发生了什么？
 
 Here we try to utilize the array list, which is one of many collection data structures provided
@@ -1240,23 +1256,24 @@ In order to use Gee, first we declare that we are using the Gee namespace.
 We can actually omit this, but we need to always put the
 Gee. prefix in front of all Gee classes.
 Now look at the member declaration in the Book class:
+````
 public class Book : Object {
 	private string title;
 	private string isbn;
 	private ArrayList<string> authors;
-
+````
 The construct with angle brackets is called generics programming. This means that the data
 contained in the data structure (which is ArrayList in this context) is generic. If we have an
 array of type integer, we will put it as ArrayList<int> , and so on. Hence, in this particular
 line, we have ArrayList , which has content with type string , and we call the list with the
 name authors . In the constructor, we have to initialize the array list with this syntax:
-
+````
 public Book(string isbn, string title) {
 	this.isbn = isbn;
 	this.title = title;
 	authors = new ArrayList<string>();
 }
-
+````
 It means that we need to allocate an ArrayList object, which has content of type string .
 Note that only a declaration is not enough. If we forget this part, the program will crash.
 
@@ -1416,7 +1433,7 @@ operator. Now how about modifying the priceAlert signal to have one parameter, w
 is the price of the book?
 
 Summary
-总结
+### 总结
 It is fairly easy and quick to create an application and get it up and running with both Seed
 and Vala. So why do we want to learn both and use them in this book?
 JavaScript is an interpreted language; we can see the guts of the program and modify it
