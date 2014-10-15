@@ -141,7 +141,7 @@ JavaScript 是松散类型的语言，这意味着我们不用定义变量的类
 这之后，我们才能够根据我们的需求来选择使用的类型。
 
 1. 创建一个新文件 _hello-world-data-types.js_ 并填入如下代码：
-````
+````JavaScript
 #!/usr/bin/env gjs
 print("Hello world")
 var number = 1;
@@ -228,7 +228,7 @@ Q1. 在完成了之前所有的任务之后，在代码运行的最后，_number
 按下面的步骤来：
 
 1. 创建一个新文件 _hello-world-iteration.js_ ，然后填入下面的代码：
-````
+````JavaScript
 #!/usr/bin/env gjs
 
 print("Hello, world")
@@ -330,7 +330,7 @@ for (i = 0; i < boxes.length; i ++) {
 我们将在本书中使用大量的对象，先从一个简单的例子开始。
 
 1. 创建 hello-world-object.js ，并输入下面的代码：
-````
+````JavaScript
 #!/usr/bin/env gjs
 print("Hello world")
 var book = {};
@@ -490,7 +490,7 @@ In JavaScript we use prototypes to achieve this feature.
 让我们在之前的 _Book_ 类中添加一些方法。我们使用 _prototype_ 对象来定义它们。
 
 1. 创建一个新的文件 _hello-world-prototype.js_ ，输入下面的代码：
-````
+````JavaScript
 #!/usr/bin/env gjs
 print("Hello world")
 
@@ -573,7 +573,7 @@ book.printISBN();
 
 1. 创建 _hello-world-proto.js_ ，输入下面的代码：
 ````JavaScript
-#!/usr/bin/env seed
+#!/usr/bin/env gjs
 
 print("Hello world")
 
@@ -649,7 +649,7 @@ global code@./hello-world-proto.js:36:24
 var book = new Book("1234", "A good title");
 ````
 接着，我们通过 __proto__ 在 _prototype_ 中加入了两个属性。
-````
+````JavaScript
 book.__proto__ = {
 	author: "Joe Random",
 	printAuthor: function() {

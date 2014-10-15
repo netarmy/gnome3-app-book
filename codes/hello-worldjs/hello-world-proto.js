@@ -1,4 +1,4 @@
-#!/usr/bin/env seed
+#!/usr/bin/env gjs
 print("Hello world")
 
 var Book = function(isbn, title) {
