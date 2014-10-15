@@ -265,7 +265,7 @@ Iteration number #9
 让我们把数组想像成一堆盒子，每个里面装了一个同类型的数据。下面就把这堆盒子填满。
 
 1. 创建 _hello-world-array.js_ ，并输入下面的代码
-````
+````JavaScript
 #!/usr/bin/env gjs
 print("Hello world")
 var boxes = []
@@ -415,7 +415,7 @@ var book = {
 当我们提到构建一个对象，就是指调用一个特殊的函数 **constructor** 。下面让我们来试一下。
 
 1. 创建一个 hello-world-constructor.js 文件，输入下面的代码：
-````
+````JavaScript
 #!/usr/bin/env gjs
 print("Hello world")
 
@@ -636,7 +636,8 @@ Author is Joe Random
 Title is A more better title
 ISBN is 4567
 
-** (seed:3507): CRITICAL **: Line 36 in ./hello-world-proto.js: TypeError undefined is not a function (evaluating 'anotherBook.printAuthor()')
+** (seed:3507): CRITICAL **: Line 36 in ./hello-world-proto.js: TypeError undefined 
+is not a function (evaluating 'anotherBook.printAuthor()')
 
 Stack:
 global code@./hello-world-proto.js:36:24
@@ -680,119 +681,92 @@ Q1. 为了给所有从 _Book_ 类创建的对象添加中 _printAuthor_ 方法�
 > ✔ 重新定义在 anotherBook 对象的 __proto__ 中的函数即可。
 
 ## 模块化
+想象一下我们在一个单独的脚本中实现一个特别大的项目，这对调试来说是一个恶梦。
+因此在我们代码变得越来越大之前有必要介绍一下模块化。
 
-Imagine that we implemented a big project and we put it inside a single script. That would
-be a nightmare as it would be very difficult to debug. Hence, we should discuss this now,
-before our code gets bigger.
-想象一下我们在一个单独的脚本中实现一个特别大的项目，这对调试来说是一个恶梦。因此在我们代码变得越来越大之前有必要介绍一下。
-
-Time for action – modularizing our program
 ### 实践环节 - 把程序模块化
-Now we are going to modularize our software.
-现在我们将把程序模块化
-1.	Let's create a new file called hello-world-module.js and fill it with this:
-创建 hello-world-module.js ，写入下面的代码：
-````
-#!/usr/bin/env seed
+现在我们将把程序模块化。
+
+1. 创建 _hello-world-module.js_ ，输入下面的代码：
+````JavaScript
+#!/usr/bin/env gjs
 print("Hello world")
+
+imports.searchPath.unshift('.');
+
 var BookModule = imports.book
+
 var book = new BookModule.Book("1234", "A good title");
 book.printTitle();
 book.printISBN();
 ````
-2.	Create another new script called book.js and fill it with this:
-创建 book.js 脚本，定入下面的代码：
-````
+2. 然后创建 book.js 脚本，输入下面的代码：
+````JavaScript
 var Book = function(isbn, title) {
 	this.isbn = isbn;
 	this.title = title;
 }
+
 Book.prototype = {
 	printTitle: function(){
 		print("Title is " + this.title);
 	},
+
 	printISBN: function() {
 		print("ISBN is " + this.isbn);
 	}
 }
 ````
-3.	Then run hello-world-module.js (not book.js ).
-3. 然后运行 hello-world-module.js ，不是 book.js 。
-4.	See the printouts.
+3. 然后运行 _hello-world-module.js_ ，注意不是 _book.js_ 。
 4. 看看运行的结果。
 
 ### 刚刚发生了什么？
+从输出的结果我们可以看到与前面代码运行的结果一样，但是我们分成了两个脚本文件。
+````
+imports.searchPath.unshift('.');
 
-From the output, we can see that it is exactly the same as the previous code. But here we
-split the code into two files.
-从输出我们可以看到各前面代码运行的结果一样，但是我们分成了两个脚本文件。
 var BookModule = imports.book
+
 var book = new BookModule.Book("1234", "A good title");
+````
+我们先设置了导入时搜索当前目录，然后再让 Gjs 用 _imports_ 命令给 _BookModule_ 赋值为 _book_ 。
+它会查找并导入当前目录下 _book.js_ ，这样在 _book.js_ 中的所有对象都可以从 _BookModule_ 变量访问到。
+接下来我们通过 _new_ 构建 _book_ 对象。
 
-Here, we ask Seed to attach the BookModule variable with the evaluation of book with the
-imports command. Here it is expected that we have book.js inside our current directory.
-With this, all objects in book.js are accessible from the BookModule variable. Hence, we
-construct the book object with the previous line.
-我们让 Seed 用 imports 命令给 BookModule 赋值为 book 。
-它会想找当前目录下的 book.js ，在 book.js 中的所有对象都可以从 BookModule 变量访问到。
-这样，在前面的代码中我们可以构建 book 对象。
+你也会注意到在 _book.js_ 中我们没有了首行的 HashBang (#!开头的行) ，
+因为我们不用 _book.js_ 作为我们的入口，所以就不需要。
+但 _hello-world-module.js_ 中还是需要的。
 
-Also note that, in book.js , we no longer have the hashbang line. This is not required because
-we don't use book.js as our entry point, but rather we use hello-world-module.js .
-你也会注意到在 book.js 中我们没有 hashbang 行，因为我们不用 book.js 作为我们的入口，所以就不需要。
-但 hello-world-module.js 中还是需要的。
-
-With this approach, we can lay out our objects in files and import them whenever necessary.
-This not only makes the memory usage efficient but also keeps the code structure clean.
-This concludes our quick introduction to JavaScript as a GNOME application development
-programming language. Now let's move on to Vala.
-用这种方法，我们可以把所有的对象按文件来存放，在需要的时候导入即可。
+模块化后，我们可以把所有的对象按文件来存放，在需要的时候导入即可。
 这不但能高效的使用内存，也能保持代码结构清晰。
-至此我们将结束对 GNOME 应用程序开发语言 JavaScript 的介绍，接下来让我们看看 Vala 。
 
-Getting to know Vala
-## 了解 Vala
-When compared to JavaScript, Vala is fairly new and is the only language being used
-in GNOME development since its conception. It has quite an interesting concept: the
-programmers are exposed to C# and Java-like syntax, but underneath, the code will be
-translated into pure C and then compiled to binary.
+至此我们将结束对 GNOME 应用程序开发语言 JavaScript 的介绍，接下来我们将开始学习 Vala 。
+
+## 学习 Vala
 和 JavaScript 比起来，Vala 是一个相当新的语言，从诞生后目前只在 GNOME 开发中使用。
 它有一个十分有趣的概念：程序员可以使用 C# 和 Java 类的语法，之后代码被转换成纯 C ，
-然后编译成二进制文件。
+最后编译成二进制文件。
 
-This approach will make GNOME programming more accessible, because developing a
-GNOME application with C is quite hard to understand for beginners. It involves many
-boilerplate code snippets that you must copy and paste into your source code tree and
-then modify according to the guidelines. This step is totally hidden by Vala.
-Similar to our adventure with JavaScript, we will now learn the basics of the Vala language
-without implementing any graphical elements. As Vala is a full-blown object-oriented
-programming language, we will immediately use the OOP concept in our journey with Vala.
-这个方法让 GNOME 编程更容易，因为对初学者用 C 语言来编写 GNOME 程序很不容易理解。
-它涉及到许多公式化的代码段，你需要复制粘贴到你的代码树并按手册来修改它。
-这些细节都被 Vala 隐藏了。
-与我们讲述 JavaScript 时一样，我们现在学习一些 Vala 编程语言的基础，并会在 Vala 语言中立即使用面向对象的概念。
-Let's now prepare a project that will be used as our experiment. Remember the steps from
-Chapter 2, Preparing Our Weapons? Good! Let's do it again with some changes. We will use
-hello-vala as the project name.
+这个方法让 GNOME 编程更容易，因为对初学者来说用 C 语言来编写 GNOME 程序还是有一定的门槛。
+因为它会用到许多公式化的代码段，你需要复制并粘贴到你的代码树，然后按手册来修改代码。
+但是这些细节在用户使用 Vala 时却不用关心。
+
+与我们讲述 JavaScript 时一样，我们现在学习一些 Vala 编程语言的基础，
+并会在 Vala 语言中很快就会使用面向对象的概念。
+
 先让我们准备一个用于实验的工程。
-记得第二章中的准备我们的武器？好！让我们对此做些修改。我们将使用 hello-vala 作为项目的名称。
-[IMAGE]
+还记得第二章中的准备我们的武器吗？好！让我们对此做些修改。我们将使用 _hello-vala_ 作为项目的名称。
 
-In the preceding screenshot, we can see in Project options that we choose No license to
-minimize modifications that we are going to do next. We also uncheck the Use GtkBuilder
-for user interface option because we want to do a simple text-based application to grasp
-the essentials of Vala.
+[IMG]
+
 在上面的截图中，我们在 'Project options' 中选择 'No license'， 让我们接下来所做的修改最小化。
 也不选择 'Use GtkBuilder for user interface' 选项，因为我们先做一个简单的基于文本的应用程序来了解一下 Vala 的内在。
 
-Time for action – entry point to our program
 ### 实践环节 - 程序的入口点
-We are now going to replace all the generated code with our own so that we understand
-what makes an application from the ground up.
 我们将用我们自己的代码来代替所有自动生成的代码，这样我们就可以了解一个程序是如何从头开始产生的。
-1.	Edit the generated hello_vala.vala file and fill it with this:
-1. 编辑 hello_vala.vala 文件，并写入下面的代码：
-````
+
+1. 编辑 _hello_vala.vala_ 文件，并输入下面的代码：
+````Vala
 using GLib;
 public class Main : Object
 {
@@ -806,38 +780,30 @@ public class Main : Object
 	}
 }
 ````
-2.	Click on the Run menu and choose Execute.
-2. 点击 'Run' 菜单中的 'Execute'。
-3.	See the text that is printed:
-3. 看下输出的结果：
+2. 点击 **Run** 菜单中的 **Execute**。
+3. 输出的结果：
 ````
 Hello, world
 ````
 ### 刚刚发生了什么？
-
 Here we start by looking at the Book class.
 下面让我们看一下 Book 类。 (TBD)
 ````
 using GLib;
 ````
-This line says that we are using the GLib namespace.
 这行说明我们使用 GLib 的命名空间。
 ````
 public class Main : Object
 
 ````
-This is the definition of the Main class. It is stated here that it is derived from the
-GLib.Object class. We don't put the full name GLib.Object but only Object
-because we already stated in the first line that we are using the GLib namespace.
-这行是 Main 类的定义。它是从 GLib.Object 类派生出来的。我们没有使用全名 GLib.Object 面只
-使用了 Object 是因为我们已经在第一行中使用 GLib 命名空间了。
+这行是 _Main_ 类的定义。它是从 _GLib.Object_ 类派生出来的。我们没有使用全名 _GLib.Object_ 而只
+使用了 _Object_ 是因为我们已经在第一行中使用 _GLib_ 命名空间了。
 ````
 public Main ()
 {
 }
 ````
-The preceding structure is the constructor of the class. Here we have an empty one.
-我们定义了类的构建函数，它为空。
+我们定义了类的构建函数，目前它为空。
 ````
 static int main (string[] args)
 {
@@ -846,39 +812,25 @@ static int main (string[] args)
 }
 }
 ````
-This is our entry point to the program. If declared as static, the main function will be
-considered as the first function that will be run in the application. Without this function,
-we can't run the application.
-这是程序的入口点。如果我们定义为静态 static ，这个 main 函数将被作为程序运行的第一个函数。
+这是程序的入口点。如果我们定义为静态(static) ，这个 _main_ 函数将被作为程序运行的第一个函数。
 没有这个函数我们无法运行程序。
-And one more thing; there must be one and only one static main function, otherwise your
-program will not compile.
-还有一件事需要注意，这必需只有一个静态 main 函数，否则你的程序将会编译失败。
 
-Have a go hero – look at the generated C code
+还有一件事需要注意，这必需只有一个静态 _main_ 函数，否则你的程序将会编译失败。
+
 ### 大胆实践 - 看看产生的 C 代码
-Now we should have the generated C code available in the src/ directory. Navigate the
-filesystem using the Files dock and find hello_vala.c . Let's open it and see how Vala
-transforms the Vala code into C code.
-现在我们在 src/ 目录下已经生成了 C 代码。使用文件浏览器找到 hello_vala.c ，看看 Vala 是如何把 Vala 代码
+现在我们在 _src/_ 目录下已经生成了 C 代码。使用文件浏览器找到 _hello_vala.c_ ，看看 Vala 是如何把 Vala 代码
 转换为 C 代码的。
-We can modify the C code, but your changes will be overwritten whenever you change the
-Vala code, and the C code will get regenerated.
+
 我们可以修改 C 代码，但是当我们更改 Vala 代码后所有的改动都会被覆盖，因为 C 代码再一次被重新生成了。
 
-Member access specifier
-成员访问符
-Vala defines a set of member access specifiers, which we can use to define which member of
-the class can be accessed by another class or by its inheriting classes. This idiom provides us
-a way to make a clean set of application programming interfaces (API), which is easy to use.
-Vala 定义了一系列的成员访问符，我们可以使用它来定义哪些类的成员可以被另一个类或继承类访问。
-这些惯用语法提供给我们一系列的应用程序开发接口(API)，用起来也非常容易。
-Time for action – defining member access
+## 成员访问标示符
+Vala 定义了一系列的成员访问标示符，我们可以使用它来定义哪些类的成员可以被另一个类或继承类访问。
+这些标示符提供给我们一系列的应用程序开发接口(API)，使用起来也非常容易。
+
 ### 实践环节 - 定义成员的访问
-Let's take a look at how to specify the access to our class member.
-让我们看一下如何指定访问类中的成员。
-1.	Create a new file and save it as book.vala inside the src/ directory. Fill it with this:
-1. 创建新的文件保存到 src/ 目录下的 book.vala ，写入下面的代码：
+让我们看一下如何设定访问类中的成员。
+
+1. 创建新的文件 book.vala 并保存到 src/ 目录下，输入下面的代码：
 ````
 using GLib;
 public class Book : Object {
@@ -896,15 +848,9 @@ public class Book : Object {
 	}
 }
 ````
-2.	 We need to add this to the project. Click on the Project menu and choose
-Add Source File....
 2. 我们添加这个到项目中，点出 'Project' 菜单，选择 'Add Source File...'。
-3.	 In the next dialog, click on the Target option, find hello_vala inside src/ ,
-and then, in the file selection box below it, choose book.vala .
-3. 在出现的对话框中点击 'Target' 选项，在 src/ 下找到 hello_vala ， 然后在文件选择框选择 book.vala 。
-
-4.	 Modify the main function of hello_vala.vala to look like this:
-4. 按下面来修改 hello_vala.vala 的 main 函数：
+3. 在出现的对话框中点击 'Target' 选项，在 _src/_ 下找到 _hello_vala_ ， 然后在文件选择框选择 _book.vala_ 。
+4. 按下面来修改 _hello_vala.vala_ 的 _main_ 函数：
 ````
 using GLib;
 public class Main : Object
@@ -922,121 +868,101 @@ public class Main : Object
 	}
 }
 ````
-5.	Run it.
-5. 运行
-6.	Note that the program cannot be built.
+5. 运行。
 6. 注意程序还不能够被编译。
+
 [IMAGE]
 
 ### 刚刚发生了什么？
-
-From the error message, we see that it rejects our access to call Book.printISBN
-(we read this dot notation as the printISBN member from the Book class).
-从错误信息看，调用 Book.printISBN 时被拒绝了（我们使用点来访问 Book 类中的 printISBN 成员）。
+从错误信息看，调用 _Book.printISBN_ 时被拒绝了（我们使用'点'来访问 _Book_ 类中的 _printISBN_ 成员）。
+````
 var book = new Book("1234", "A new book");
 book.printISBN ();
-
-This is what we have in the Main class constructor. There we instantiate Book into the book
-variable, and call printISBN there.
-这是我们在 Main 类构建函数中的代码，我们把 Book 实例化并赋给 book 变量，然后调用 printISBN 。
+````
+这是我们在 _Main_ 类构建函数中的代码，我们把 _Book_ 实例化并赋给 _book_ 变量，然后调用 _printISBN_ 。
 ````
 void printISBN() {
     stdout.printf(isbn);
 }
 ````
-However, this is what we have in the Book class. It looks innocent, but it turns out that we
-missed something crucial that makes this function inaccessible from outside the class.
-然而在 Book 类的代码，看起来没什么问题，但从结果证明它缺少一些关键的东西来让它可以从类外面访问。
+然而在 _Book_ 类的代码，看起来没什么问题，但从结果证明它缺少一些关键的东西来让它可以从类外面访问。
 
-The access specifiers
-### 访问指示符
-Here is a list of access specifiers that are recognized by Vala:
-在 Vala 中可以使用的访问指示符列表：
-  private : The access is limited within the class or struct.
-private : 访问被限制在类或结构内。
-  public : The access is unlimited
-public : 访问没有限制。
-  protected : The access is limited within the class and any class that inherits from the class
-protected : 访问被限制在类内和任何从它派生的类。
- 
-internal : The access is limited within the classes inside the package
-internal : 访问被限制在 package 中所有的类。
+## 访问标示符
+在 Vala 中可以使用的访问标示符列表如下：
 
-When we don't specify anything, the access is set to private by default. That is why our
-program cannot be built.
-当我们不指定任何类型时，访问权限被缺省的设置为 private 。这也是为什么程序编译失败的原因。
+- private : 访问被限制在类或结构内。
+- public : 访问没有限制。
+- protected : 访问被限制在类内和任何从它派生的类。
+- internal : 访问被限制在 package 中所有的类。
 
-Pop quiz – how to fix this?
+当我们不指定任何类型时，访问权限被缺省的设置为 _private_ 。这也是为什么程序编译失败的原因。
+
 ### 小测试 - 如何解决呢？
-As mentioned previously, we don't put any specifiers in front of the printISBN function,
-so it is considered private. We can fix this by putting the correct access specifier in the
-printISBN function.
-因此就像前面提到的，我们没有在 printISBN 函数前面添加任何指示符，这个函数被看作为私有的。
-我们在 printISBN 函数前面添加正确的指示符就可以了。
+因此就像前面提到的，我们没有在 _printISBN_ 函数前面添加任何标示符，那么这个函数被看作为私有的(_private_)。
+我们在 _printISBN_ 函数前面添加正确的指示符就可以了。
 
-Q1. Which specifier from the following options do you think is correct?
-Q1. 你认为下面哪个指示符是正确的？
-1.	 public , because we want to access it from Main class which is outside the Book class.
-1. public ，因为我们想从 Book 类外的 Main 类中访问它。
-2.	 None; we just need to fix how we call printISBN in the Main constructor.  
-2. None ，我们需要更改在 Main 构造函数调用 printISBN 的方式。
+Q1. 你认为下面哪个标示符是正确的？
 
-Basic data types
-基本数据类型
+1. _public_ ，因为我们想从 _Book_ 类外的 _Main_ 类中访问它。
+2. 不添加，我们需要更改在 _Main_ 构造函数调用 _printISBN_ 的方式。
 
-Let's now move on, learning the basic data types available in Vala, meaning that we will take
-a look at how to interact with strings, numbers, and Boolean.
+## 基本数据类型
 让我们继续学习在 Vala 中可用的基本数据类型，也就是说看看如何使用字符串，数字和布尔值。
 
-Time for action – experiment with data types
-### 实践环节 - 数据类型实验
-We will now create an imaginary BookStore program to explore the data types in Vala.
-我们现在通过创建一个想象中的书店 (BookStore) 程序来了解 Vala 的数据类型。
-1.	Create a new file called bookstore.vala and put it in src/ . Fill it with these lines:
-1. 创建一个 bookstore.vala 的文件，保存到 src/ 目录下，写入下面的代码：
-````
+### 实践环节 - 使用数据类型
+我们现在通过创建一个设想中的书店 (BookStore) 程序来探索 Vala 中的数据类型。
+1. 创建一个 _bookstore.vala_ 的文件，保存到 _src/_ 目录下，输入下面的代码：
+````Vala
 using GLib;
+
 public class BookStore {
 	private Book book;
 	private double price = 0.0;
 	private int stock = 0;
+
 	public BookStore (Book book, double price, int stock) {
 		this.book = book;
 		this.price = price;
 		this.stock = stock;
 	}
+
 	public int getStock() {
 		return stock;
 	}
+
 	public void removeStock(int amount) {
 		stock = stock - amount;
 	}
+
 	public void addStock(int amount) {
 		stock = stock + amount;
 	}
+
 	public double getPrice() {
 		return price;
 	}
+
 	public void setPrice(double price) {
 		this.price = price;
 	}
+
 	public bool isAvailable() {
 		return (stock > 0);
 	}
 }
 ````
-2.	Add this file to our project.
 2. 把这个文件添加到工程里。
-3.	Modify our Main class to look like this:
-3. 按下面来编辑我们的 Main 类：
-````
+3. 按下面来编辑我们的 _Main_ 类：
+````Vala
 using GLib;
+
 public class Main : Object
 {
 	public Main ()
 	{
 		var book = new Book("1234", "A new book");
 		book.printISBN ();
+
 		var store = new BookStore(book, 4.2, 10);
 		stdout.printf ("Initial stock is %d\n", store.getStock());
 		stdout.printf ("Initial price is $ %f\n", store.getPrice());
@@ -1050,6 +976,7 @@ public class Main : Object
 		}
 		stdout.printf ("And the book is %s\n", status);
 	}
+
 	static int main (string[] args)
 	{
 		stdout.printf ("Hello, world\n");
@@ -1058,9 +985,7 @@ public class Main : Object
 	}
 }
 ````
-4.	Run it.
-4. 运行
-5.	See how the data is manipulated and printed:
+4. 运行。
 5. 看看数据是怎么处理和输出的：
 ````
 Hello, world
@@ -1072,7 +997,6 @@ and price is now $ 5.000000
 And the book is still available
 ````
 ### 刚刚发生了什么？
-
 Let's start analyzing from the calling code, the Main constructor.
 让我们从 Main 构造函数开始分析。
 ````
