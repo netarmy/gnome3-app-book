@@ -7,3 +7,5 @@ Hashbang -
 project - 工程 or 项目
 namespace - 命名空间 or 名字空间
 constructor - 构造函数 or 构建函数
+signal - 信号量 or 信号
+method - 方法 or 函数

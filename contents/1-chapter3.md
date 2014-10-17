@@ -1184,40 +1184,36 @@ public void printAuthors() {
 }
 }
 ````
-Here we iterate the content of the array list. We use the foreach command to iterate while
-assigning the value obtained on each iteration to the author variable. Note that we use
-the var author in authors expression. We don't specify the author variable to be
-string , but instead we use an automatic variable construction with the var keyword. In
-this line, var will get assigned a type depending on the content of the authors variable.
-Because the authors content type is string , the author variable bound to the var
-keyword will be also string . This kind of construction is really useful if we generalize a
-class to be able to handle any kind of data types depending on the data type stored in the
-collection or data structure.
+在这我们遍历数组的内容。我们使用 _foreach_ 来在每一次迭代中给 _author_ 赋值。
+注意我们使用的是 _var author in authors_表达式。
+我们没有指明 _author_ 变量为 _string_ 类型，而是通过 _var_ 定义为自动变量。
+在这行 _var_ 会根据 _authors_ 变量的内容来分配类型。
+因为 _authors_ 的内容是 _string_ ，所以定义为 _var_ 的 _author_ 变量将被看作 _string_ 。
+如果我们想让类更通用，这种结构就十分有必要，它可以处理任何存储在集合或数据结构中的数据类型。
 
-## Initializing members when declaring
-In our previous code, we initialize the array list in the constructor. Another alternative is to
-initialize it while declaring in the declaration area, without initializing it in the constructor.
-We can do it like this:
+## 声明时初始化成员
+之前的代码中我们在构造函数中对数据列表进行初始化。
+另一个办法是在声明时可以对它进行初始化，而不用在构造函数中进行。
+我们可以这样做：
+````Vala
 private ArrayList<string> authors = new ArrayList<string>();
-When your code grows and you have more than one constructor, this alternative is better
-than initializing in the constructor because you must copy all of the initialization code to
-all constructors.
-Time for action – watching for signals
+````
+随着代码的增长，有可能会有多个构造函数，那么这种方法初始化就会方便些，
+因为你就不必一个一个复制初始化代码到每个构造函数了。
+
 ### 实践环节 - 监视信号量
-Vala has a construct for emitting and watching signals, which is a mechanism of subscribing
-to information when something happens in the code. We can subscribe to a signal by
-connecting the function that will perform some action into the signal.
-让我们看看这是如何工作的。
+Vala 有一个能发出和监视信号的结构，它提供了订阅机制来在发生某些事情的时候通知大家。
+通过连接函数我们可以订阅信号量。 让我们看看这是如何工作的。
 
 1. 编辑 _bootstore.vala_ 文件，添加下面两个声明：
-```
+````Vala
 public class BookStore {
 	...
 	public signal void stockAlert();
 	public signal void priceAlert();
-```
+````
 2. 按下面来修改 _bookstore.vala_ 中的 _removeStock_ 和 _setPrice_ 函数：
-```
+````
 	public void removeStock(int amount) {
 		stock = stock - amount;
 		if (stock < 5) {
@@ -1231,9 +1227,9 @@ public class BookStore {
 		priceAlert();
 	}
 }
-```
+````
 3. 按下面来修改 _Main_ 构造函数：
-```
+````
 public Main ()
 {
 	var book = new Book("1234", "A new book");
@@ -1269,10 +1265,10 @@ public Main ()
 	stdout.printf ("And the book is %s\n", status);
 	store.setPrice(0.2);
 }
-```
+````
 4. 运行。
 5. 看看结果：
-```
+````
 Hello, world
 1234
 Author name: Joe Random
@@ -1284,23 +1280,19 @@ and price is now $ 5.000000
 Uh oh, we are going to run out stock soon!
 And the book is still available
 Uh oh, price is too low
-```
+````
 ### 刚刚发生了什么？
-
-The warning message printed that the stock is running out and the price is too low is not
-printed by BookStore class but rather by the Main class. This assumes a scenario where
-the Main class subscribes to the signals and will do something about it when Main receives
-the information from the signals.
-```
+你可以看到，显示的库存不足和价格太低这些警告信息不是由 _BookStore_ 类打印出来的，
+而是由 _Main_ 类来打出的。
+我们可以假定 _Main_ 类订阅了信息量，并当 _Main_ 接收到从信号量来的通知时就会做些事情。
+````
 public signal void stockAlert();
 public signal void priceAlert();
-```
-First, we have to define the signal in the class that we want to publish the signal from. In
-BookStore , we declare these two signals. Note that we only declare the method signature
-with the signal keyword. We don't declare the body of the function. It is essential of
-the signal that the object that subscribes to these signals provides functions to handle the
-emitted signals.
-```
+````
+首先，我们需要在类中定义信号量，以便我们能从这类中发布信号量。
+在 _BookStore_ 类中，我们定义了两个信号量。你会注意到我们用 _signal_ 关键字来声明这两个方法。
+但我们并没有定义函数体，这个要由订阅这些信号量的对象来提供函数处理发出的信号。
+````
 if (stock < 5) {
 stockAlert();
 }
@@ -1308,12 +1300,11 @@ stockAlert();
 if (price < 1) {
 priceAlert();
 }
-```
-These two snippets show how we emit the signal. When stock is less than 5 , we emit
-the stockAlert signal, and if price is less than 1 , we emit the priceAlert signal. The
-BookStore class doesn't care about what happens next; it only announces the signals, and
-that's it.
-```
+````
+这两段代码展示给我们是如何发出信号的。当库存小于 5 时，我们发出 _stockAlert_ 信号，
+如果价格小于 1 时，我们发出 _priceAlert_ 信号。
+_BookStore_ 类并不关心接下来发生什么，它只负责发出信号，其它的就不管了。
+````
 store.stockAlert.connect(() => {
 stdout.printf ("Uh oh, we are going to run out stock soon!\n");
 });
@@ -1321,41 +1312,39 @@ stdout.printf ("Uh oh, we are going to run out stock soon!\n");
 store.priceAlert.connect(() => {
 stdout.printf ("Uh oh, price is too low\n");
 });
-```
-While here, the Main class constructor connects itself with these two signals. We can see
-the construct for providing a function body by using the => operator. This construct is called
-closure or anonymous function. The parameter of this function is defined before => , which
-in this context is indicating that no parameters were supplied. This is shown by empty
-parentheses.
-Inside the function body, we declare what should happen when the signal is emitted by
-the store object. Here, we just print some alert text. In reality, we could do anything
-from disconnecting network and displaying images to any other actions we want.
+````
+在这， _Main_ 类的构造函数连接这两个信号量。我们可以看到使用 => 操作符来提供函数体，
+这叫闭包 (closure) 函数或匿名函数。函数的参数在 => 之前定义，此处没有任何参数，
+所以你会看到一对空的括号。
+
+在函数体内，我们定义了当信息从 _store_ 对象发出时做些什么。
+我们只打印出一些警告信息，实际上我们可以做任何事情，如断开网络、显示图片和任何我们想要做的事情。
 ```
 store.removeStock(4);
 ...
 store.setPrice(0.2);
 ```
-Here the actual signals are emitted and the text is printed.
+这两行是信号发出的地方，警告信息也被打印出来了。
 
 ### 大胆实践 - 在信号量中添加参数
-We can put parameters in our signal, too. We can just put the parameters we want in the
-signal declaration. Then, when connecting to a signal, put the parameters before the =>
-operator. Now how about modifying the priceAlert signal to have one parameter, which
-is the price of the book?
+我们也可以在我们的信号量中添加参数，只要把我们想要的参数添加到声明处。
+然后，在连接信号量的时候把参数放在 => 操作符之前。
+现在给 _priceAlert_ 信号添加个参数怎么样？如书的价格。
 
 ## 总结
-It is fairly easy and quick to create an application and get it up and running with both Seed
-and Vala. So why do we want to learn both and use them in this book?
-JavaScript is an interpreted language; we can see the guts of the program and modify it
-directly without recompilation. Vala, on the other hand, is a compiled language. We need
-to have access to the source code to modify it. If we want to make a commercial software
-on top of the GNOME platform, Vala makes a pretty good choice.
-Making a program with JavaScript in Seed is pretty straightforward and does not require
-project management in Anjuta, while in Vala, we need to take care of the dependencies
-manually. Let's hope this can be fixed in the future version of Anjuta.
-Now we know the basic construct of the JavaScript and Vala code, from manipulating basic
-data types to using the object-oriented programming concept.
-We see that JavaScript programming is pretty relaxed, while Vala is strict. A better code
-structure using modularization would help simplify development and make debugging easier.
-After knowing all of this, now we are ready to go to the next chapter, which uses the GNOME
-platform libraries, which is the foundation of creating a GNOME application.
+用 Gjs ，Seed 和 Vala 创建一个程序并让程序运行是不是很容易而且快速？
+为什么在本书中我们想介绍这些？
+
+JavaScript 是一个解释性语言，我们很容易的了解它的内在并可直接修改而不需要编译。
+Vala 则是一个编译语言，我们需要通过源代码来修改。
+如果我们想要在 GNOME 平台编写一个商业软件，Vala 是一个相当不错的选择。
+
+在 Gjs 或 Seed 使用 JavaScript 编程十分直接，不需要 Anjuta 这样的项目管理工具。
+而当使用 Vala 时，我们还需要在 Anjuta 中手动修改依赖，真心希望在 Anjuta 以后的版本中可以解决这个问题。
+
+现在我们已经了解 JavaScript 和 Vala 代码的基本架构，包括从使用基本数据类型到使用面向对象的编程。
+
+我们也可以看到用 JavaScript 编程十分随便，但使用 Vala 则要严谨些。
+使代码模块化是一个好的习惯，将有助于我们简化开发，易于调试。
+
+接下来我们将进入下一章节，使用 GNOME 平台库，这是创建 GNOME 应用程序的基础。
