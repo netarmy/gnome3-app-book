@@ -911,6 +911,7 @@ Q1. 你认为下面哪个标示符是正确的？
 
 ### 实践环节 - 使用数据类型
 我们现在通过创建一个设想中的书店 (BookStore) 程序来探索 Vala 中的数据类型。
+
 1. 创建一个 _bookstore.vala_ 的文件，保存到 _src/_ 目录下，输入下面的代码：
 ````Vala
 using GLib;
@@ -997,149 +998,116 @@ and price is now $ 5.000000
 And the book is still available
 ````
 ### 刚刚发生了什么？
-Let's start analyzing from the calling code, the Main constructor.
-让我们从 Main 构造函数开始分析。
+让我们从 _Main_ 构造函数开始分析。
 ````
 var store = new BookStore(book, 4.2, 10);
 ````
-Here, we instantiate a new store object from the BookStore class. We initialize it with
-a book object, a floating point number, and an integer.
-我们从 BookStore 类实例化一个新的 store 对象，并用一个 book 对象，一个浮点数字和一个整数来做为参数。
+我们从 _BookStore_ 类实例化一个新的 _store_ 对象，并用一个 _book_ 对象，一个浮点型数字和一个整数来做为参数。
 ````
 public BookStore (Book book, double price, int stock) {
 ````
-In the BookStore constructor, we have to specify the data types in the argument list as
-previously done. Then we say that we want to accept a Book object, a number in double
-precision, and an integer.
-在 BookStore 的构造函数里，我们必须在参数列表中指定数据的类型，也就是说我们想要接受一个 Book 对象，
+在 _BookStore_ 的构造函数里，我们必须在参数列表中指定数据的类型，也就是说我们想要接受一个 Book 对象，
 一个浮点型的数字和一个整数。
 ````
 this.book = book;
 this.price = price;
 this.stock = stock;
 ````
-And then, we assign our private members of book , price , and stock with the arguments.
-Here we use this. to denote that we want to assign the book member from the private
-member with the book member from the argument. If we name our argument variable
-with a different name, for example, bookObject , we can omit this because it is no longer
-ambiguous; we know that bookObject must be coming from the argument list and not
-from our member. The same happens with price and stock .
-然后，我们把参数赋值给私有成员 book, price 和 stock 。在这我们使用 this. 来区分开参数中的 book 和私有的 book 成员。
-如果我们把参数变量改一个名字，如 bookObject ，那么我们就不用使用 this 了，因为不会造成歧义了。
-我们知道 bookObject 来自参数列表而不是我们的成员。 对 price 和 stock 也一样。
-
+然后，我们把参数赋值给私有成员 _book_ ，_price_ 和 _stock_ 。在这我们使用 _this._ 来区分开参数中的 _book_ 和私有的 _book_ 成员。
+如果我们把参数变量改一个名字，如 _bookObject_ ，那么我们就不用使用 _this_ 了，因为这样就不会造成歧义了。
+我们知道 _bookObject_ 来自参数列表而不是我们的成员。 对 _price_ 和 _stock_ 也一样。
+````
 stdout.printf ("Initial stock is %d\n", store.getStock());
-This is how we print an integer with printf . We use %d as a placeholder for an integer.
-这行用 printf 来打印一个整数，使用 %d 作为一个整数的点位符。
-
+````
+这行用 _printf_ 来打印一个整数，使用 _%d_ 作为一个整数的占位符。
+````
 stdout.printf ("Initial price is $ %f\n", store.getPrice());
-And this is how we print a real number with printf. We use %f as a placeholder for it.
-这行用 printf 来打印一个实数，使用 %f 作为它的点位符。
+````
+这行用 _printf_ 来打印一个实数，使用 _%f_ 作为它的占位符。
 ````
 store.removeStock(4);
-Then, we remove 4 books from the stock. Internally, this is defined in BookStore.
-然后，我们从仓库中删除 4 本书，这在 BookStore 中有定义。
-removeStock , as follows:
-removeStock , 如下：
+````
+然后，我们从仓库中删除 4 本书，这在 _BookStore_ 中有定义。
+让我们看下 _removeStock_ 函数：
+````
 stock = stock - amount;
-
-There we just subtract using a mathematical expression because it is simply an integer.
-这是一个减法表达式。
+````
+这就是一个减法表达式。
 ````
 var status = "still available";
 if (store.isAvailable() == false) {
-    status = "not available";
+	status = "not available";
 }
 ````
-Next, we have a Boolean expression evaluation. If the value is false , we change the value
-of status . The type for status is string , and we can just assign the value.
-接下来，我们使用一个布尔表达式。如果值为 false ，我们更改 status 的值。status 的类型为字符串，可以直接赋值。
+这行代码可以看到，我们使用一个布尔表达式，如果值为 _false_ ，我们更改 _status_ 的值。
+_status_ 的类型为字符串(string) ，可以直接赋值。
 ````
 stdout.printf ("And the book is %s\n", status);
 ````
-Finally, we use %s as a placeholder in printf to put our string value there.
-最后我们使用 %s 做为输出字符串的点位符。
+最后我们在 _printf_ 中使用 _%s_ 做为输出字符串的占位符来输出结果。
 
-Gee, what is it?
-### Gee 是什么？
-
-Gee is a collection library written in Vala. The basic types of the collection are list, set,
-and maps. These are similar to array but with more powerful features.
+## Gee 是什么？
 Gee 是 Vala 中一个集合的库。集合的基本类型有 list, set 和 maps 。
 这些与数组类似，但功能更强大些。
 
-Time for action – adding the Gee library
 ### 实践环节 - 添加 Gee 库
-Let's take a look at Gee more closely. But first, let's try adding it to our project:
-让我们看下 Gee ，但首先需要把它加入到项目中：
-1.	Click on the Project menu and choose Add Library....
-1. 选择 Project 菜单中的 Add Library....
-2.	In Select the target for the library, find hello_vala under src/ .
-2. 在 Select the target for the library 中，在 src/ 目录下找到 hello_vala 。
-3.	Then click on the New library... button.
-3. 点击 New library... 按钮。
-4.	Find gee from the list and check it in the Module option at the bottom of the dialog,
-and then find HELLO_VALA. This means that we add Gee into the C compilation
-step. Under the hood, this step modifies the configure.ac file to add Gee
-into the build system.
-4. 从列表中选择 gee 并在对话框的底部检查下 Module 选项，然后找到 HELLO_VALA 。
-这是我们添加 Gee 到 C 编译环境的步骤。同时也会编辑 configure.ac 文件，添加 Gee 到编译系统中。
+接下来我们将要学习 Gee ，但首先需要把它加入到项目中：
 
-5.	Then, from the Files dock, find Makefile.am in the src/ directory and open it.
-Find the hello_vala_VALAFLAGS stanza and modify it to look like this:
-5. 然后，从文件浏览器在 src/ 目录下找到 Makefile.am 并打开它。
-找到 hello_vala_VALAFLAGS 的部分，按下面来编辑它：
+1. 选择 **Project** 菜单中的 **Add Library....**
+2. 在 **Select the target for the library** 中，在 _src/_ 目录下找到 _hello_vala_ 。
+3. 点击 **New library...** 按钮。
+4. 从列表中选择 **gee** 并在对话框的底部检查下 **Module** 选项，然后找到 **HELLO_VALA** 。
+这是我们添加 Gee 到 C 编译环境的步骤。同时也会编辑 _configure.ac_ 文件，添加 Gee 到编译系统中。
+5. 然后，从文件浏览器在 _src/_ 目录下找到 _Makefile.am_ 并打开它。
+找到 _hello_vala_VALAFLAGS_ 的部分，按下面来编辑它：
+````
 hello_vala_VALAFLAGS =
 --pkg gtk+-3.0 \
 --pkg gee-1.0
 \
-6.	 Then, save and close the Makefile.am file. This step means that we add Gee into
-the Vala compilation step.
-6. 然后，保存并关闭 Makefile.am 文件。这时我们已经添加 Gee 到 Vala 编译环境中了。
-
-7.	 Then click on Build and choose Clean Project. This would clean the project from all
-the generated code and scripts prepared by the build system to make sure we pick
-up changes that we made in Makefile.am and configure.ac .
-7. 然后点击 Build 菜单选择 'Clean Project' 。这将清理产生的所有代码和脚本，来保证我们能够使用
-最新的 Makefile.am 和 configure.ac 来编译。
-8.	 Try running our previous code again. There should be no error anymore.
+````
+6. 然后，保存并关闭 _Makefile.am_ 文件。这时我们已经添加 Gee 到 Vala 编译环境中了。
+7. 然后点击 **Build** 菜单选择 **Clean Project** 。这将清理产生的所有代码和脚本，来保证我们能够使用
+最新的 _Makefile.am_ 和 _configure.ac_ 来编译。
 8. 运行之前的代码，现在不应该再有错误了。
 
 ### 刚刚发生了什么？
+我们把 Gee 添加到工程中。目前 Anjuta 还不太完美的支持 Vala ，所以我们还需要自己做两件事，
+即把库添加到工程中，一个为 C 编译，另一个为 Vala 编译。没有这两步，我们就无法编译程序，
+因为这或者引起 Vala 无法识别 Gee 的命名空间，或者引起 C 编译器无法找到 Gee 的头文件和库。
 
-We just added Gee into the project. Anjuta support for Vala is not yet perfect as we need to
-perform two actions (as we just did) to add a library into a project, one for C compilation and
-another for Vala compilation. Without these two steps, our program cannot be built because
-either Vala would not recognize the Gee namespace or the C compiler would not find the
-Gee header files and library.
+### 实践环节 - 使用 Gee
+在把 Gee 集成到工程中后，让我们看下 Gee 都能提供给我们什么。
+先来个简单的，数组列表(ArrayList) 。
 
-Time for action – Gee in action
-### 实践环节 - 
-After installing Gee in our project, let's quickly check what capabilities Gee has to offer. Let's
-start from the simple ones, the array list.
-1.	Modify our book.vala file to look like this:
-编辑 book.vala 文件：
-````
+1. 编辑 _book.vala_ 文件：
+````Vala
 using GLib;
 using Gee;
+
 public class Book : Object {
 	private string title;
 	private string isbn;
 	private ArrayList<string> authors;
+
 	public Book(string isbn, string title) {
 		this.isbn = isbn;
 		this.title = title;
 		authors = new ArrayList<string>();
 	}
+
 	public void addAuthor(string author) {
 		authors.add(author);
 	}
+
 	public void printISBN() {
 		stdout.printf("%s\n", isbn);
 	}
+
 	public void printTitle() {
 		stdout.printf("%s\n", title);
 	}
+
 	public void printAuthors() {
 		foreach (var author in authors) {
 			stdout.printf("Author name: %s\n", author);
@@ -1147,17 +1115,16 @@ public class Book : Object {
 	}
 }
 ````
-2.	Modify the Main class constructor to include these lines:
-2. 编辑 Main 类的构造函数并加入下面这些行：
+2. 编辑 _Main_ 类的构造函数并加入下面这些行：
+````
 var book = new Book("1234", "A new book");
 book.printISBN ();
 book.addAuthor("Joe Random");
 book.addAuthor("Joe Random Jr.");
 book.printAuthors();
-3.	Run it.
-3. 运行
-4.	See that it prints all of the authors of the book.
-看看结果，它会打印书的所有作者。
+````
+3. 运行。
+4. 看看结果，它会打印书的所有作者。
 ````
 Hello, world
 1234
@@ -1170,27 +1137,26 @@ and price is now $ 5.000000
 And the book is still available
 ````
 ### 刚刚发生了什么？
-
-Here we try to utilize the array list, which is one of many collection data structures provided
-by Gee.
-
+我们刚刚尝试使用数组列表，这也是 Gee 所提供的众多集合类型的一种。
+````
 using Gee;
+````
+为了使用 Gee ，我们首先需要声明使用 Gee 命名空间。
 
-In order to use Gee, first we declare that we are using the Gee namespace.
-We can actually omit this, but we need to always put the
-Gee. prefix in front of all Gee classes.
-Now look at the member declaration in the Book class:
+> ✔ 我们实际上也可以不使用这个，但是需要在使用 Gee 类提供的东东都要加上 _Gee._ 前缀。
+
+现在来看下 _Book_ 类成员的声明：
 ````
 public class Book : Object {
 	private string title;
 	private string isbn;
 	private ArrayList<string> authors;
 ````
-The construct with angle brackets is called generics programming. This means that the data
-contained in the data structure (which is ArrayList in this context) is generic. If we have an
-array of type integer, we will put it as ArrayList<int> , and so on. Hence, in this particular
-line, we have ArrayList , which has content with type string , and we call the list with the
-name authors . In the constructor, we have to initialize the array list with this syntax:
+结构中的尖括号就是所谓的**泛型编程 (generic programming)** 。
+这意味着在数据结构 (_ArrayList_) 中的数据是泛型 (generic) 的。
+如果我们想定义一个整形数组，需要使用 _ArrayList<init>_ ，使用其它类型的类似。
+在我们的代码中，我们使用的数组类型 (_ArrayList_) 是字符串 (_string_) ，定义为作者 (_authors_) 。
+在构造函数中，我们必需用下面的语法来初始化数组列表：
 ````
 public Book(string isbn, string title) {
 	this.isbn = isbn;
@@ -1198,23 +1164,26 @@ public Book(string isbn, string title) {
 	authors = new ArrayList<string>();
 }
 ````
-It means that we need to allocate an ArrayList object, which has content of type string .
-Note that only a declaration is not enough. If we forget this part, the program will crash.
+我们需要分配一个 _string_ 类型的 _ArrayList_ 对象。
 
+请注意只有声明还不够，如果我们忘记了这个步骤，程序将会崩溃。
+````
 public void addAuthor(string author) {
 	authors.add(author);
 }
-Here, we use an add function, which is provided by the ArrayList class. As the name
-suggests, it will add the data into the array list; note that it can only accept string because
-we declare and initialize it with string content.
+````
+在这个函数里我们调用了 _ArrayList_ 提供的 _add_ 函数。
+从字面上就可以看出来这是往数组里添加数据，注意我们只能添加 _string_ 类型的数据，
+因为我们在声明时和初始化时使用的是字符串类型。
 
+````
 public void printAuthors() {
 	foreach (var author in authors) {
 		stdout.printf("Author name: %s\n", author);
 	}
 }
 }
-
+````
 Here we iterate the content of the array list. We use the foreach command to iterate while
 assigning the value obtained on each iteration to the author variable. Note that we use
 the var author in authors expression. We don't specify the author variable to be
@@ -1224,7 +1193,8 @@ Because the authors content type is string , the author variable bound to the va
 keyword will be also string . This kind of construction is really useful if we generalize a
 class to be able to handle any kind of data types depending on the data type stored in the
 collection or data structure.
-Initializing members when declaring
+
+## Initializing members when declaring
 In our previous code, we initialize the array list in the constructor. Another alternative is to
 initialize it while declaring in the declaration area, without initializing it in the constructor.
 We can do it like this:
@@ -1233,20 +1203,20 @@ When your code grows and you have more than one constructor, this alternative is
 than initializing in the constructor because you must copy all of the initialization code to
 all constructors.
 Time for action – watching for signals
-### 实践环节 - 
+### 实践环节 - 监视信号量
 Vala has a construct for emitting and watching signals, which is a mechanism of subscribing
 to information when something happens in the code. We can subscribe to a signal by
-connecting the function that will perform some action into the signal. Let's see how it works.
+connecting the function that will perform some action into the signal.
+让我们看看这是如何工作的。
 
-1.	Modify our bookstore.vala file ad add two new declarations:
+1. 编辑 _bootstore.vala_ 文件，添加下面两个声明：
 ```
 public class BookStore {
 	...
 	public signal void stockAlert();
 	public signal void priceAlert();
 ```
-
-2. Modify our removeStock and setPrice functions in bookstore.vala to be like this:
+2. 按下面来修改 _bookstore.vala_ 中的 _removeStock_ 和 _setPrice_ 函数：
 ```
 	public void removeStock(int amount) {
 		stock = stock - amount;
@@ -1254,6 +1224,7 @@ public class BookStore {
 			stockAlert();
 		}
 	}
+
 	public void setPrice(double price) {
 	this.price = price;
 	if (price < 1) {
@@ -1261,41 +1232,47 @@ public class BookStore {
 	}
 }
 ```
-3.	Modify our Main constructor to be like this:
+3. 按下面来修改 _Main_ 构造函数：
 ```
 public Main ()
 {
-var book = new Book("1234", "A new book");
-book.printISBN ();
-book.addAuthor("Joe Random");
-book.addAuthor("Joe Random Jr.");
-book.printAuthors();
-var store = new BookStore(book, 4.2, 10);
-store.stockAlert.connect(() => {
-stdout.printf ("Uh oh, we are going to run out stock
-soon!\n");
-});
-store.priceAlert.connect(() => {
-stdout.printf ("Uh oh, price is too low\n");
-});
-stdout.printf ("Initial stock is %d\n", store.getStock());
-stdout.printf ("Initial price is $ %f\n", store.getPrice());
-store.removeStock(4);
-store.setPrice(5.0);
-stdout.printf ("Stock is %d\n", store.getStock());
-stdout.printf ("and price is now $ %f\n", store.getPrice());
-store.removeStock(4);
-var status = "still available";
-if (store.isAvailable() == false) {
-status = "not available";
+	var book = new Book("1234", "A new book");
+	book.printISBN ();
+	book.addAuthor("Joe Random");
+	book.addAuthor("Joe Random Jr.");
+	book.printAuthors();
+
+	var store = new BookStore(book, 4.2, 10);
+
+	store.stockAlert.connect(() => {
+			stdout.printf ("Uh oh, we are going to run out stock
+					soon!\n");
+			});
+
+	store.priceAlert.connect(() => {
+			stdout.printf ("Uh oh, price is too low\n");
+			});
+	stdout.printf ("Initial stock is %d\n", store.getStock());
+	stdout.printf ("Initial price is $ %f\n", store.getPrice());
+	store.removeStock(4);
+
+	store.setPrice(5.0);
+	stdout.printf ("Stock is %d\n", store.getStock());
+	stdout.printf ("and price is now $ %f\n", store.getPrice());
+
+	store.removeStock(4);
+
+	var status = "still available";
+	if (store.isAvailable() == false) {
+		status = "not available";
+	}
+	stdout.printf ("And the book is %s\n", status);
+	store.setPrice(0.2);
 }
-stdout.printf ("And the book is %s\n", status);
-store.setPrice(0.2);
 ```
-4.	Run it.
-4. 运行
-5.	See the printed message:
+4. 运行。
 5. 看看结果：
+```
 Hello, world
 1234
 Author name: Joe Random
@@ -1307,20 +1284,23 @@ and price is now $ 5.000000
 Uh oh, we are going to run out stock soon!
 And the book is still available
 Uh oh, price is too low
-
+```
 ### 刚刚发生了什么？
 
 The warning message printed that the stock is running out and the price is too low is not
 printed by BookStore class but rather by the Main class. This assumes a scenario where
 the Main class subscribes to the signals and will do something about it when Main receives
 the information from the signals.
+```
 public signal void stockAlert();
 public signal void priceAlert();
+```
 First, we have to define the signal in the class that we want to publish the signal from. In
 BookStore , we declare these two signals. Note that we only declare the method signature
 with the signal keyword. We don't declare the body of the function. It is essential of
 the signal that the object that subscribes to these signals provides functions to handle the
 emitted signals.
+```
 if (stock < 5) {
 stockAlert();
 }
@@ -1328,16 +1308,20 @@ stockAlert();
 if (price < 1) {
 priceAlert();
 }
+```
 These two snippets show how we emit the signal. When stock is less than 5 , we emit
 the stockAlert signal, and if price is less than 1 , we emit the priceAlert signal. The
 BookStore class doesn't care about what happens next; it only announces the signals, and
 that's it.
+```
 store.stockAlert.connect(() => {
 stdout.printf ("Uh oh, we are going to run out stock soon!\n");
 });
+
 store.priceAlert.connect(() => {
 stdout.printf ("Uh oh, price is too low\n");
 });
+```
 While here, the Main class constructor connects itself with these two signals. We can see
 the construct for providing a function body by using the => operator. This construct is called
 closure or anonymous function. The parameter of this function is defined before => , which
@@ -1346,18 +1330,20 @@ parentheses.
 Inside the function body, we declare what should happen when the signal is emitted by
 the store object. Here, we just print some alert text. In reality, we could do anything
 from disconnecting network and displaying images to any other actions we want.
+```
 store.removeStock(4);
 ...
 store.setPrice(0.2);
+```
 Here the actual signals are emitted and the text is printed.
-Have a go hero – putting parameters in signals
+
+### 大胆实践 - 在信号量中添加参数
 We can put parameters in our signal, too. We can just put the parameters we want in the
 signal declaration. Then, when connecting to a signal, put the parameters before the =>
 operator. Now how about modifying the priceAlert signal to have one parameter, which
 is the price of the book?
 
-Summary
-### 总结
+## 总结
 It is fairly easy and quick to create an application and get it up and running with both Seed
 and Vala. So why do we want to learn both and use them in this book?
 JavaScript is an interpreted language; we can see the guts of the program and modify it
