@@ -57,32 +57,40 @@
 Gjs 和 Seed 是一个解释器。我们通过这种方式运行会进入交互模式，意味着我们每输入一段指令它就会立即返回给我们结果。
 我们可以输入任何 JavaScript 代码，然而你不能输入我们开发网页应用的代码。
 例如：
+
 ````
 console.log("Hello, world")
 ````
+
 这是因为 Gjs 和 Seed 并不提供 _document_ 或 _console_ 对象。因此只支持基本的 JavaScript ，除非我们导入相应的对象。
 
 ### 大胆实践 - 亲手试一试下面的 JavaScript 代码
 
 在交互模式下，试试下面的代码，如加法，减法和变量赋值。如：
+
 ````
 var a=1
 var b=2
 b+a
 a-b
 ````
+
 你可以继续练习其它的，这只是为了了解一些基本的概念。
 如果你有使用 JavaScript 的经验但有些生疏，你不防用这些来热下身。
 我们也可以用它作为一个计算器。
 
 如果我们输入一个不完整的行后回车，如：
+
 ````
 var c=
 ````
+
 我们将会看到如下的提示：(Gjs 和 Seed 的一个‘点’的区别)
+
 ````
 ..
 ````
+
 这意味你需要完整的输入，否则 Gjs 或 Seed 将输出一个语法错误。
 
 实验结束之后，你可以使用 **Ctrl + C** 来退出，返回到终端。
@@ -98,16 +106,23 @@ var c=
 
 ````JavaScript
     #!/usr/bin/env gjs
+
     print("Hello, world")
 ````
+
         或
+
 ````
     #!/usr/bin/env seed
+
     print("Hello, world")
 ````
+
 4. 保存文件为 _hello-world.js_ 。最好创建一个新的目录（如 _hello-worldjs_) 并把文件保存到这个目录下。
 
-    > ✔ 在保存时弹出的对话框上，你可以点击 **创建文件夹 (Create Folder)** 按钮来创建新的目录。
+----
+> ✔ 在保存时弹出的对话框上，你可以点击 **创建文件夹 (Create Folder)** 按钮来创建新的目录。
+----
 
 5. 在菜单上单击 **运行 (Run)** 菜单，再选择 **执行(Execute)** ，弹出一个小的对话框，在 **程序 (Program)** 栏填入 _/usr/bin/gjs_ 或 _/usr/bin/seed_ ，在 **参数 (Arguments)** 栏填入 _hello-world.js_ 。 注意一定要选择 **终端运行 (Run in terminal)** 的复选框。如果保存到一个新的目录，也要设置 **工作目录 (Working Directory)** 为新的目录。
 
@@ -121,13 +136,16 @@ var c=
 
 你也许会有疑问为什么我们在运行的对话框上填入了 _/usr/bin/seed_ 而不是输入 _hello-world.js_ 。
 这是因为你没有为该文件设置可执行属性。通过下面的指令你可以设置可执行权限。
+
 ````
 chmod +x hello-world.js
 ````
+
 这之后，我们就可以直接在 **运行(Run)** 对话框上的 **程序(Program)** 栏中输入 _hello-world.js_ 。
 你也许注意到在 **执行(Execute)** 的时候，不再提示对话框了。这是因为 Anjuta 认为我们已经设置程序的运行参数。
 如果想要更改，从 **运行(Run)** 菜单选择 **程序参数(Program Parameters...)** 。
 另外，我们也在可以在终端中直接运行程序：
+
 ````
 ./hello-world.js
 ````
@@ -141,8 +159,10 @@ JavaScript 是松散类型的语言，这意味着我们不用定义变量的类
 这之后，我们才能够根据我们的需求来选择使用的类型。
 
 1. 创建一个新文件 _hello-world-data-types.js_ 并填入如下代码：
+
 ````JavaScript
 #!/usr/bin/env gjs
+
 print("Hello world")
 var number = 1;
 print(number);
@@ -157,8 +177,10 @@ print(number);
 number = undefined
 print(number);
 ````
+
 2. 运行
 3. 输出的结果如下：（如果使用 seed 运行，输出的结果略有不同）
+
 ````
 Hello world
 1
@@ -169,45 +191,58 @@ undefined
 false
 undefined
 ````
+
 ### 刚刚发生了什么？
 
 我们会发现两件有趣的事情。一是 JavaScript 能够自动转换数据类型。
 我们能够通过赋值的方式来改变一个变量的类型。
 第二，我们并不需要定义变量的类型，之前已经提到过。
 在程序中我们使用 _number_ 变量，并赋值为 _1_ 。
+
 ````
 var number = 1;
 print(number);
 ````
+
 现在 _number_ 变量是一个整数。
+
 ````
 number = number + 0.5;
 print(number);
 ````
+
 在我们给 _number_ 加 _0.5_ 后，它转换为浮点类型。JavaScript 支持这个没有任何问题，当前 _number_ 的值是 _1.5_ 。
+
 ````
 print(number.length);
 ````
+
 然后我们尝试访问 _number_ 的 _.length_ 属性。因为当前的类型是数字，并没有长度，所以返回值是 _undefined_。
 
 我们可以看到 JavaScript 有未知值的概念，也就是 _undefined_, 如果一个变量是未知值，我们不能访问它的属性，
 这会让 JavaScript 认为这是一个错误。
+
 ````
 number = number + " is a number? no, it is now a string";
 print(number);
 ````
+
 现在给 _number_ 连接一个字符串，使它变成了一个字符串。现在 _number.length_ 就在解释器中有定义了，值为39，意思是
 _number_ 包含了 39 个字符。
+
 ````
 number = (number.length == 0)
 print(number);
 ````
+
 这行代码又把 _number_ 赋了一个布尔值。因为 _number.length_ 不是 _0_ ，表达式 _(number.length == 0)_
 返回 _false_ ，也就是 _0_ 。 如果返回的 _true_ ，值就是 _1_ 。
+
 ````
 number = undefined
 print(number);
 ````
+
 现在给 _number_ 赋值为 _undefined_ ，这是一个保留字，因此我们可以用它赋值。
 
 很有趣，是吧？
@@ -228,6 +263,7 @@ Q1. 在完成了之前所有的任务之后，在代码运行的最后，_number
 按下面的步骤来：
 
 1. 创建一个新文件 _hello-world-iteration.js_ ，然后填入下面的代码：
+
 ````JavaScript
 #!/usr/bin/env gjs
 
@@ -236,9 +272,11 @@ for (var i = 0; i < 10; i ++) {
 	print("Iteration number #" + i);
 }
 ````
+
 2. 运行
 
 3. 我们可以看到输出了10次结果。
+
 ````
 Hello, world
 Iteration number #0
@@ -252,6 +290,7 @@ Iteration number #7
 Iteration number #8
 Iteration number #9
 ````
+
 ### 刚刚发生了什么？
 在这段代码里，我们让 JavaScript 使用 _for_ 循环做 _10_ 次迭代操作，从 _0_ 开始，不是 _1_ ，每次迭代我们
 给 _i_ 加 _1_ （在 _for_ 循环中的 _i++_ 表达式意味着每次给 _i_ 加 _1_ ），循环在 _i_ 到 _10_ 之后将会退出。
@@ -265,19 +304,25 @@ Iteration number #9
 让我们把数组想像成一堆盒子，每个里面装了一个同类型的数据。下面就把这堆盒子填满。
 
 1. 创建 _hello-world-array.js_ ，并输入下面的代码
+
 ````JavaScript
 #!/usr/bin/env gjs
+
 print("Hello world")
 var boxes = []
+
 for (var i = 0; i < 10; i ++) {
 	boxes[i] = i * 2;
 }
+
 for (i = 0; i < boxes.length; i ++) {
 	print("Box content #" + i + " is " + boxes[i])
 }
 ````
+
 2. 运行。
 3. 我们将看到下面的从 _0_ 到 _9_ 号箱子中放了些什么。
+
 ````
 Hello world
 Box content #0 is 0
@@ -291,28 +336,35 @@ Box content #7 is 14
 Box content #8 is 16
 Box content #9 is 18
 ````
+
 ### 刚刚发生了什么？
 
 首先我们定义 _boxes_ 为数组类型：
+
 ````
 var boxes = []
 ````
+
 你也许注意我们没有设置数据的大小，其实我们只用知道这个是数组就足够了，让 JavaScript 来处理吧。
 这是因为任何时候我们编辑它的内容时，数组自身可以自动缩小或增大。
 接下来我们往盒子数组里填充数据：
+
 ````
 for (var i = 0; i < 10; i ++) {
 	boxes[i] = i * 2;
 }
 ````
+
 我们给每一个盒子赋了一个索引值的2倍的值。
 我们只直接按索引来给盒子赋值，而不像 C 语言那样需要提前分配。
 真心简单啊！然后我们打印出数组的内容：
+
 ````
 for (i = 0; i < boxes.length; i ++) {
 	print("Box content #" + i + " is " + boxes[i])
 }
 ````
+
 数组的长度可以从对象的 _length_ 变量来获取，本例中使用 _boxes.length_ 就可以获取长度。
 无论数组怎么变化，它的长度都会自动调整。
 
@@ -330,8 +382,10 @@ for (i = 0; i < boxes.length; i ++) {
 我们将在本书中使用大量的对象，先从一个简单的例子开始。
 
 1. 创建 hello-world-object.js ，并输入下面的代码：
+
 ````JavaScript
 #!/usr/bin/env gjs
+
 print("Hello world")
 var book = {};
 print(book);
@@ -342,8 +396,10 @@ print(book);
 print(book.isbn);
 print(book.title);
 ````
+
 2. 运行。
 3. 看看结果：
+
 ````
 Hello world
 [object Object]
@@ -352,33 +408,46 @@ undefined
 xxxx-1234-1234
 A somewhat interesting book
 ````
+
 ### 刚刚发生了什么？
 与其它数据类型一样，我们可以很容易地给一个变量赋一个对象值。
+
 ````
 var book = {};
 ````
+
 这行我们定义 _book_ 为一个空的对象。用大括号来初始化对象，这是对象最简单的形式。
+
 ````
 print(book);
 ````
+
 这行打印出 _[object Object]_ ， 意思是这是一个 _Object_ 类型的对象。
+
 ````
 print(book.isbn);
 ````
+
 我们试图访问对象的 _.isbn_ 属性，但是没有值，初始化为 _undefined_ 。
+
 ````
 book.isbn = "xxxx-1234-1234";
 book.title = "A somewhat interesting book"
 ````
+
 这两行代码给对象的属性赋些值。我们可以随意在对象内放任何东东，我们不用初始化或在使用前声明它。
+
 ````
 print(book);
 ````
+
 再次打印变量 _book_ ，它仍将返回 _Object_ 类型的对象。
+
 ````
 print(book.isbn);
 print(book.title);
 ````
+
 目前情况已经改变，因为已经赋值了，_isbn_ 和 _title_ 能够被打印出来了。
 
 ### 能力越大责任也越大
@@ -387,25 +456,31 @@ print(book.title);
 
 因为 JavaScript 区分大小写，这将对跟踪错误增加了难度。
 假设在我们的代码中有下面一行：
+
 ````
 book.authorFirstName = "Random Joe"
 ````
+
 然后，在其它部分，我们编辑了这个变量：
+
 ````
 book.authorFirstname = "Another Joe"
 ````
+
 JavaScript 将不会有任何提示因为我们可以随意的设置对象内的东东。
 我们有责任检查这种错误，两遍甚至三遍，以致于我们不会有前面的错误。
 到现在，你对我们提到的 bug 明白了么？
 
 ### 大胆实践 - 给对象赋值的另一个方法
 按下面的方法编辑前面的代码，看看结果怎么样。
+
 ````
 var book = {
 	isbn:"xxxx-1234-1234",
 	title:"A somewhat interesting book"
 }
 ````
+
 我们以一个新的方式来定义 book 对象内 ISBN 和标题。我们使用冒号而不是等号，在不同的变量间使用逗号。
 这个就是所谓的 **JSON (JavaScript 对象标记法)** 。
 ## 构建对象
@@ -415,8 +490,10 @@ var book = {
 当我们提到构建一个对象，就是指调用一个特殊的函数 **constructor** 。下面让我们来试一下。
 
 1. 创建一个 hello-world-constructor.js 文件，输入下面的代码：
+
 ````JavaScript
 #!/usr/bin/env gjs
+
 print("Hello world")
 
 var Book = function(isbn, title) {
@@ -428,30 +505,39 @@ var book = new Book("1234", "A good title");
 print(book.isbn);
 print(book.title);
 ````
+
 2. 运行。
 3. 看看结果：
+
 ````
 Hello world
 1234
 A good title
 ````
+
 ### 刚刚发生了什么？
 这与我们前面介绍的代码相类似，不同的是现在我们定义了一个类，然后实例化为一个对象。
+
 ````
 var Book = function(isbn, title) {
 	this.isbn = isbn;
 	this.title = title;
 }
 ````
+
 这是 _Book_ 类的构造函数，我们把构造函数的参数 _isbn_ 赋值给 _.isbn_ 属性，对 _.title_ 属性也是一样。
+
 ````
 var book = new Book("1234", "A good title");
 ````
+
 我们创建了一个叫 _book_ 的变量（注意我们用的小写！)，通过参数把 _Book_ 类实例化。
+
 ````
 print(book.isbn);
 print(book.title);
 ````
+
 现在我们可以看见 _.isbn_ 和 _.title_ 已经被打印出来了。
 
 ## 类和对象
@@ -464,6 +550,7 @@ print(book.title);
 
 ### 小测试 - 你能分辨出类和对象的区别吗？
 看一下下面的代码：
+
 ````
 var Circle = function(radiusInPixel) {
 	this.radius = radiusInPixel
@@ -471,6 +558,7 @@ var Circle = function(radiusInPixel) {
 
 var circle = new Circle(100);
 ````
+
 Q1. circle 和 Circle 都代表什么？下面哪句话正确？
 
 1. _Circle_ 是一个类，因为它有定义，_circle_ 是一个对象，从一个 _Circle_ 类实例。
@@ -490,8 +578,10 @@ In JavaScript we use prototypes to achieve this feature.
 让我们在之前的 _Book_ 类中添加一些方法。我们使用 _prototype_ 对象来定义它们。
 
 1. 创建一个新的文件 _hello-world-prototype.js_ ，输入下面的代码：
+
 ````JavaScript
 #!/usr/bin/env gjs
+
 print("Hello world")
 
 var Book = function(isbn, title) {
@@ -512,50 +602,67 @@ var book = new Book("1234", "A good title");
 book.printTitle();
 book.printISBN();
 ````
+
 2. 运行。
 3. 结果如下：
+
 ````
 Hello world
 Title is A good title
 ISBN is 1234
 ````
+
 ### 刚刚发生了什么？
 在 JavaScript  对象，_prototype_ 是一个特殊的对象，它拥有一个类或对象内部的所有属性和函数。
 因此我们所做的就是往 _prototype_ 中添加我们自己的函数。
+
 ````
 var Book = function(isbn, title) {
 	this.isbn = isbn;
 	this.title = title;
 }
 ````
+
 从上面可以看到，构造函数与前面的一样。
+
 ````
 Book.prototype = {
 ````
+
 然后，定义 _prototype_ ，加入我们自己的方法。
+
 ````
 printTitle: function(){
 	print("Title is " + this.title);
 },
 ````
+
 这是我们添加的第一个方法。
+
 ````
 printISBN: function() {
 	print("ISBN is " + this.isbn);
 }
 ````
+
+----
 > ✔ 我们使用冒号而不是等号来定义一个函数，在函数结束时使用逗号，意味着还将定义另一个函数或成员。
 还记得我们之前定义 _book_ 对象时使用什么方式了么？
+----
 
 接着，添加第二个方法，注意结束后大括号后边没有逗号。
+
 ````
 var book = new Book("1234", "A good title");
 ````
+
 在这之后，定义了 _book_ 变量，并以特定的参数构建一个 _Book_ 对象赋值给它。
+
 ````
 book.printTitle();
 book.printISBN();
 ````
+
 最后，我们调用这些方法（注意方法名字后面要接小括号）。
 
 ### 大胆实践 - 添加更多的方法
@@ -564,7 +671,9 @@ book.printISBN();
 - _getISBN()_ , 将返回 _isbn_ 的值
 - _getTitle()_ , 将返回书名
 
+----
 > ✔ 注意不要忘记冒号和逗号！
+----
 
 ### 实践环节 - 编辑一个对象的 prototype
 就像前面提到的，我们可以直接在一个对象的 _prototype_ 中添加一些东东，而不是在类中添加。
@@ -572,6 +681,7 @@ book.printISBN();
 想象一下我们如何在运行的时候用另一个函数代替在 prototype 中已经定义的函数！
 
 1. 创建 _hello-world-proto.js_ ，输入下面的代码：
+
 ````JavaScript
 #!/usr/bin/env gjs
 
@@ -612,8 +722,10 @@ anotherBook.printTitle();
 anotherBook.printISBN();
 anotherBook.printAuthor(); // this is invalid
 ````
+
 2. 运行。
 3. 看看结果你会发现这段代码能够打印第一本书的作者，但打印第二本书的作者时会失败。
+
 ````
 Hello world
 Title is A good title
@@ -627,7 +739,9 @@ ISBN is 4567
 
 JS_EvaluateScript() failed
 ````
+
 用 Seed 运行后的结果略有不同，只需要把第一行的 _gjs_ 更改为 _seed_ 。
+
 ````
 Hello world
 Title is A good title
@@ -642,14 +756,18 @@ is not a function (evaluating 'anotherBook.printAuthor()')
 Stack:
 global code@./hello-world-proto.js:36:24
 ````
+
 ### 刚刚发生了什么？
 为了在运行时编辑 _prototype_ ，我们需要知道些小技巧。
 这时 _prototype_ 属性不再能被访问了，我们需要使用 __proto__ 。
 在下面这行，我们先实例化一个 _book_ 对象。
+
 ````
 var book = new Book("1234", "A good title");
 ````
+
 接着，我们通过 __proto__ 在 _prototype_ 中加入了两个属性。
+
 ````JavaScript
 book.__proto__ = {
 	author: "Joe Random",
@@ -658,16 +776,21 @@ book.__proto__ = {
 	}
 }
 ````
+
 然后，我们立即调用它。
+
 ````
 book.printAuthor();
 ````
+
 然而，我们另一个实例并不具有这个属性。你知道为什么吧？
 因为我们只编辑了 _book_ 对象，这不会影响另一个 _anotherBook_ 对象。
+
 ````
 var anotherBook = new Book("4567", "A more better title");
 anotherBook.printAuthor(); // this is invalid
 ````
+
 ### 小测试 - 如何让 _printAuthor()_ 都可以用？
 Q1. 为了给所有从 _Book_ 类创建的对象添加中 _printAuthor_ 方法，下面哪个方式更好些？
 
@@ -678,7 +801,9 @@ Q1. 为了给所有从 _Book_ 类创建的对象添加中 _printAuthor_ 方法�
 假设我们准备使用 _anotherBook_ 对象定义一本特殊的书。我们想在 _printTitle_ 中打印出的 "<book-title> is really good title" 。
 其中 <book-title> 是书的标题。
 
+----
 > ✔ 重新定义在 anotherBook 对象的 __proto__ 中的函数即可。
+----
 
 ## 模块化
 想象一下我们在一个单独的脚本中实现一个特别大的项目，这对调试来说是一个恶梦。
@@ -688,8 +813,10 @@ Q1. 为了给所有从 _Book_ 类创建的对象添加中 _printAuthor_ 方法�
 现在我们将把程序模块化。
 
 1. 创建 _hello-world-module.js_ ，输入下面的代码：
+
 ````JavaScript
 #!/usr/bin/env gjs
+
 print("Hello world")
 
 imports.searchPath.unshift('.');
@@ -700,7 +827,9 @@ var book = new BookModule.Book("1234", "A good title");
 book.printTitle();
 book.printISBN();
 ````
+
 2. 然后创建 book.js 脚本，输入下面的代码：
+
 ````JavaScript
 var Book = function(isbn, title) {
 	this.isbn = isbn;
@@ -717,11 +846,13 @@ Book.prototype = {
 	}
 }
 ````
+
 3. 然后运行 _hello-world-module.js_ ，注意不是 _book.js_ 。
 4. 看看运行的结果。
 
 ### 刚刚发生了什么？
 从输出的结果我们可以看到与前面代码运行的结果一样，但是我们分成了两个脚本文件。
+
 ````
 imports.searchPath.unshift('.');
 
@@ -729,6 +860,7 @@ var BookModule = imports.book
 
 var book = new BookModule.Book("1234", "A good title");
 ````
+
 我们先设置了导入时搜索当前目录，然后再让 Gjs 用 _imports_ 命令给 _BookModule_ 赋值为 _book_ 。
 它会查找并导入当前目录下 _book.js_ ，这样在 _book.js_ 中的所有对象都可以从 _BookModule_ 变量访问到。
 接下来我们通过 _new_ 构建 _book_ 对象。
@@ -766,6 +898,7 @@ var book = new BookModule.Book("1234", "A good title");
 我们将用我们自己的代码来代替所有自动生成的代码，这样我们就可以了解一个程序是如何从头开始产生的。
 
 1. 编辑 _hello_vala.vala_ 文件，并输入下面的代码：
+
 ````Vala
 using GLib;
 public class Main : Object
@@ -780,30 +913,40 @@ public class Main : Object
 	}
 }
 ````
+
 2. 点击 **Run** 菜单中的 **Execute**。
 3. 输出的结果：
+
 ````
 Hello, world
 ````
+
 ### 刚刚发生了什么？
 Here we start by looking at the Book class.
 下面让我们看一下 Book 类。 (TBD)
+
 ````
 using GLib;
 ````
+
 这行说明我们使用 GLib 的命名空间。
+
 ````
 public class Main : Object
 
 ````
+
 这行是 _Main_ 类的定义。它是从 _GLib.Object_ 类派生出来的。我们没有使用全名 _GLib.Object_ 而只
 使用了 _Object_ 是因为我们已经在第一行中使用 _GLib_ 命名空间了。
+
 ````
 public Main ()
 {
 }
 ````
+
 我们定义了类的构建函数，目前它为空。
+
 ````
 static int main (string[] args)
 {
@@ -812,6 +955,7 @@ static int main (string[] args)
 }
 }
 ````
+
 这是程序的入口点。如果我们定义为静态(static) ，这个 _main_ 函数将被作为程序运行的第一个函数。
 没有这个函数我们无法运行程序。
 
@@ -831,7 +975,8 @@ Vala 定义了一系列的成员访问标示符，我们可以使用它来定义
 让我们看一下如何设定访问类中的成员。
 
 1. 创建新的文件 book.vala 并保存到 src/ 目录下，输入下面的代码：
-````
+
+````Vala
 using GLib;
 public class Book : Object {
 	private string title;
@@ -848,9 +993,11 @@ public class Book : Object {
 	}
 }
 ````
+
 2. 我们添加这个到项目中，点出 'Project' 菜单，选择 'Add Source File...'。
 3. 在出现的对话框中点击 'Target' 选项，在 _src/_ 下找到 _hello_vala_ ， 然后在文件选择框选择 _book.vala_ 。
 4. 按下面来修改 _hello_vala.vala_ 的 _main_ 函数：
+
 ````
 using GLib;
 public class Main : Object
@@ -868,6 +1015,7 @@ public class Main : Object
 	}
 }
 ````
+
 5. 运行。
 6. 注意程序还不能够被编译。
 
@@ -875,16 +1023,20 @@ public class Main : Object
 
 ### 刚刚发生了什么？
 从错误信息看，调用 _Book.printISBN_ 时被拒绝了（我们使用'点'来访问 _Book_ 类中的 _printISBN_ 成员）。
+
 ````
 var book = new Book("1234", "A new book");
 book.printISBN ();
 ````
+
 这是我们在 _Main_ 类构建函数中的代码，我们把 _Book_ 实例化并赋给 _book_ 变量，然后调用 _printISBN_ 。
+
 ````
 void printISBN() {
     stdout.printf(isbn);
 }
 ````
+
 然而在 _Book_ 类的代码，看起来没什么问题，但从结果证明它缺少一些关键的东西来让它可以从类外面访问。
 
 ## 访问标示符
@@ -913,6 +1065,7 @@ Q1. 你认为下面哪个标示符是正确的？
 我们现在通过创建一个设想中的书店 (BookStore) 程序来探索 Vala 中的数据类型。
 
 1. 创建一个 _bookstore.vala_ 的文件，保存到 _src/_ 目录下，输入下面的代码：
+
 ````Vala
 using GLib;
 
@@ -952,8 +1105,10 @@ public class BookStore {
 	}
 }
 ````
+
 2. 把这个文件添加到工程里。
 3. 按下面来编辑我们的 _Main_ 类：
+
 ````Vala
 using GLib;
 
@@ -986,8 +1141,10 @@ public class Main : Object
 	}
 }
 ````
+
 4. 运行。
 5. 看看数据是怎么处理和输出的：
+
 ````
 Hello, world
 1234
@@ -997,53 +1154,72 @@ Stock is 6
 and price is now $ 5.000000
 And the book is still available
 ````
+
 ### 刚刚发生了什么？
 让我们从 _Main_ 构造函数开始分析。
+
 ````
 var store = new BookStore(book, 4.2, 10);
 ````
+
 我们从 _BookStore_ 类实例化一个新的 _store_ 对象，并用一个 _book_ 对象，一个浮点型数字和一个整数来做为参数。
+
 ````
 public BookStore (Book book, double price, int stock) {
 ````
+
 在 _BookStore_ 的构造函数里，我们必须在参数列表中指定数据的类型，也就是说我们想要接受一个 Book 对象，
 一个浮点型的数字和一个整数。
+
 ````
 this.book = book;
 this.price = price;
 this.stock = stock;
 ````
+
 然后，我们把参数赋值给私有成员 _book_ ，_price_ 和 _stock_ 。在这我们使用 _this._ 来区分开参数中的 _book_ 和私有的 _book_ 成员。
 如果我们把参数变量改一个名字，如 _bookObject_ ，那么我们就不用使用 _this_ 了，因为这样就不会造成歧义了。
 我们知道 _bookObject_ 来自参数列表而不是我们的成员。 对 _price_ 和 _stock_ 也一样。
+
 ````
 stdout.printf ("Initial stock is %d\n", store.getStock());
 ````
+
 这行用 _printf_ 来打印一个整数，使用 _%d_ 作为一个整数的占位符。
+
 ````
 stdout.printf ("Initial price is $ %f\n", store.getPrice());
 ````
+
 这行用 _printf_ 来打印一个实数，使用 _%f_ 作为它的占位符。
+
 ````
 store.removeStock(4);
 ````
+
 然后，我们从仓库中删除 4 本书，这在 _BookStore_ 中有定义。
 让我们看下 _removeStock_ 函数：
+
 ````
 stock = stock - amount;
 ````
+
 这就是一个减法表达式。
+
 ````
 var status = "still available";
 if (store.isAvailable() == false) {
 	status = "not available";
 }
 ````
+
 这行代码可以看到，我们使用一个布尔表达式，如果值为 _false_ ，我们更改 _status_ 的值。
 _status_ 的类型为字符串(string) ，可以直接赋值。
+
 ````
 stdout.printf ("And the book is %s\n", status);
 ````
+
 最后我们在 _printf_ 中使用 _%s_ 做为输出字符串的占位符来输出结果。
 
 ## Gee 是什么？
@@ -1060,12 +1236,14 @@ Gee 是 Vala 中一个集合的库。集合的基本类型有 list, set 和 maps
 这是我们添加 Gee 到 C 编译环境的步骤。同时也会编辑 _configure.ac_ 文件，添加 Gee 到编译系统中。
 5. 然后，从文件浏览器在 _src/_ 目录下找到 _Makefile.am_ 并打开它。
 找到 _hello_vala_VALAFLAGS_ 的部分，按下面来编辑它：
+
 ````
 hello_vala_VALAFLAGS =
 --pkg gtk+-3.0 \
 --pkg gee-1.0
 \
 ````
+
 6. 然后，保存并关闭 _Makefile.am_ 文件。这时我们已经添加 Gee 到 Vala 编译环境中了。
 7. 然后点击 **Build** 菜单选择 **Clean Project** 。这将清理产生的所有代码和脚本，来保证我们能够使用
 最新的 _Makefile.am_ 和 _configure.ac_ 来编译。
@@ -1081,6 +1259,7 @@ hello_vala_VALAFLAGS =
 先来个简单的，数组列表(ArrayList) 。
 
 1. 编辑 _book.vala_ 文件：
+
 ````Vala
 using GLib;
 using Gee;
@@ -1115,7 +1294,9 @@ public class Book : Object {
 	}
 }
 ````
+
 2. 编辑 _Main_ 类的构造函数并加入下面这些行：
+
 ````
 var book = new Book("1234", "A new book");
 book.printISBN ();
@@ -1123,8 +1304,10 @@ book.addAuthor("Joe Random");
 book.addAuthor("Joe Random Jr.");
 book.printAuthors();
 ````
+
 3. 运行。
 4. 看看结果，它会打印书的所有作者。
+
 ````
 Hello, world
 1234
@@ -1136,27 +1319,35 @@ Stock is 6
 and price is now $ 5.000000
 And the book is still available
 ````
+
 ### 刚刚发生了什么？
 我们刚刚尝试使用数组列表，这也是 Gee 所提供的众多集合类型的一种。
+
 ````
 using Gee;
 ````
+
 为了使用 Gee ，我们首先需要声明使用 Gee 命名空间。
 
+----
 > ✔ 我们实际上也可以不使用这个，但是需要在使用 Gee 类提供的东东都要加上 _Gee._ 前缀。
+----
 
 现在来看下 _Book_ 类成员的声明：
+
 ````
 public class Book : Object {
 	private string title;
 	private string isbn;
 	private ArrayList<string> authors;
 ````
+
 结构中的尖括号就是所谓的**泛型编程 (generic programming)** 。
 这意味着在数据结构 (_ArrayList_) 中的数据是泛型 (generic) 的。
 如果我们想定义一个整形数组，需要使用 _ArrayList<init>_ ，使用其它类型的类似。
 在我们的代码中，我们使用的数组类型 (_ArrayList_) 是字符串 (_string_) ，定义为作者 (_authors_) 。
 在构造函数中，我们必需用下面的语法来初始化数组列表：
+
 ````
 public Book(string isbn, string title) {
 	this.isbn = isbn;
@@ -1164,14 +1355,17 @@ public Book(string isbn, string title) {
 	authors = new ArrayList<string>();
 }
 ````
+
 我们需要分配一个 _string_ 类型的 _ArrayList_ 对象。
 
 请注意只有声明还不够，如果我们忘记了这个步骤，程序将会崩溃。
+
 ````
 public void addAuthor(string author) {
 	authors.add(author);
 }
 ````
+
 在这个函数里我们调用了 _ArrayList_ 提供的 _add_ 函数。
 从字面上就可以看出来这是往数组里添加数据，注意我们只能添加 _string_ 类型的数据，
 因为我们在声明时和初始化时使用的是字符串类型。
@@ -1184,6 +1378,7 @@ public void printAuthors() {
 }
 }
 ````
+
 在这我们遍历数组的内容。我们使用 _foreach_ 来在每一次迭代中给 _author_ 赋值。
 注意我们使用的是 _var author in authors_表达式。
 我们没有指明 _author_ 变量为 _string_ 类型，而是通过 _var_ 定义为自动变量。
@@ -1195,9 +1390,11 @@ public void printAuthors() {
 之前的代码中我们在构造函数中对数据列表进行初始化。
 另一个办法是在声明时可以对它进行初始化，而不用在构造函数中进行。
 我们可以这样做：
+
 ````Vala
 private ArrayList<string> authors = new ArrayList<string>();
 ````
+
 随着代码的增长，有可能会有多个构造函数，那么这种方法初始化就会方便些，
 因为你就不必一个一个复制初始化代码到每个构造函数了。
 
@@ -1206,13 +1403,16 @@ Vala 有一个能发出和监视信号的结构，它提供了订阅机制来在
 通过连接函数我们可以订阅信号量。 让我们看看这是如何工作的。
 
 1. 编辑 _bootstore.vala_ 文件，添加下面两个声明：
+
 ````Vala
 public class BookStore {
 	...
 	public signal void stockAlert();
 	public signal void priceAlert();
 ````
+
 2. 按下面来修改 _bookstore.vala_ 中的 _removeStock_ 和 _setPrice_ 函数：
+
 ````
 	public void removeStock(int amount) {
 		stock = stock - amount;
@@ -1228,7 +1428,9 @@ public class BookStore {
 	}
 }
 ````
+
 3. 按下面来修改 _Main_ 构造函数：
+
 ````
 public Main ()
 {
@@ -1266,8 +1468,10 @@ public Main ()
 	store.setPrice(0.2);
 }
 ````
+
 4. 运行。
 5. 看看结果：
+
 ````
 Hello, world
 1234
@@ -1281,17 +1485,21 @@ Uh oh, we are going to run out stock soon!
 And the book is still available
 Uh oh, price is too low
 ````
+
 ### 刚刚发生了什么？
 你可以看到，显示的库存不足和价格太低这些警告信息不是由 _BookStore_ 类打印出来的，
 而是由 _Main_ 类来打出的。
 我们可以假定 _Main_ 类订阅了信息量，并当 _Main_ 接收到从信号量来的通知时就会做些事情。
+
 ````
 public signal void stockAlert();
 public signal void priceAlert();
 ````
+
 首先，我们需要在类中定义信号量，以便我们能从这类中发布信号量。
 在 _BookStore_ 类中，我们定义了两个信号量。你会注意到我们用 _signal_ 关键字来声明这两个方法。
 但我们并没有定义函数体，这个要由订阅这些信号量的对象来提供函数处理发出的信号。
+
 ````
 if (stock < 5) {
 stockAlert();
@@ -1301,9 +1509,11 @@ if (price < 1) {
 priceAlert();
 }
 ````
+
 这两段代码展示给我们是如何发出信号的。当库存小于 5 时，我们发出 _stockAlert_ 信号，
 如果价格小于 1 时，我们发出 _priceAlert_ 信号。
 _BookStore_ 类并不关心接下来发生什么，它只负责发出信号，其它的就不管了。
+
 ````
 store.stockAlert.connect(() => {
 stdout.printf ("Uh oh, we are going to run out stock soon!\n");
@@ -1313,6 +1523,7 @@ store.priceAlert.connect(() => {
 stdout.printf ("Uh oh, price is too low\n");
 });
 ````
+
 在这， _Main_ 类的构造函数连接这两个信号量。我们可以看到使用 => 操作符来提供函数体，
 这叫闭包 (closure) 函数或匿名函数。函数的参数在 => 之前定义，此处没有任何参数，
 所以你会看到一对空的括号。
