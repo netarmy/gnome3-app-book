@@ -122,6 +122,7 @@ var c=
 
 ----
 > ✔ 在保存时弹出的对话框上，你可以点击 **创建文件夹 (Create Folder)** 按钮来创建新的目录。
+
 -----
 
 5. 在菜单上单击 **运行 (Run)** 菜单，再选择 **执行(Execute)** ，弹出一个小的对话框，在 **程序 (Program)** 栏填入 /usr/bin/gjs 或 /usr/bin/seed ，在 **参数 (Arguments)** 栏填入 hello-world.js 。 注意一定要选择 **终端运行 (Run in terminal)** 的复选框。如果保存到一个新的目录，也要设置 **工作目录 (Working Directory)** 为新的目录。
@@ -647,6 +648,7 @@ printISBN: function() {
 
 ----
 > ✔ 我们使用冒号而不是等号来定义一个函数，在函数结束时使用逗号，意味着还将定义另一个函数或成员。 还记得我们之前定义 book 对象时使用什么方式了么？
+
 -----
 
 接着，添加第二个方法，注意结束后大括号后边没有逗号。
@@ -672,6 +674,7 @@ book.printISBN();
 
 ----
 > ✔ 注意不要忘记冒号和逗号！
+
 -----
 
 ### 实践环节 - 编辑一个对象的 prototype
@@ -758,14 +761,14 @@ global code@./hello-world-proto.js:36:24
 
 ### 刚刚发生了什么？
 为了在运行时编辑 prototype ，我们需要知道些小技巧。
-这时 prototype 属性不再能被访问了，我们需要使用 __proto__ 。
+这时 prototype 属性不再能被访问了，我们需要使用 \_\_proto\_\_ 。
 在下面这行，我们先实例化一个 book 对象。
 
 ````
 var book = new Book("1234", "A good title");
 ````
 
-接着，我们通过 __proto__ 在 prototype 中加入了两个属性。
+接着，我们通过 \_\_proto\_\_ 在 prototype 中加入了两个属性。
 
 ````JavaScript
 book.__proto__ = {
@@ -793,15 +796,16 @@ anotherBook.printAuthor(); // this is invalid
 ### 小测试 - 如何让 printAuthor() 都可以用？
 Q1. 为了给所有从 Book 类创建的对象添加中 printAuthor 方法，下面哪个方式更好些？
 
-1. 在每一个创建的对象的 __proto__ 中添加 printAuthor ，之后所有的对象中都可以使用这个函数。
+1. 在每一个创建的对象的 \_\_proto\_\_ 中添加 printAuthor ，之后所有的对象中都可以使用这个函数。
 2. 在 Book 类的 prototype 中添加 printAuthor ，然后从 Book 创建的所有对象中都可以使用这个函数。
 
 ### 大胆实践 - 改变实现的细节
-假设我们准备使用 anotherBook 对象定义一本特殊的书。我们想在 printTitle 中打印出的 "<book-title> is really good title" 。
-其中 <book-title> 是书的标题。
+假设我们准备使用 anotherBook 对象定义一本特殊的书。我们想在 printTitle 中打印出的 "<book-title\> is really good title" 。
+其中 <book-title\> 是书的标题。
 
 ----
-> ✔ 重新定义在 anotherBook 对象的 __proto__ 中的函数即可。
+> ✔ 重新定义在 anotherBook 对象的 \_\_proto\_\_ 中的函数即可。
+
 -----
 
 ## 模块化
@@ -1330,6 +1334,7 @@ using Gee;
 
 ----
 > ✔ 我们实际上也可以不使用这个，但是需要在使用 Gee 类提供的东东都要加上 Gee. 前缀。
+
 -----
 
 现在来看下 Book 类成员的声明：
