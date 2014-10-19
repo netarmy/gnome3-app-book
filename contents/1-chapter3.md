@@ -800,8 +800,8 @@ Q1. 为了给所有从 Book 类创建的对象添加中 printAuthor 方法，下
 2. 在 Book 类的 prototype 中添加 printAuthor ，然后从 Book 创建的所有对象中都可以使用这个函数。
 
 ### 大胆实践 - 改变实现的细节
-假设我们准备使用 anotherBook 对象定义一本特殊的书。我们想在 printTitle 中打印出的 "<book-title\> is really good title" 。
-其中 <book-title\> 是书的标题。
+假设我们准备使用 anotherBook 对象定义一本特殊的书。我们想在 printTitle 中打印出的 "\<book-title\> is really good title" 。
+其中 \<book-title\> 是书的标题。
 
 ----
 > ✔ 重新定义在 anotherBook 对象的 \_\_proto\_\_ 中的函数即可。
