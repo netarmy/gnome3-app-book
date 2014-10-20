@@ -6,8 +6,8 @@ IMAGE_DIR=./contents/img
 
 all: 
 	multimarkdown -t latex ${TEMPLATE_DIR}/meta.txt ${CONTENTS_DIR}/0-preface*.md -o preface.tex
-	multimarkdown -t latex ${TEMPLATE_DIR}/meta.txt ${CONTENTS_DIR}/1-chapter*.md -o chapters.tex
-	multimarkdown -t latex ${TEMPLATE_DIR}/meta.txt ${CONTENTS_DIR}/2-appendix*.md -o appendix.tex
+	multimarkdown -t latex ${TEMPLATE_DIR}/meta.txt ${CONTENTS_DIR}/*-chapter*.md -o chapters.tex
+	multimarkdown -t latex ${TEMPLATE_DIR}/meta.txt ${CONTENTS_DIR}/3-appendix*.md -o appendix.tex
 	${call pdfgen}
 	
 define pdfgen	
