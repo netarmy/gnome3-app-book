@@ -901,7 +901,7 @@ var book = new BookModule.Book("1234", "A good title");
 
 1. 编辑 `hello_vala.vala` 文件，并输入下面的代码：
 
-````Vala
+````Javascript
 using GLib;
 public class Main : Object
 {
@@ -978,7 +978,7 @@ Vala 定义了一系列的成员访问标示符，我们可以使用它来定义
 
 1. 创建新的文件 `book.vala` 并保存到 `src/` 目录下，输入下面的代码：
 
-````Vala
+````Javascript
 using GLib;
 public class Book : Object {
 	private string title;
@@ -1068,7 +1068,7 @@ Q1. 你认为下面哪个标示符是正确的？
 
 1. 创建一个 `bookstore.vala` 的文件，保存到 `src/` 目录下，输入下面的代码：
 
-````Vala
+````Javascript
 using GLib;
 
 public class BookStore {
@@ -1111,7 +1111,7 @@ public class BookStore {
 2. 把这个文件添加到工程里。
 3. 按下面来编辑我们的 `Main` 类：
 
-````Vala
+````Javascript
 using GLib;
 
 public class Main : Object
@@ -1262,7 +1262,7 @@ hello_vala_VALAFLAGS =
 
 1. 编辑 `book.vala` 文件：
 
-````Vala
+````Javascript
 using GLib;
 using Gee;
 
@@ -1394,7 +1394,7 @@ public void printAuthors() {
 另一个办法是在声明时可以对它进行初始化，而不用在构造函数中进行。
 我们可以这样做：
 
-````Vala
+````Javascript
 private ArrayList<string> authors = new ArrayList<string>();
 ````
 
@@ -1407,7 +1407,7 @@ Vala 有一个能发出和监视信号的结构，它提供了订阅机制来在
 
 1. 编辑 `bootstore.vala` 文件，添加下面两个声明：
 
-````Vala
+````Javascript
 public class BookStore {
 	...
 	public signal void stockAlert();
