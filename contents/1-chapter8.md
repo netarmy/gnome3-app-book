@@ -2,7 +2,7 @@
 
 > 当我们谈及数据，不只在说数据库，也包括其他来源的数据。这个过程包括访问和操纵这些数据，并把它们展现给用户。便捷地访问数据意味着更好地集成，而 GNOME 擅长此方面。GNOME 提供了许多用于完成这些工作的 API ；我们将在本章讨论它们。
 
-本章将讲述如何从多个数据源获取数据并展现在屏幕上，使用 GTK+ 的`TreeView`控件在屏幕上显示数据。本章也将介绍`Evolution`数据服务器库，以从地址簿中收集数据。为简便起见，本章只使用 Seed 和 Glade 。
+本章将讲述如何从多个数据源获取数据并展现在屏幕上，使用 GTK+ 的`TreeView`控件在屏幕上显示数据。本章也将介绍`Evolution`数据服务器库，以从地址簿中收集数据。为简便起见，本章只使用 Seed 、 gjs 和 Glade 。
 在本章中，将更详细地研究以下主题：
 
 * 用`TreeView`展示数据
@@ -274,8 +274,6 @@ EDS提供了一个保持在内存中的守护进程，以服务EDS用户——�
 该服务需要认证或授权，GNOME会弹出一个对话框，以便最终
 用户可以与其交互，例如填写密码，授予访问权限等等。
 
-在EDS中，地址簿有个数据源组的概念，用于表示数据的来源，比如本地或远程数据源，逻辑上用`EBook.SourceGroup`对象来表示。每个`SourceGroup`组可以有很多实际数据来源，每个都由EBook.Source对象描述。
-
 ## 实践环节——设置地址簿和日历数据源
 
 访问地址簿和日历的数据之前，需要先设置数据源。下面将讨论如何在 GNOME 中设置 Google 帐户。继续之前，请先确定你已经有一个 Google 帐户。设置方法如下：
@@ -311,14 +309,35 @@ EDS提供了一个保持在内存中的守护进程，以服务EDS用户——�
 8. 编辑名为`contacts`的`ListStore`模型。同样添加两列到该模型中，类型均为`gchararray`。
 9. 此时的UI设计应该类似以下截图：  
 ![8-6](./img/8-6.png)
-10. 新建 Seed 脚本，命名为`address-book.js`。
-11. 以下代码对脚本的执行起着非常重要的作用。
+10. 新建 gjs 脚本，命名为`address-book.js`。(译注：GNOME Evolution DataServer的架构在GNOME 3.6时有重大变化，几乎重写，
+导致原书代码不兼容无法运行。Seed最新版极少维护,有Bug，无法正确获取Email帐户名称，故改用gjs重写。)
+11. 以下是`address-book.js`的全部代码：
     
     ````JavaScript
-    Main = new GType({
-      parent: GObject.Object.type,
-      name: "Main",
-      init: function (self) {
+    #!/usr/bin/env gjs
+    
+    const Lang = imports.lang;
+    const Gtk = imports.gi.Gtk;
+    const GObject = imports.gi.GObject;
+    const EBook = imports.gi.EBook;
+    const EBC = imports.gi.EBookContacts;
+    const EDS = imports.gi.EDataServer;
+    
+    const Main = new Lang.Class({
+      Extends: GObject.Object.type,
+      Name: "Main",
+      _init: function () {
+        var self = this;
+        var ui = new Gtk.Builder()
+        this.ui = ui;
+        ui.add_from_file("address-book.ui");
+    
+        var window = ui.get_object("window1");
+        window.resize(300, 400);
+        window.show_all();
+        window.connect('destroy', Gtk.main_quit);
+        this.clients = {};
+    
         var bookColumn = {
           UID: 0,
           NAME: 1,
@@ -327,106 +346,121 @@ EDS提供了一个保持在内存中的守护进程，以服务EDS用户——�
           NAME: 0,
           EMAIL: 1,
         }
-        this.listContacts = function (e) {
-          var c = {};
-          var q = EBook.BookQuery.any_field_contains("");
-          var r = e.get_contacts_sync(q.to_string(), c, null);
-          if (r && c && c.contacts && c.contacts.length > 0) {
+        
+        /**
+         * 在右側列出各聯絡人的姓名和郵件地址。
+         * parm: ebookcli :: EBookClient
+         */
+        this.listContacts = function (ebookcli) {
+          var q = EBC.BookQuery.any_field_contains("");
+          ebookcli.get_contacts(q.to_string(), null, function (so, rs) {
+            /* c :: [EContact]
+             * 原型
+               e_book_client_get_contacts_finish :: EBookClient ->
+                 GAsyncResult -> IO [EContact] -> GError -> IO ();
+             */
+            var c = ebookcli.get_contacts_finish(rs, null, null)[1];
             var store = self.contact_view.get_model();
-            c.contacts.forEach(function (contact) {
-              var iter = {};
-              store.append(iter);
-              var name = contact.full_name;
-              if (!name) {
-                name = contact.nickname;
-              }
-              store.set_value(iter.iter, contactColumn.NAME,
-                name);
-              store.set_value(iter.iter, contactColumn.EMAIL,
-                contact.email_1);
-            });
-          }
+            store.clear();
+            if (c && c.length > 0) {
+    
+              c.forEach(function (contact) {
+                var iter = store.append();
+                var name = contact.full_name;
+                if (!name) {
+                  name = contact.nickname;
+                }
+                if (!name || !contact.email_1) {
+                  // 資訊不完整，放棄並從ListStore中移除佔位符
+                  store.remove(iter);
+                  return;
+                }
+                store.set_value(iter, contactColumn.NAME, name);
+                store.set_value(iter, contactColumn.EMAIL, contact.email_1);
+              });
+            }
+          });
         }
         this.clients = {};
         var book_view = ui.get_object("bookView");
         var selection = ui.get_object("selection");
-        selection.signal.changed.connect(function (s) {
-          var selected = {}
-          s.get_selected(selected);
-          var book = selected.model.get_value(selected.iter,
-            bookColumn.UID);
-          var uid = book.value.get_string();
-          if (uid == "") {
-            return;
-          }
-          source = self.sources.peek_source_by_uid(uid);
-          var e = null;
+    
+        /* 加載選中的地址簿*/
+        selection.connect('changed', function (s) {
+          /* gtk_tree_selection_get_selected :: TreeSelection ->
+               (ListStore, TreeIter)
+           */
+          var selected = s.get_selected();
+          var model = selected[1];
+          var iter = selected[2];
+    
+          var uid = model.get_value(iter, bookColumn.UID); // uid :: String
+          if (uid == "") return;
           if (typeof (self.clients[uid]) !== "undefined") {
-            e = self.clients[uid];
+            var e = self.clients[uid]; // e :: EBookClient
             if (e) {
               self.clients[uid] = e;
               self.listContacts(e);
             }
           } else {
-            var e = new EBook.BookClient.c_new(source);
-            var r = e.open(false, null, function () {
-              if (e) {
-                self.clients[uid] = e;
-                self.listContacts(e);
-              }
-            });
+            var source = EDS.Source.new_with_uid(uid, null, null);
+            var e = EBook.BookClient.connect_sync(source, null, null);
+            if (e) {
+              self.clients[uid] = e;
+              self.listContacts(e);
+            }
           }
         });
         var cell = new Gtk.CellRendererText();
-        var column = new Gtk.TreeViewColumn({
-          title: 'Book'
-        });
-        column.pack_start(cell);
-        column.add_attribute(cell, 'markup', bookColumn.NAME);
+        var column = new Gtk.TreeViewColumn({title: 'Book'});
+        column.pack_start(cell, null);
+        column.add_attribute(cell, 'text', bookColumn.NAME);
         book_view.append_column(column);
+    
         var contact_view = ui.get_object("contactView");
         this.contact_view = contact_view;
         cell = new Gtk.CellRendererText();
-        column = new Gtk.TreeViewColumn({
-          title: 'Name'
-        });
-        column.pack_start(cell);
+        column = new Gtk.TreeViewColumn({title: 'Name'});
+        column.pack_start(cell, null);
         column.add_attribute(cell, 'text', contactColumn.NAME);
         contact_view.append_column(column);
+    
         cell = new Gtk.CellRendererText();
-        column = new Gtk.TreeViewColumn({
-          title: 'E-mail'
-        });
-        column.pack_start(cell);
+        column = new Gtk.TreeViewColumn({title: 'E-mail'});
+        column.pack_start(cell, null);
         column.add_attribute(cell, 'text', contactColumn.EMAIL);
         contact_view.append_column(column);
-        var s = {};
-        var e = EBook.BookClient.get_sources(s);
-        this.sources = s.sources;
-        var groups = this.sources.peek_groups();
-        if (groups && groups.length > 0) {
+    
+        // 列出所有資料來源
+        var registry = EDS.SourceRegistry.new_sync(null);
+        var sources = registry.list_enabled(EDS.SOURCE_EXTENSION_ADDRESS_BOOK);
+        if (sources && sources.length > 0) {
           var store = book_view.get_model();
-          groups.forEach(function (item) {
-            var iter = {};
-            store.append(iter);
-            store.set_value(iter.iter, bookColumn.UID, "");
-            store.set_value(iter.iter, bookColumn.NAME,
-              "<b><i>" + item.peek_name() +
-              "</i></b>");
-            var sources = item.peek_sources();
-            if (sources && sources.length > 0) {
-              sources.forEach(function (source) {
-                store.append(iter);
-                store.set_value(iter.iter, bookColumn.UID,
-                  source.peek_uid());
-                store.set_value(iter.iter, bookColumn.NAME,
-                  source.peek_name());
-              });
+          sources.forEach(function (item) {
+            var iter = store.append();
+            store.set_value(iter, bookColumn.UID, item.get_uid());
+            var name = item.get_display_name();
+    
+            // 若能取得後端名稱，則追加於來源名稱之後
+            if (item.has_extension(EDS.SOURCE_EXTENSION_ADDRESS_BOOK)) {
+              var ext = item.get_extension(EDS.SOURCE_EXTENSION_ADDRESS_BOOK);
+              name += ' - ' + ext.get_backend_name();
             }
+            // 若能取得帳號名稱，則追加於來源名稱之後
+            if (item.has_extension(EDS.SOURCE_EXTENSION_AUTHENTICATION)) {
+              var ext = item.get_extension(EDS.SOURCE_EXTENSION_AUTHENTICATION);
+              name += ' - ' + ext.get_user();
+            }
+            store.set_value(iter, bookColumn.NAME, name);
           });
         }
       }
     });
+    
+    
+    Gtk.init(null, null);
+    var main = new Main();
+    Gtk.main();
     ````
       
 12. 运行代码。应用程序将被执行并显示一个窗口，如以下截图：  
@@ -434,9 +468,9 @@ EDS提供了一个保持在内存中的守护进程，以服务EDS用户——�
 
 #### 刚刚发生了什么？
 
-根据您的设置，以上练习的结果可能看起来不一样（也请原谅我出于隐私原因模糊了文字，因为这些都是真正的e-mail地址）。在前面的截图中，EDS返回四个地址簿数据源，分别是**此计算机上**，**LDAP服务器**，**WebDAV**和**Google**。在这些资源中，只有**此计算机上**和**Google**两个含有真实的数据。在前面的截图中列出了地址簿**Personal**和**Contacts**。
+根据您的设置，以上练习的结果可能看起来不一样（也请原谅笔者出于隐私原因在人名和邮件地址上打了马赛克）。在前面的截图中，EDS返回三个地址簿数据源，其中一个是来自**本机**的“个人”，两个来自**Google通讯录**。
 
-点击**Contacts**时，所有联系人都显示在右侧的窗口中。这里我们只显示两个栏位，姓名和 e-mail 地址。
+点击**连络人 - google - example@gmail.com**时，所有联系人都显示在右侧的窗口中。这里我们只显示两个栏位，姓名和 e-mail 地址。
 
 让我们深入到源代码中。
 
@@ -463,63 +497,51 @@ EDS提供了一个保持在内存中的守护进程，以服务EDS用户——�
     var selection = ui.get_object("selection");
     
 我们希望选取时的行为应该是，选中一个地址簿后就得到地址簿的内容。为了做到这一点，我们需要修改选中信号连接到的函数，正如以下所示：
+    selection.connect('changed', function (s) {
+
+在回调函数中，首先要从`selection`对象取得选中项对应的模型（这里是`Gtk.ListStore`）和`Iter`对象。
+从模型中获取选中项第0栏的内容（`bookColumn.UID`）。
     
-    selection.signal.changed.connect(function(s) {
+    var selected = s.get_selected();
+    var model = selected[1];
+    var iter = selected[2];
+    var uid = model.get_value(iter, bookColumn.UID); // uid :: String
 
-在回调函数中，首先要从`selection`对象取得选中项。
-    
-    var selected = {}
-    s.get_selected(selected);
-
-我们从`selected`对象中获取`Iter`对象，保存在`iter`成员变量中。立即取得第0栏（`bookColumn.UID`）的值。值的类型是字符串，所以用`get_string()`函数。我们要设置一个特殊行为：每当UID值是空的，这意味着该行不指向特定的地址簿。这被程序用作显示地址簿的数据源。
-
-    var book = selected.model.get_value(selected.iter, bookColumn.UID);
-    var uid = book.value.get_string();
-    if (uid == "") {
-        return;
-    }
-
-若`uid`含有值，将询问 EDS 以直接取得`EBook.Source`，其中使用`uid`作标识。
-这将返回一个`EBook.Source`对象并存放在变量`e`中。
+若`uid`含有值，就使用`EDS.Source.new_with_uid`询问 EDS ，取得以`uid`做标识的`EDS.Source`对象。
+紧接着用这个`EDS.Source`对象创建并连接到一个`EBook.BookClient`对象，存放在变量`e`中。
 
 将取得的数据源保存在客户端的缓存中，故无需每次点击时重新打开数据源。
 当缓存内定义有`uid`对应的数据源时，只需调用`listContacts`方法；
 否则，需要先连接到数据源。之后，将数据源存入缓存。
 然后我们使用listContacts列出内容，如以下代码所示：
-      
-      source = self.sources.peek_source_by_uid(uid);
-      var e = null;
-      if (typeof(self.clients[uid]) !== "undefined") {
-        e = self.clients[uid];
+    
+      if (typeof (self.clients[uid]) !== "undefined") {
+        var e = self.clients[uid]; // e :: EBookClient
         if (e) {
           self.clients[uid] = e;
           self.listContacts(e);
         }
       } else {
-        var e = new EBook.BookClient.c_new(source);
-        var r = e.open(false, null, function() {
-          if (e) {
-              self.clients[uid] = e;
-              self.listContacts(e);
-          }
-        });
+        var source = EDS.Source.new_with_uid(uid, null, null);
+        var e = EBook.BookClient.connect_sync(source, null, null);
+        if (e) {
+          self.clients[uid] = e;
+          self.listContacts(e);
+        }
       }
     });
-    
-注意，这里要异步打开数据源，为函数提供一个回调作为参数。这样，打开数据源的过程中不会使应用程序被阻塞而无法响应用户。如果数据源需要授权，此时将弹出一个对话框。
+ 
+如果数据源需要授权，此时将弹出一个对话框。
 
-接下来为`bookView`定义栏位。只需要显示一个栏位，内容是地址簿的标题或者地址簿的数据源组。
+接下来为`bookView`定义栏位。只需要显示一个栏位，内容是数据源的标题。
     
     var cell = new Gtk.CellRendererText();
     var column = new Gtk.TreeViewColumn({title:'Book'});
     column.pack_start(cell);
-
-代码接下来的部分将会使用 Pango 标记语言，因此不能使用 CellRendererText 作为文本属性，而是使用 markup 并映射到第1栏（bookColumn.NAME）。
-    
     column.add_attribute(cell, 'markup', bookColumn.NAME);
     book_view.append_column(column);
 
-为联系人定义栏位。我们需要两个可见栏位，并分别分配`contactColumn.NAME`和`contactColumn.EMAIL`的名称。
+为联系人视图定义栏位。我们需要两个可见栏位，并分别分配`contactColumn.NAME`和`contactColumn.EMAIL`的名称。
     
     var contact_view = ui.get_object("contactView");
     this.contact_view = contact_view;
@@ -528,69 +550,72 @@ EDS提供了一个保持在内存中的守护进程，以服务EDS用户——�
     column.pack_start(cell);
     column.add_attribute(cell, 'text', contactColumn.NAME);
     contact_view.append_column(column);
+    
     cell = new Gtk.CellRendererText();
     column = new Gtk.TreeViewColumn({title:'E-mail'});
     column.pack_start(cell);
     column.add_attribute(cell, 'text', contactColumn.EMAIL);
     contact_view.append_column(column);
 
-初始化过程中，我们用`get_sources`方法取得地址簿数据源。之后，用`peek_groups`方法寻找系统中可用的组。
+初始化过程中，我们从`EDS.SourceRegistry`单件对象中，取得属于地址簿类型的数据源列表。
     
-    var s = {};
-    var e = EBook.BookClient.get_sources(s);
-    this.sources = s.sources;
-    var groups = this.sources.peek_groups();
-    if (groups && groups.length > 0) {
-        var store = book_view.get_model();
-
-每个组都要加入地址簿ID和名称，但无需填写`uid`的值，因为只需对实际地址簿的数据源保留`uid`。
-而对于组的名称，则加入到粗体和斜体的标签中：
-    
-    groups.forEach(function(item) {
-        var iter = {};
-        store.append(iter);
-        store.set_value(iter.iter, bookColumn.UID, "");
-        store.set_value(iter.iter, bookColumn.NAME, 
-                        "<b><i>" +item.peek_name()+ "</i></b>");
-    
-注意前面的代码中用到了看起来像HTML的标记。事实上，这些是Pango的标记，Pango是GNOME框架使用的文本渲染引擎。这种标记语言与HTML类似，但功能相对较少。在这里加入标签的原因是我们想在表现层上为控件增加样式。因此，我们不应该既修改数据又添加风格，而是只在数据被显示是才加入风格。*但是，先前的做法是不正确的，因为数据在加入模型之前就被修改了。* 如果我们在数据里搜索，可能找不到数据，因为它已经堆满了标记。正确的做法是在渲染控件中对数据加入样式。这意味着将不再能够使用`Gtk.CellRendererWidget`，而是使用自定义的渲染控件，以在显示数据之前为其加入样式。
-
-我们也要尝试用`peek_sources`函数为每个组取得实际的地址簿数据源，并把其中可用的放在表格里。然后现在把`uid`放到第0列（bookColumn.UID）。
-    
-    var sources = item.peek_sources();
+    // 列出所有資料來源
+    var registry = EDS.SourceRegistry.new_sync(null);
+    var sources = registry.list_enabled(EDS.SOURCE_EXTENSION_ADDRESS_BOOK);
     if (sources && sources.length > 0) {
-      sources.forEach(function(source) {
-        store.append(iter);
-        store.set_value(iter.iter, bookColumn.UID, source.peek_uid());
-        store.set_value(iter.iter, bookColumn.NAME, source.peek_name());
-      });
-
-注意，第0列因为没有加入`TreeViewColumn`，所以在表格中是不可见的。
-
-`listContacts`函数首先准备对地址簿的查询。为了向 EDS 传递数据，EDS 提供了 `EBook.BookQuery`对象。以下代码中，我们将用`any_field_contains("")`函数创建查询，从 EDS 中取得所有数据。
+      var store = book_view.get_model();
     
-      this.listContacts = function(e) {
-        var c = {};
-        var q = EBook.BookQuery.any_field_contains("");
-        var r = e.get_contacts_sync(q.to_string(), c, null);
-        if (r && c && c.contacts && c.contacts.length > 0) {
+遍历数据源列表，并将数据源的UID和名称加入`ListStore`。
     
-传递给`get_contacts_sync`的对象的`contatcs`成员将用地址簿中的联系人填充。我们只从取得的每个联系人（属于`EBook.Contact`类型）中获取感兴趣的属性（只需`full_name`，`nickname`和`email_1`），并将其放入模型中。
+      sources.forEach(function (item) {
+        var iter = store.append();
+        store.set_value(iter, bookColumn.UID, item.get_uid());
+        var name = item.get_display_name();
     
-          var store = self.contact_view.get_model();
-          c.contacts.forEach(function(contact) {
-            var iter = {};
-            store.append(iter);
-            var name = contact.full_name;
-            if (!name) {
-              name = contact.nickname;
-            }
-            store.set_value(iter.iter, contactColumn.NAME, name);
-            store.set_value(iter.iter, contactColumn.EMAIL, contact.email_1);
-          });
+        // 若能取得後端名稱，則追加於來源名稱之後
+        if (item.has_extension(EDS.SOURCE_EXTENSION_ADDRESS_BOOK)) {
+          var ext = item.get_extension(EDS.SOURCE_EXTENSION_ADDRESS_BOOK);
+          name += ' - ' + ext.get_backend_name();
         }
-      }
+        // 若能取得帳號名稱，則追加於來源名稱之後
+        if (item.has_extension(EDS.SOURCE_EXTENSION_AUTHENTICATION)) {
+          var ext = item.get_extension(EDS.SOURCE_EXTENSION_AUTHENTICATION);
+          name += ' - ' + ext.get_user();
+        }
+        store.set_value(iter, bookColumn.NAME, name);
+      });
+    }
+     
+注意，第0列`bookColumn.UID`因为没有加入`TreeViewColumn`，所以在表格中是不可见的。
+
+`listContacts`函数首先准备对地址簿的查询。为了向 EDS 传递数据，EDS 提供了 `EBookContacts.BookQuery`对象。以下代码中，我们将用`any_field_contains("")`函数创建查询，从 EDS 中取得所有数据。
     
+    this.listContacts = function (ebookcli) {
+      var q = EBC.BookQuery.any_field_contains("");
+      ebookcli.get_contacts(q.to_string(), null, function (so, rs) {
+        var c = ebookcli.get_contacts_finish(rs, null, null)[1];
+        var store = self.contact_view.get_model();
+        store.clear();
+        if (c && c.length > 0) {
+
+在`ebookcli`上调用`get_contacts`方法，异步地取得联系人列表。`ebookcli.get_contacts_finish`的返回值其实是调用时的参数列表，而第二个参数`null`则被返回的联系人列表取代，因此将返回数组的第二个元素`[1]`存入变量`c`。我们只从取得的每个联系人（属于`EBookContact.Contact`类型）中获取感兴趣的属性（只需`full_name`，`nickname`和`email_1`），并将其放入模型中。
+    
+      c.forEach(function (contact) {
+        var iter = store.append();
+        var name = contact.full_name;
+        if (!name) {
+          name = contact.nickname;
+        }
+        if (!name || !contact.email_1) {
+          // 資訊不完整，放棄並從ListStore中移除佔位符
+          store.remove(iter);
+          return;
+        }
+        store.set_value(iter, contactColumn.NAME, name);
+        store.set_value(iter, contactColumn.EMAIL, contact.email_1);
+      });
+    }
+
 
 ## 大胆实践——向地址簿保存数据
 
@@ -604,7 +629,7 @@ EDS提供了一个保持在内存中的守护进程，以服务EDS用户——�
     // then save it with
     e.modify_contact_sync(modifiedContact, null);
 
-我们也要刷新模型，通过重新读取数据源。
+我们也要刷新模型，办法是重新读取数据源。
 
 ## 总结
 
