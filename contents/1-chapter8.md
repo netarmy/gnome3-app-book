@@ -151,7 +151,7 @@ GTK+ `TreeView`是一种既可以展示树形数据，也可以展示列表类�
 
   [8-3]: ./img/8-3.png width=200px
 
-#### 刚刚发生了什么？
+#### 刚刚发生了什幺？
 
 这个例子描述了`TreeView`工作的方式。`TreeView`和两个`CellRendererText`控件及相应的`TreeView`栏位作为视图部分。`ListStore`则对应模型部分。
 
@@ -290,7 +290,7 @@ EDS提供了一个保持在内存中的守护进程，以服务EDS用户——�
 ![8-5](./img/8-5.png)
 
 
-#### 刚刚发生了什么？
+#### 刚刚发生了什幺？
 
 我们刚刚连接到了我们的 Google 帐户。这意味着我们可以使用 GNOME 的 API 访问 Google 帐户保存的数据。这也是我们接下来要做的。
 
@@ -348,7 +348,7 @@ EDS提供了一个保持在内存中的守护进程，以服务EDS用户——�
         }
         
         /**
-         * 在右側列出各聯絡人的姓名和郵件地址。
+         * 在右侧列出各联络人的姓名和邮件地址。
          * parm: ebookcli :: EBookClient
          */
         this.listContacts = function (ebookcli) {
@@ -371,7 +371,7 @@ EDS提供了一个保持在内存中的守护进程，以服务EDS用户——�
                   name = contact.nickname;
                 }
                 if (!name || !contact.email_1) {
-                  // 資訊不完整，放棄並從ListStore中移除佔位符
+                  // 信息不完整，放弃并从ListStore中移除占位符
                   store.remove(iter);
                   return;
                 }
@@ -385,7 +385,7 @@ EDS提供了一个保持在内存中的守护进程，以服务EDS用户——�
         var book_view = ui.get_object("bookView");
         var selection = ui.get_object("selection");
     
-        /* 加載選中的地址簿*/
+        /* 加载选中的地址簿*/
         selection.connect('changed', function (s) {
           /* gtk_tree_selection_get_selected :: TreeSelection ->
                (ListStore, TreeIter)
@@ -431,7 +431,7 @@ EDS提供了一个保持在内存中的守护进程，以服务EDS用户——�
         column.add_attribute(cell, 'text', contactColumn.EMAIL);
         contact_view.append_column(column);
     
-        // 列出所有資料來源
+        // 列出所有资料来源
         var registry = EDS.SourceRegistry.new_sync(null);
         var sources = registry.list_enabled(EDS.SOURCE_EXTENSION_ADDRESS_BOOK);
         if (sources && sources.length > 0) {
@@ -441,12 +441,12 @@ EDS提供了一个保持在内存中的守护进程，以服务EDS用户——�
             store.set_value(iter, bookColumn.UID, item.get_uid());
             var name = item.get_display_name();
     
-            // 若能取得後端名稱，則追加於來源名稱之後
+            // 若能取得后端名称，则追加于来源名称之后
             if (item.has_extension(EDS.SOURCE_EXTENSION_ADDRESS_BOOK)) {
               var ext = item.get_extension(EDS.SOURCE_EXTENSION_ADDRESS_BOOK);
               name += ' - ' + ext.get_backend_name();
             }
-            // 若能取得帳號名稱，則追加於來源名稱之後
+            // 若能取得帐号名称，则追加于来源名称之后
             if (item.has_extension(EDS.SOURCE_EXTENSION_AUTHENTICATION)) {
               var ext = item.get_extension(EDS.SOURCE_EXTENSION_AUTHENTICATION);
               name += ' - ' + ext.get_user();
@@ -466,7 +466,7 @@ EDS提供了一个保持在内存中的守护进程，以服务EDS用户——�
 12. 运行代码。应用程序将被执行并显示一个窗口，如以下截图：  
 ![8-7](./img/8-7.png)
 
-#### 刚刚发生了什么？
+#### 刚刚发生了什幺？
 
 根据您的设置，以上练习的结果可能看起来不一样（也请原谅笔者出于隐私原因在人名和邮件地址上打了马赛克）。在前面的截图中，EDS返回三个地址簿数据源，其中一个是来自**本机**的“个人”，两个来自**Google通讯录**。
 
@@ -559,7 +559,7 @@ EDS提供了一个保持在内存中的守护进程，以服务EDS用户——�
 
 初始化过程中，我们从`EDS.SourceRegistry`单件对象中，取得属于地址簿类型的数据源列表。
     
-    // 列出所有資料來源
+    // 列出所有资料来源
     var registry = EDS.SourceRegistry.new_sync(null);
     var sources = registry.list_enabled(EDS.SOURCE_EXTENSION_ADDRESS_BOOK);
     if (sources && sources.length > 0) {
@@ -572,12 +572,12 @@ EDS提供了一个保持在内存中的守护进程，以服务EDS用户——�
         store.set_value(iter, bookColumn.UID, item.get_uid());
         var name = item.get_display_name();
     
-        // 若能取得後端名稱，則追加於來源名稱之後
+        // 若能取得后端名称，则追加于来源名称之后
         if (item.has_extension(EDS.SOURCE_EXTENSION_ADDRESS_BOOK)) {
           var ext = item.get_extension(EDS.SOURCE_EXTENSION_ADDRESS_BOOK);
           name += ' - ' + ext.get_backend_name();
         }
-        // 若能取得帳號名稱，則追加於來源名稱之後
+        // 若能取得帐号名称，则追加于来源名称之后
         if (item.has_extension(EDS.SOURCE_EXTENSION_AUTHENTICATION)) {
           var ext = item.get_extension(EDS.SOURCE_EXTENSION_AUTHENTICATION);
           name += ' - ' + ext.get_user();
@@ -607,7 +607,7 @@ EDS提供了一个保持在内存中的守护进程，以服务EDS用户——�
           name = contact.nickname;
         }
         if (!name || !contact.email_1) {
-          // 資訊不完整，放棄並從ListStore中移除佔位符
+          // 资讯不完整，放弃并从ListStore中移除占位符
           store.remove(iter);
           return;
         }

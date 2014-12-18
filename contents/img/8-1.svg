@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="378"
+   height="305"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.5 r10040"
+   sodipodi:docname="新文件 1">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.7"
+     inkscape:cx="258.77342"
+     inkscape:cy="168.557"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="626"
+     inkscape:window-height="476"
+     inkscape:window-x="496"
+     inkscape:window-y="162"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-747.36218)">
+    <rect
+       style="fill:#cccccc"
+       id="rect2987"
+       width="161.42857"
+       height="102.85714"
+       x="22.857143"
+       y="808.07648" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot2989"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       transform="translate(5.7142857,817.36218)"><flowRegion
+         id="flowRegion2991"><rect
+           id="rect2993"
+           width="91.428574"
+           height="70"
+           x="57.142857"
+           y="-3.5714288" /></flowRegion><flowPara
+         id="flowPara2995"
+         style="font-size:32px">View</flowPara></flowRoot>    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="34.285717"
+       y="855.2193"
+       id="text2997"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan2999"
+         x="34.285717"
+         y="855.2193"
+         style="font-size:18px"> TreeView</tspan><tspan
+         sodipodi:role="line"
+         x="34.285717"
+         y="877.7193"
+         style="font-size:18px"
+         id="tspan3003"> TreeViewColumn</tspan><tspan
+         sodipodi:role="line"
+         x="34.285717"
+         y="900.2193"
+         id="tspan3001"
+         style="font-size:18px"> CellRenderer</tspan></text>
+    <rect
+       style="fill:#cccccc"
+       id="rect3005"
+       width="147.14285"
+       height="65.714287"
+       x="215.71428"
+       y="86.428574"
+       transform="translate(0,747.36218)" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3007"
+       style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:Sans;font-style:normal;font-weight:normal;font-size:40px;line-height:125%;letter-spacing:0px;word-spacing:0px"><flowRegion
+         id="flowRegion3009"><rect
+           id="rect3011"
+           width="130"
+           height="42.857143"
+           x="224.28572"
+           y="177.85715" /></flowRegion><flowPara
+         id="flowPara3013"></flowPara></flowRoot>    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="240"
+       y="888.07648"
+       id="text3015"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3017"
+         x="240"
+         y="888.07648"
+         style="font-size:32px">Model</tspan></text>
+    <rect
+       style="fill:#cccccc"
+       id="rect3019"
+       width="134.28572"
+       height="41.42857"
+       x="224.28572"
+       y="203.57143"
+       transform="translate(0,747.36218)" />
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="222.85715"
+       y="980.93359"
+       id="text3021"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3023"
+         x="222.85715"
+         y="980.93359"
+         style="font-size:28px">Controller</tspan></text>
+    <rect
+       style="fill:#cccccc"
+       id="rect3025"
+       width="107.14286"
+       height="58.57143"
+       x="28.571428"
+       y="235"
+       transform="translate(0,747.36218)" />
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="40"
+       y="1023.7908"
+       id="text3031"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3033"
+         x="40"
+         y="1023.7908">用户</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 88.571429,226.42857 C 81.613133,209.72829 87.536264,186.05714 87.142857,170.71429 84.2213,175.76818 76.298349,185.62548 75.714286,186.42857"
+       id="path3057"
+       inkscape:connector-curvature="0"
+       transform="translate(0,747.36218)" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 90,166.42857 c -3.486616,-1.48873 4.387446,14.03983 7.142857,22.85714"
+       id="path3059"
+       inkscape:connector-curvature="0"
+       transform="translate(0,747.36218)" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 151.42857,275 c 52.35555,29.70291 93.2665,-5.78282 130,-21.42857"
+       id="path3063"
+       inkscape:connector-curvature="0"
+       transform="translate(0,747.36218)" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 305.71429,193.57143 c 6.11609,-12.83976 -1.05533,-27.43842 -1.42858,-37.14286"
+       id="path3073"
+       inkscape:connector-curvature="0"
+       transform="translate(0,747.36218)" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 302.85714,73.571428 C 258.55169,-24.416944 174.08109,20.361296 105.71429,49.285714"
+       id="path3075"
+       inkscape:connector-curvature="0"
+       transform="translate(0,747.36218)" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 115.71429,27.857143 c -0.0703,5.235694 -3.81092,7.621841 -5.71429,11.428571 -2.78566,5.571319 -8.57143,12.786701 -8.57143,11.428572 0,-0.725914 5.14656,-0.567728 8.57143,2.857142 1.9812,1.981198 25.71429,-0.890122 25.71429,-2.857142"
+       id="path3077"
+       inkscape:connector-curvature="0"
+       transform="translate(0,747.36218)" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 292.85714,176.42857 c 0,-6.11971 9.0167,-15.36492 11.42857,-21.42857 5.5415,3.42312 15.54283,14.28571 20,14.28571"
+       id="path3079"
+       inkscape:connector-curvature="0"
+       transform="translate(0,747.36218)" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 254.28571,250.71429 c -2.38973,0 6.12354,-1.42858 8.57143,-1.42858 2.14496,0 6.71316,-0.7964 8.57143,0 2.55214,1.09378 4.36621,4.28572 7.14286,4.28572 2.38095,0 -4.28572,-6.19048 -5.71429,-4.28572 -1.42857,1.90477 3.80953,2.85715 5.71429,4.28572 3.86322,10.85861 0.55476,5.47856 -1.42857,11.42857 -0.68928,2.06782 -0.48908,3.8353 -1.42857,5.71429 -1.01937,2.03873 -2.85715,1.73125 -2.85715,4.28571"
+       id="path3081"
+       inkscape:connector-curvature="0"
+       transform="translate(0,747.36218)" />
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="35.714287"
+       y="197.85715"
+       id="text3083"
+       sodipodi:linespacing="125%"
+       transform="translate(0,747.36218)"><tspan
+         sodipodi:role="line"
+         id="tspan3085"
+         x="35.714287"
+         y="197.85715"
+         style="font-size:18px">看到</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="188.57143"
+       y="1022.3622"
+       id="text3087"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3089"
+         x="188.57143"
+         y="1022.3622"
+         style="font-size:18px">触发</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="250"
+       y="932.36218"
+       id="text3091"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3093"
+         x="250"
+         y="932.36218"
+         style="font-size:18px">修改</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="182.85715"
+       y="35"
+       id="text3095"
+       sodipodi:linespacing="125%"
+       transform="translate(0,747.36218)"><tspan
+         sodipodi:role="line"
+         id="tspan3097"
+         x="182.85715"
+         y="35"
+         style="font-size:18px">刷新</tspan></text>
+  </g>
+</svg>

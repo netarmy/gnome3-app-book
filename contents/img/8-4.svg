@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="300"
+   height="90"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.5 r10040"
+   sodipodi:docname="新文件 1">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.4"
+     inkscape:cx="158.22545"
+     inkscape:cy="35.014687"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="626"
+     inkscape:window-height="459"
+     inkscape:window-x="361"
+     inkscape:window-y="159"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-962.36218)">
+    <rect
+       style="fill:#b3b3b3"
+       id="rect2989"
+       width="80.714287"
+       height="49.285713"
+       x="99.285713"
+       y="991.64789" />
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="87.85714"
+       y="985.2193"
+       id="text2991"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan2993"
+         x="87.85714"
+         y="985.2193"
+         style="font-size:28px">EDS API</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="102.14286"
+       y="1005.2193"
+       id="text2995"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan2997"
+         x="102.14286"
+         y="1005.2193"
+         style="font-size:12px">Address Book</tspan><tspan
+         sodipodi:role="line"
+         x="102.14286"
+         y="1020.2193"
+         id="tspan2999"
+         style="font-size:12px">Calendar</tspan><tspan
+         sodipodi:role="line"
+         x="102.14286"
+         y="1035.2194"
+         id="tspan3001"
+         style="font-size:12px">Task</tspan></text>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3003"
+       style="font-size:13px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       transform="translate(0,962.36218)"><flowRegion
+         id="flowRegion3005"><rect
+           id="rect3007"
+           width="71.428574"
+           height="77.14286"
+           x="7.8571429"
+           y="8.5714283"
+           style="font-size:13px" /></flowRegion><flowPara
+         id="flowPara3009" /></flowRoot>    <text
+       xml:space="preserve"
+       style="font-size:13px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="0.71428549"
+       y="988.07648"
+       id="text3011"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="0.71428549"
+         y="988.07648"
+         style="font-size:11px"
+         id="tspan3019">E-mail 程序</tspan><tspan
+         sodipodi:role="line"
+         x="0.71428549"
+         y="1001.8265"
+         style="font-size:11px"
+         id="tspan3076" /><tspan
+         sodipodi:role="line"
+         x="0.71428549"
+         y="1015.5765"
+         style="font-size:11px"
+         id="tspan3021">日历应用</tspan><tspan
+         sodipodi:role="line"
+         x="0.71428549"
+         y="1029.3264"
+         style="font-size:11px"
+         id="tspan3070" /><tspan
+         sodipodi:role="line"
+         x="0.71428549"
+         y="1043.0764"
+         style="font-size:11px"
+         id="tspan3074">日记本应用</tspan></text>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3023"
+       style="font-size:13px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       transform="translate(10,970.93361)"><flowRegion
+         id="flowRegion3025"><rect
+           id="rect3027"
+           width="90.714287"
+           height="72.85714"
+           x="197.14285"
+           y="12.142857" /></flowRegion><flowPara
+         id="flowPara3029">Google</flowPara><flowPara
+         id="flowPara3031">MS-Exchange</flowPara><flowPara
+         id="flowPara3035">企业集成</flowPara><flowPara
+         id="flowPara3080">服务器</flowPara></flowRoot>    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 65,993.07647 c 16.428571,8.57143 17.142857,8.57143 17.142857,8.57143 l -23.571428,12.8571 23.571428,-12.1428 -12.142857,40"
+       id="path3039"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 200,27.857143 183.57143,50 207.14286,42.142857 183.57143,50.714286 206.42857,65"
+       id="path3043"
+       inkscape:connector-curvature="0"
+       transform="translate(0,962.36218)" />
+  </g>
+</svg>
