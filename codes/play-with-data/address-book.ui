@@ -19,6 +19,7 @@
     </columns>
   </object>
   <object class="GtkWindow" id="window1">
+    <property name="width_request">640</property>
     <property name="can_focus">False</property>
     <child>
       <object class="GtkBox" id="box1">
@@ -56,7 +57,7 @@
             </child>
           </object>
           <packing>
-            <property name="expand">False</property>
+            <property name="expand">True</property>
             <property name="fill">True</property>
             <property name="position">1</property>
           </packing>
